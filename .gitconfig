@@ -15,3 +15,6 @@
   st = status -s
 [core]
 	editor = vim
+	
+[diff]
+    patience = true
