@@ -6,6 +6,8 @@ set incsearch
 set hlsearch
 
 set number
+syntax on
+
 set showcmd
 set showmode
 
