@@ -8,7 +8,6 @@ antigen bundle bundler
 antigen bundle git
 antigen bundle redis-cli
 antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle tarruda/zsh-autosuggestions # Must be loaded after zsh-syntax-highlting!
 
 antigen theme robbyrussell
 
@@ -44,12 +43,6 @@ source /usr/local/share/zsh/site-functions/_aws
 
 # direnv
 eval "$(direnv hook zsh)"
-
-# Enable zsh-autosuggestions automatically.
-zle-line-init() {
-    zle autosuggest-start
-}
-zle -N zle-line-init
 
 # Automatically list directory contents on `cd`.
 auto-ls () { ls; }
