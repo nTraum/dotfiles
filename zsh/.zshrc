@@ -6,10 +6,11 @@ antigen use oh-my-zsh
 
 antigen bundle bundler
 antigen bundle git
+antigen bundle jira
 antigen bundle redis-cli
 antigen bundle zsh-users/zsh-syntax-highlighting
 
-antigen theme robbyrussell
+antigen theme agnoster
 
 antigen apply
 
@@ -47,3 +48,9 @@ eval "$(direnv hook zsh)"
 # Automatically list directory contents on `cd`.
 auto-ls () { ls; }
 chpwd_functions=( auto-ls $chpwd_functions )
+
+# Hide default user in prompt (agnoster theme)
+DEFAULT_USER="ntraum"
+
+# JIRA URL
+JIRA_URL="https://blacklane.atlassian.net"
