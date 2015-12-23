@@ -87,3 +87,21 @@ if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Sublime Text 3
 alias s="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"
+
+# added by travis gem
+[ -f /Users/ntraum/.travis/travis.sh ] && source /Users/ntraum/.travis/travis.sh
+
+# Brew
+export PATH="/usr/local/sbin:$PATH"
+
+# ~/bin
+export PATH="$HOME/bin:$PATH"
+
+# awscli
+source /usr/local/share/zsh/site-functions/_aws
+
+# direnv
+eval "$(direnv hook zsh)"
