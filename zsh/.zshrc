@@ -52,5 +52,10 @@ chpwd_functions=( auto-ls $chpwd_functions )
 # Hide default user in prompt (agnoster theme)
 DEFAULT_USER="ntraum"
 
-# JIRA URL
-JIRA_URL="https://blacklane.atlassian.net"
+# Elli aliases
+alias reset_elli="mysql -uroot < db/reset_db.sql; bundle exec rake db:schema:load db:migrate"
+alias reset_elli_with_test="mysql -uroot < db/reset_db.sql; bundle exec rake db:schema:load db:migrate parallel:prepare\[4\]"
+
+# Brew go
+export GOPATH=/Users/ntraum/go
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
