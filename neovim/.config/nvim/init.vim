@@ -45,6 +45,9 @@ set background=dark
 " Highlight current line
 set cursorline
 
+" Highlight column 120
+set colorcolumn=120
+
 " Always use System clipboard
 set clipboard+=unnamed
 
