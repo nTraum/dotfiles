@@ -16,8 +16,7 @@
   st = status -s
 [core]
   editor = vim
-  excludesfile = /Users/philipppress/.gitignore_global
-
+  excludesfile = ~/.global_gitignore
 [diff]
   patience = true
 
