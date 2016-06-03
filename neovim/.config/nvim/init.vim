@@ -59,14 +59,19 @@ set splitright
 autocmd BufWritePre * :StripWhitespace
 
 " Use deoplete.
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup=1
 
 " Show hidden files
-let g:ctrlp_dotfiles = 1
+let g:ctrlp_dotfiles=1
 
 " Cycle buffers with <Tab> <S-Tab>
 nnoremap <Tab> <C-w>w
 nnoremap <S-Tab> <C-w>W
 
 " Update ctags async
-let g:easytags_async = 1
+let g:easytags_async=1
+
+" Create tags file in current working directory
+let g:easytags_dynamic_files=2
+set cpoptions+=d
+set tags=./.tags
