@@ -24,9 +24,6 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-# Sublime Text 3
-alias s="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
-
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
 
