@@ -76,6 +76,9 @@ let g:easytags_dynamic_files=2
 set cpoptions+=d
 set tags=./.tags
 
+" Do not automatically highlight tags
+let g:easytags_auto_highlight = 0
+
 " Add support for Elixir
 let g:tagbar_type_elixir = {
     \ 'ctagstype' : 'elixir',
