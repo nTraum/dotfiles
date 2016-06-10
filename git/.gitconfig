@@ -22,3 +22,6 @@
 
 [push]
   default = simple
+
+[rebase]
+  autosquash = true
