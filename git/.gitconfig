@@ -19,7 +19,7 @@
   excludesfile = ~/.global_gitignore
 [diff]
   patience = true
-
+  compactionHeuristic = true
 [push]
   default = simple
 
