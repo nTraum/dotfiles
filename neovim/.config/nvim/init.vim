@@ -63,6 +63,8 @@ let g:deoplete#enable_at_startup=1
 
 " Show hidden files
 let g:ctrlp_dotfiles=1
+" Don't sync results size with window height
+let g:ctrlp_match_window = 'results:50'
 
 " Cycle buffers with <Tab> <S-Tab>
 nnoremap <Tab> <C-w>w
