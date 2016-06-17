@@ -22,6 +22,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'elixir-lang/vim-elixir'
 Plug 'archSeer/elixir.nvim'
 Plug 'chriskempson/base16-vim'
+Plug 'SirVer/ultisnips'
 call plug#end()
 
 nmap <F8> :TagbarToggle<CR>
