@@ -101,3 +101,7 @@ let g:tagbar_type_elixir = {
         \ 'r:records'
     \ ]
 \ }
+
+" Jump to topic on German keyboard
+nnoremap ü <C-]>
+nnoremap Ü <C-O>
