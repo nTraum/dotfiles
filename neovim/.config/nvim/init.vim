@@ -20,7 +20,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'elixir-lang/vim-elixir'
-Plug 'archSeer/elixir.nvim'
 Plug 'chriskempson/base16-vim'
 Plug 'SirVer/ultisnips'
 call plug#end()
