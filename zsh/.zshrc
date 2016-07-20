@@ -6,7 +6,6 @@ antigen use oh-my-zsh
 
 antigen bundle bundler
 antigen bundle git
-antigen bundle jira
 antigen bundle mix-fast
 antigen bundle rake-fast
 antigen bundle redis-cli
