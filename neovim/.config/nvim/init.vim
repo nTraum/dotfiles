@@ -22,6 +22,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'elixir-lang/vim-elixir'
 Plug 'chriskempson/base16-vim'
 Plug 'SirVer/ultisnips'
+Plug 'janko-m/vim-test'
 call plug#end()
 
 nmap <F8> :TagbarToggle<CR>
@@ -104,3 +105,10 @@ let g:tagbar_type_elixir = {
 " Jump to topic on German keyboard
 nnoremap ü <C-]>
 nnoremap Ü <C-O>
+
+" vim-test bindings
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
