@@ -31,6 +31,9 @@ nmap <F8> :TagbarToggle<CR>
 set number
 set relativenumber
 
+" Keep 5 lines above / below cursor
+set scrolloff=5
+
 " Indentation
 set expandtab
 set shiftwidth=2
