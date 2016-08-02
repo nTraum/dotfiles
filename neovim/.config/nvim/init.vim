@@ -109,6 +109,9 @@ let g:tagbar_type_elixir = {
 nnoremap ü <C-]>
 nnoremap Ü <C-O>
 
+" Ag bindings
+nmap <leader>s :Ag
+
 " Use neovim terminal as test strategy
 let test#strategy = "neovim"
 
