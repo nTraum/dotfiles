@@ -15,7 +15,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 Plug 'raimondi/delimitmate'
 Plug 'itchyny/lightline.vim'
-Plug 'rking/ag.vim'
+Plug 'mileszs/ack.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
@@ -65,12 +65,7 @@ autocmd BufWritePre * :StripWhitespace
 " Use deoplete.
 let g:deoplete#enable_at_startup=1
 
-"
-let g:ctrlp_user_command = 'ag %s --files-with-matches --nocolor --hidden -g ""'
-" Show hidden files
-let g:ctrlp_dotfiles=1
-" Don't sync results size with window height
-let g:ctrlp_match_window = 'results:50'
+let g:ackprg = 'ag --vimgrep --hidden'
 
 " Cycle buffers with <Tab> <S-Tab>
 nnoremap <Tab> <C-w>w
@@ -110,7 +105,7 @@ nnoremap ü <C-]>
 nnoremap Ü <C-O>
 
 " Ag bindings
-nmap <leader>s :Ag
+nmap <leader>s :Ack!<Space>
 
 " Use neovim terminal as test strategy
 let test#strategy = "neovim"
