@@ -23,6 +23,7 @@ Plug 'elixir-lang/vim-elixir'
 Plug 'chriskempson/base16-vim'
 Plug 'SirVer/ultisnips'
 Plug 'janko-m/vim-test'
+Plug 'vim-ruby/vim-ruby'
 call plug#end()
 
 nmap <F8> :TagbarToggle<CR>
