@@ -24,6 +24,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'SirVer/ultisnips'
 Plug 'janko-m/vim-test'
 Plug 'vim-ruby/vim-ruby'
+Plug 'scrooloose/nerdcommenter'
 call plug#end()
 
 nmap <F8> :TagbarToggle<CR>
