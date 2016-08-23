@@ -25,6 +25,7 @@ Plug 'SirVer/ultisnips'
 Plug 'janko-m/vim-test'
 Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/nerdcommenter'
+Plug 'neomake/neomake'
 call plug#end()
 
 nmap <F8> :TagbarToggle<CR>
