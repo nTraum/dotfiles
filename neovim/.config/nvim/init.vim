@@ -30,6 +30,10 @@ call plug#end()
 
 nmap <F8> :TagbarToggle<CR>
 
+" Enable smartsearch
+set ignorecase
+set smartcase
+
 " Enable Line numbers
 set number
 set relativenumber
