@@ -26,6 +26,7 @@ Plug 'janko-m/vim-test'
 Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/nerdcommenter'
 Plug 'neomake/neomake'
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 nmap <F8> :TagbarToggle<CR>
@@ -143,3 +144,7 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
