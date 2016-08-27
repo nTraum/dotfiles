@@ -79,6 +79,12 @@ let g:ackprg = 'ag --vimgrep --hidden'
 nnoremap <Tab> <C-w>w
 nnoremap <S-Tab> <C-w>W
 
+" Neomake configuration
+autocmd! BufWritePost * Neomake
+
+let g:neomake_open_list = 2
+let g:neomake_ruby_enabled_makers = ['mri']
+
 " Update ctags async
 let g:easytags_async=1
 
