@@ -52,7 +52,7 @@ DEFAULT_USER="ntraum"
 
 # Elli aliases
 alias reset_elli="mysql -uroot < db/reset_db.sql; bundle exec rake db:migrate"
-alias reset_elli_with_test="mysql -uroot < db/reset_db.sql; bundle exec rake db:migrate; bundle exec rake test:prepare"
+alias reset_elli_with_test="mysql -uroot < db/reset_db.sql; bundle exec rake db:migrate test:prepare"
 
 # Brew go
 export GOPATH=/Users/ntraum/go
