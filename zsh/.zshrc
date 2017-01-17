@@ -54,6 +54,10 @@ DEFAULT_USER="ntraum"
 alias reset_elli="mysql -uroot < db/reset_db.sql; bundle exec rake db:migrate"
 alias reset_elli_with_test="mysql -uroot < db/reset_db.sql; bundle exec rake db:migrate test:prepare"
 
+# Ansible aliases
+alias ap="ansible-playbook --vault-password-file ~/.vault_pass.txt"
+alias av="ansible-vault --vault-password-file ~/.vault_pass.txt"
+
 # Brew go
 export GOPATH=/Users/ntraum/go
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
