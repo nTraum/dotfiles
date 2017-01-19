@@ -134,8 +134,8 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 
-" Jump to topic on German keyboard
-nnoremap ü <C-]>
+" Jump to tag on German keyboard
+nnoremap ü g<C-]>
 nnoremap Ü <C-O>
 
 " Ag bindings
