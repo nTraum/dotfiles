@@ -27,6 +27,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/nerdcommenter'
 Plug 'neomake/neomake'
 Plug 'easymotion/vim-easymotion'
+Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 nmap <F8> :TagbarToggle<CR>
