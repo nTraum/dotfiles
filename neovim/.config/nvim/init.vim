@@ -74,7 +74,7 @@ autocmd BufWritePre * :StripWhitespace
 " Use deoplete.
 let g:deoplete#enable_at_startup=1
 
-let g:ackprg = 'ag --vimgrep --hidden'
+let g:ackprg = 'rg --vimgrep --hidden'
 
 " Cycle buffers with <Tab> <S-Tab>
 nnoremap <Tab> <C-w>w
