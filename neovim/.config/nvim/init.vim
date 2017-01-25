@@ -25,7 +25,6 @@ Plug 'janko-m/vim-test'
 Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/nerdcommenter'
 Plug 'neomake/neomake'
-Plug 'easymotion/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
@@ -150,9 +149,3 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
-
-" Disable default mappings
-let g:EasyMotion_do_mapping = 0
-" <Leader>f{char} to move to {char}
-map  <Leader>f <Plug>(easymotion-bd-f)
-nmap <Leader>f <Plug>(easymotion-overwin-f)
