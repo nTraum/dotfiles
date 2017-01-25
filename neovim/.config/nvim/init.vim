@@ -7,7 +7,6 @@ endfunction
 
 " vim-plug
 call plug#begin()
-Plug 'kien/ctrlp.vim'
 Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
 Plug 'majutsushi/tagbar'
 Plug 'airblade/vim-gitgutter'
