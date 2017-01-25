@@ -26,6 +26,7 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'scrooloose/nerdcommenter'
 Plug 'neomake/neomake'
 Plug 'terryma/vim-multiple-cursors'
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 call plug#end()
 
 nmap <F8> :TagbarToggle<CR>
@@ -139,6 +140,9 @@ nnoremap Ü <C-O>
 
 " Ag bindings
 nmap <leader>s :Ack!<Space>
+
+" FZF bindingd
+nmap <leader>f :FZF<ENTER>
 
 " Use neovim terminal as test strategy
 let test#strategy = "neovim"
