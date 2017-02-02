@@ -142,8 +142,8 @@ nnoremap Ü <C-O>
 " Ag bindings
 nmap <leader>s :Ack!<Space>
 
-" FZF bindingd
-nmap <leader>f :FZF<ENTER>
+" FZF bindings
+nmap <C-p> :FZF<ENTER>
 
 " Use neovim terminal as test strategy
 let test#strategy = "neovim"
