@@ -27,6 +27,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'neomake/neomake'
 Plug 'terryma/vim-multiple-cursors'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'kshenoy/vim-signature'
 call plug#end()
 
 nmap <F8> :TagbarToggle<CR>
