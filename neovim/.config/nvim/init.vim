@@ -158,3 +158,9 @@ nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
+
+" Show completion window when multiple commands match
+set wildmode=longest,list
+
+" Undo always works
+set hidden
