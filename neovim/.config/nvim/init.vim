@@ -136,6 +136,9 @@ let g:lightline = {
       \ 'subseparator': { 'left': '', 'right': '' }
       \ }
 
+" Always show gitgutter column
+let g:gitgutter_sign_column_always=1
+
 " Jump to tag on German keyboard
 nnoremap ü g<C-]>
 nnoremap Ü <C-O>
