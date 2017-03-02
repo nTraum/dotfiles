@@ -1,6 +1,3 @@
-" Map leader key to SPACE
-let mapleader = "\<Space>"
-
 function! DoRemote(arg)
     UpdateRemotePlugins
 endfunction
@@ -21,6 +18,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'elixir-lang/vim-elixir'
 Plug 'chriskempson/base16-vim'
+Plug 'airblade/vim-rooter'
 Plug 'SirVer/ultisnips'
 Plug 'janko-m/vim-test'
 Plug 'vim-ruby/vim-ruby'
@@ -28,10 +26,12 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'neomake/neomake'
 Plug 'terryma/vim-multiple-cursors'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-Plug 'kshenoy/vim-signature'
+Plug 'SirVer/ultisnips'
 call plug#end()
 
-nmap <F8> :TagbarToggle<CR>
+source ~/.config/nvim/key_bindings.vim
+source ~/.config/nvim/lightline.vim
+source ~/.config/nvim/tagbar.vim
 
 " Enable smartsearch
 set ignorecase
@@ -69,6 +69,12 @@ set clipboard+=unnamed
 set splitbelow
 set splitright
 
+" Show completion window when multiple commands match
+set wildmode=longest,list
+
+" Undo always works
+set hidden
+
 " Strip trailing whitespace on save
 autocmd BufWritePre * :StripWhitespace
 
@@ -76,10 +82,6 @@ autocmd BufWritePre * :StripWhitespace
 let g:deoplete#enable_at_startup=1
 
 let g:ackprg = 'rg --vimgrep --hidden'
-
-" Cycle buffers with <Tab> <S-Tab>
-nnoremap <Tab> <C-w>w
-nnoremap <S-Tab> <C-w>W
 
 " Neomake configuration
 autocmd! BufWritePost * Neomake
@@ -98,69 +100,10 @@ set tags=./.tags
 " Do not automatically highlight tags
 let g:easytags_auto_highlight = 0
 
-" Add support for Elixir
-let g:tagbar_type_elixir = {
-    \ 'ctagstype' : 'elixir',
-    \ 'kinds' : [
-        \ 'f:functions',
-        \ 'functions:functions',
-        \ 'c:callbacks',
-        \ 'd:delegates',
-        \ 'e:exceptions',
-        \ 'i:implementations',
-        \ 'a:macros',
-        \ 'o:operators',
-        \ 'm:modules',
-        \ 'p:protocols',
-        \ 'r:records'
-    \ ]
-\ }
-
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
-
 " Always show gitgutter column
 let g:gitgutter_sign_column_always=1
-
-" Jump to tag on German keyboard
-nnoremap ü g<C-]>
-nnoremap Ü <C-O>
-
-" Ag bindings
-nmap <leader>s :Ack!<Space>
-
-" FZF bindings
-nmap <C-p> :FZF<ENTER>
 
 " Use neovim terminal as test strategy
 let test#strategy = "neovim"
 
-" vim-test bindings
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
-
-" Show completion window when multiple commands match
-set wildmode=longest,list
-
-" Undo always works
-set hidden
+let g:UltiSnipsSnippetsDir = "~/.config/nvim/UltiSnips"
