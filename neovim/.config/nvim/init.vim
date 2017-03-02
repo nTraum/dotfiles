@@ -81,6 +81,9 @@ autocmd BufWritePre * :StripWhitespace
 " Use deoplete.
 let g:deoplete#enable_at_startup=1
 
+" Increase cache size to 5Mib
+let deoplete#tag#cache_limit_size = 5000000
+
 let g:ackprg = 'rg --vimgrep --hidden'
 
 " Neomake configuration
