@@ -61,6 +61,9 @@ alias reset_elli_with_test="mysql -uroot < db/reset_db.sql; bundle exec rake db:
 alias ap="ansible-playbook --vault-password-file ~/.vault_pass.txt"
 alias av="ansible-vault --vault-password-file ~/.vault_pass.txt"
 
+alias create_my_stack="ap aws_infrastructure.yml -e \"stack_name=philipp\" -e \"key_pair=philipp.press\""
+alias destroy_my_stack="ap aws_infrastructure.yml -e \"stack_name=philipp\" -e \"key_pair=philipp.press\" -e \"state=absent\""
+
 # Brew go
 export GOPATH=/Users/ntraum/go
 export PATH=$PATH:/usr/local/opt/go/libexec/bin
