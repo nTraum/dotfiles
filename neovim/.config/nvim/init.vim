@@ -1,39 +1,40 @@
 function! DoRemote(arg)
-    UpdateRemotePlugins
+  UpdateRemotePlugins
 endfunction
 
 " vim-plug
 call plug#begin()
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
-Plug 'majutsushi/tagbar'
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-bundler'
-Plug 'raimondi/delimitmate'
-Plug 'itchyny/lightline.vim'
-Plug 'mileszs/ack.vim'
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'elixir-lang/vim-elixir'
-Plug 'chriskempson/base16-vim'
-Plug 'airblade/vim-rooter'
-Plug 'SirVer/ultisnips'
-Plug 'janko-m/vim-test'
-Plug 'vim-ruby/vim-ruby'
-Plug 'scrooloose/nerdcommenter'
-Plug 'neomake/neomake'
-Plug 'terryma/vim-multiple-cursors'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'Chiel92/vim-autoformat'
+Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'SirVer/ultisnips'
+Plug 'airblade/vim-gitgutter'
+Plug 'airblade/vim-rooter'
+Plug 'chriskempson/base16-vim'
+Plug 'elixir-lang/vim-elixir'
+Plug 'itchyny/lightline.vim'
+Plug 'janko-m/vim-test'
+Plug 'majutsushi/tagbar'
+Plug 'mhinz/vim-grepper'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'neomake/neomake'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'raimondi/delimitmate'
+Plug 'scrooloose/nerdcommenter'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-bundler'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'vim-ruby/vim-ruby'
+Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
 call plug#end()
 
 source ~/.config/nvim/key_bindings.vim
 source ~/.config/nvim/lightline.vim
 source ~/.config/nvim/tagbar.vim
 
-" Enable smartsearch
+autocmd BufEnter * EnableStripWhitespaceOnSave
+
 set ignorecase
 set smartcase
 
@@ -52,7 +53,7 @@ set softtabstop=2
 " Disable last line that shows current mode
 set noshowmode
 
-" Enable predawn colorscheme & dark background
+" Enable base16 colorscheme on dark background
 colorscheme base16-ocean
 set background=dark
 
@@ -75,16 +76,11 @@ set wildmode=longest,list
 " Undo always works
 set hidden
 
-" Strip trailing whitespace on save
-autocmd BufWritePre * :StripWhitespace
-
 " Use deoplete.
 let g:deoplete#enable_at_startup=1
 
 " Increase cache size to 5Mib
 let deoplete#tag#cache_limit_size = 5000000
-
-let g:ackprg = 'rg --vimgrep --hidden'
 
 " Neomake configuration
 autocmd! BufWritePost * Neomake
@@ -110,3 +106,6 @@ let g:gitgutter_sign_column_always=1
 let test#strategy = "neovim"
 
 let g:UltiSnipsSnippetsDir = "~/.config/nvim/UltiSnips"
+
+let g:grepper = {}
+let g:grepper.tools = ['rg']

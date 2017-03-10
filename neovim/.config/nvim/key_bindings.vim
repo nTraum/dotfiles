@@ -39,10 +39,10 @@ nnoremap ü g<C-]>
 nnoremap Ü <C-O>
 
 " Ag bindings
-nmap <leader>s :Ack!<Space>
+nmap <leader>s :Grepper<CR>
 
 " FZF bindings
-nmap <C-p> :FZF<ENTER>
+nmap <C-p> :FZF<CR>
 
 " Tagbar bindings
 nmap <F8> :TagbarToggle<CR>
