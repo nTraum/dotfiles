@@ -52,6 +52,7 @@ DEFAULT_USER="ntraum"
 
 # Custom aliases
 alias nv="nvim"
+alias pr="hub pull-request"
 
 # Elli aliases
 alias reset_elli="mysql -uroot < db/reset_db.sql; bundle exec rake db:migrate"
@@ -79,3 +80,6 @@ export VISUAL=nvim
 # --follow: Follow symlinks
 # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
