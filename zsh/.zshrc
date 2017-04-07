@@ -25,12 +25,6 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-# added by travis gem
-[ -f /Users/ntraum/.travis/travis.sh ] && source /Users/ntraum/.travis/travis.sh
-
 # Brew
 export PATH="/usr/local/sbin:$PATH"
 
