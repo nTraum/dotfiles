@@ -8,8 +8,8 @@ If you don't want to manage symlinks manually, take a look at [stow](https://www
 ```shell
 $ cd dotfiles
 
-# Create symlinks for vim
-$ stow vim --target=$HOME
+# Create symlinks for zsh
+$ stow zsh --target=$HOME
 ```
 
 ## LICENSE
