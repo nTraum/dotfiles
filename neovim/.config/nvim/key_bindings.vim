@@ -1,17 +1,17 @@
 " Map leader key to SPACE
 let mapleader = "\<Space>"
 
-" Use `Alt+{h,j,k,l}` to navigate between splits no matter if they are displaying a normal buffer or a terminal
+" Use `Ctrl+{h,j,k,l}` to navigate between splits no matter if they are displaying a normal buffer or a terminal
 " buffer in terminal mode.
-nnoremap º <C-W>j
-nnoremap ∆ <C-W><C-K>
-nnoremap @ <C-W><C-L>
-nnoremap ª <C-W><C-H>
+nnoremap <C-h> <C-W><C-H>
+nnoremap <C-j> <C-W><C-J>
+nnoremap <C-k> <C-W><C-K>
+nnoremap <C-l> <C-W><C-L>
 
-:tnoremap º <C-\><C-n><C-W>h
-:tnoremap ∆ <C-\><C-n><C-W>j
-:tnoremap @ <C-\><C-n><C-W>k
-:tnoremap ª <C-\><C-n><C-W>l
+tnoremap <C-h> <C-\><C-n><C-W>h
+tnoremap <C-j> <C-\><C-n><C-W>j
+tnoremap <C-k> <C-\><C-n><C-W>k
+tnoremap <C-l> <C-\><C-n><C-W>l
 
 " Use <Esc> to go to normal mode in terminal
 :tnoremap <Esc> <C-\><C-n>
