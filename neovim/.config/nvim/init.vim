@@ -90,7 +90,7 @@ let g:neomake_ruby_enabled_makers = ['mri']
 
 " Create tags file in current working directory
 set cpoptions+=d
-set tags=./.tags
+set tags=./tags
 
 " Always show gitgutter column
 let g:gitgutter_sign_column_always=1
