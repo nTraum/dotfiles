@@ -24,9 +24,9 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-bundler'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
-Plug 'xolox/vim-misc' | Plug 'xolox/vim-easytags'
 call plug#end()
 
 source ~/.config/nvim/key_bindings.vim
@@ -88,16 +88,9 @@ autocmd! BufWritePost * Neomake
 let g:neomake_open_list = 2
 let g:neomake_ruby_enabled_makers = ['mri']
 
-" Update ctags async
-let g:easytags_async=1
-
 " Create tags file in current working directory
-let g:easytags_dynamic_files=2
 set cpoptions+=d
 set tags=./.tags
-
-" Do not automatically highlight tags
-let g:easytags_auto_highlight = 0
 
 " Always show gitgutter column
 let g:gitgutter_sign_column_always=1
