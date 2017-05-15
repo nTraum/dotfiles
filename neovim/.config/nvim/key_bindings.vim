@@ -13,6 +13,11 @@ tnoremap <C-j> <C-\><C-n><C-W>j
 tnoremap <C-k> <C-\><C-n><C-W>k
 tnoremap <C-l> <C-\><C-n><C-W>l
 
+nnoremap <C-Right> :vertical resize +2<CR>
+nnoremap <C-Left> :vertical resize -2<CR>
+nnoremap <C-Up> :resize +2<CR>
+nnoremap <C-Down> :resize -2<CR>
+
 " Use <Esc> to go to normal mode in terminal
 :tnoremap <Esc> <C-\><C-n>
 
