@@ -8,6 +8,7 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'chriskempson/base16-vim'
@@ -81,6 +82,8 @@ let g:deoplete#enable_at_startup=1
 
 " Increase cache size to 5Mib
 let deoplete#tag#cache_limit_size = 5000000
+
+call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
 
 " Neomake configuration
 autocmd! BufWritePost * Neomake
