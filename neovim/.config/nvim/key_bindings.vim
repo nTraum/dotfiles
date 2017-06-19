@@ -48,6 +48,7 @@ nmap <leader>s :Grepper<CR>
 
 " FZF bindings
 nmap <C-p> :FZF<CR>
+nmap <leader>h :History<CR>
 
 " Tagbar bindings
 nmap <F8> :TagbarToggle<CR>
