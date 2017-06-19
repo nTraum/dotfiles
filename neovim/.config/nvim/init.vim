@@ -28,6 +28,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
+Plug 'kopischke/vim-fetch'
+Plug 'nelstrom/vim-textobj-rubyblock' | Plug 'kana/vim-textobj-user'
 call plug#end()
 
 source ~/.config/nvim/key_bindings.vim
