@@ -30,6 +30,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-ruby/vim-ruby'
 Plug 'kopischke/vim-fetch'
 Plug 'nelstrom/vim-textobj-rubyblock' | Plug 'kana/vim-textobj-user'
+Plug 'machakann/vim-highlightedyank'
 call plug#end()
 
 source ~/.config/nvim/key_bindings.vim
