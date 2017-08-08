@@ -100,7 +100,7 @@ set cpoptions+=d
 set tags=./tags
 
 " Always show gitgutter column
-let g:gitgutter_sign_column_always=1
+set signcolumn=yes
 
 " Use neovim terminal as test strategy
 let test#strategy = "neovim"
