@@ -13,7 +13,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'airblade/vim-rooter'
 Plug 'chriskempson/base16-vim'
 Plug 'elixir-lang/vim-elixir'
-Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
@@ -32,10 +31,11 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'kopischke/vim-fetch'
 Plug 'nelstrom/vim-textobj-rubyblock' | Plug 'kana/vim-textobj-user'
 Plug 'machakann/vim-highlightedyank'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 source ~/.config/nvim/key_bindings.vim
-source ~/.config/nvim/lightline.vim
 source ~/.config/nvim/tagbar.vim
 
 autocmd BufEnter * EnableStripWhitespaceOnSave
@@ -112,3 +112,5 @@ let g:grepper.tools = ['rg']
 
 " Disable word wrap set by fugitive
 autocmd FileType gitcommit setlocal textwidth=0
+
+let g:airline_theme='base16_tomorrow'
