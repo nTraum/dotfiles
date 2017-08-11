@@ -22,18 +22,19 @@ nnoremap <C-Down> :resize -2<CR>
 :tnoremap <Esc> <C-\><C-n>
 
 " fugitive bindings
-nmap <leader>ga :Gwrite<CR>
 nmap <leader>gb :Gblame<CR>
 nmap <leader>gc :Gcommit<CR>
 nmap <leader>gd :Gdiff<CR>
+nmap <leader>gp :Gpush<CR>
 nmap <leader>gs :Gstatus<CR>
+nmap <leader>gw :Gwrite<CR>
 
 " vim-test bindings
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
+nmap <silent> <leader>tt :TestNearest<CR>
+nmap <silent> <leader>tT :TestFile<CR>
+nmap <silent> <leader>ta :TestSuite<CR>
+nmap <silent> <leader>tl :TestLast<CR>
+nmap <silent> <leader>tg :TestVisit<CR>
 
 " Cycle buffers with <Tab> <S-Tab>
 nnoremap <Tab> <C-w>w
