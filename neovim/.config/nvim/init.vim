@@ -113,4 +113,4 @@ let g:grepper.tools = ['rg']
 " Disable word wrap set by fugitive
 autocmd FileType gitcommit setlocal textwidth=0
 
-let g:airline_theme='base16_tomorrow'
+let g:airline_theme='base16'
