@@ -44,12 +44,10 @@ nnoremap <S-Tab> <C-w>W
 nnoremap ü g<C-]>
 nnoremap Ü <C-O>
 
-" Ag bindings
-nmap <leader>s :Grepper<CR>
-
-" FZF bindings
-nmap <C-p> :FZF<CR>
-nmap <leader>h :History<CR>
-
 " Tagbar bindings
 nmap <F8> :TagbarToggle<CR>
+
+" File related bindings
+nmap <leader>ff :FZF<CR>
+nmap <leader>fs :Grepper<CR>
+nmap <leader>fh :History<CR>
