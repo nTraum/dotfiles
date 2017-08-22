@@ -44,6 +44,10 @@ chpwd_functions=( auto-ls $chpwd_functions )
 
 # liquidprompt configuration
 LP_ENABLE_RUNTIME="false"
+LP_ENABLE_SVN="false"
+LP_ENABLE_HG="false"
+LP_ENABLE_BZR="false"
+LP_ENABLE_FOSSIL="false"
 
 # Brew go
 export GOPATH=/Users/ntraum/go
