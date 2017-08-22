@@ -42,8 +42,8 @@ eval "$(direnv hook zsh)"
 auto-ls () { ls; }
 chpwd_functions=( auto-ls $chpwd_functions )
 
-# Hide default user in prompt (agnoster theme)
-DEFAULT_USER="ntraum"
+# liquidprompt configuration
+LP_ENABLE_RUNTIME="false"
 
 # Brew go
 export GOPATH=/Users/ntraum/go
