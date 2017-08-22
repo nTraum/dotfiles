@@ -10,6 +10,7 @@ antigen bundle mix-fast
 antigen bundle rake-fast
 antigen bundle redis-cli
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle nojhan/liquidprompt
 
 antigen theme agnoster
 
