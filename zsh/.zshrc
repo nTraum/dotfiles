@@ -43,11 +43,15 @@ auto-ls () { ls; }
 chpwd_functions=( auto-ls $chpwd_functions )
 
 # liquidprompt configuration
-LP_ENABLE_RUNTIME="false"
-LP_ENABLE_SVN="false"
-LP_ENABLE_HG="false"
+LP_ENABLE_BATT="false"
+LP_ENABLE_SSH_COLORS="false"
+
 LP_ENABLE_BZR="false"
 LP_ENABLE_FOSSIL="false"
+LP_ENABLE_HG="false"
+LP_ENABLE_SVN="false"
+
+LP_RUNTIME_THRESHOLD=10
 
 # QT 5
 export PATH="/usr/local/opt/qt@5.5/bin:$PATH"
