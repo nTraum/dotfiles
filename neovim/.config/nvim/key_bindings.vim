@@ -27,7 +27,7 @@ nmap <leader>gcc :Gcommit<CR>
 nmap <leader>gcd :Git checkout develop<CR>
 nmap <leader>gcm :Git checkout master<CR>
 nmap <leader>gd :Gdiff<CR>
-nmap <leader>gl :Glog<CR>
+nmap <leader>gl :silent! Glog<CR>
 nmap <leader>gp :Gpush<CR>
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gw :Gwrite<CR>
