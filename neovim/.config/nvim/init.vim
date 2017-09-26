@@ -40,6 +40,9 @@ source ~/.config/nvim/tagbar.vim
 
 autocmd BufEnter * EnableStripWhitespaceOnSave
 
+set undofile
+set undodir=$HOME/.tmp/vim/undo
+
 set ignorecase
 set smartcase
 
