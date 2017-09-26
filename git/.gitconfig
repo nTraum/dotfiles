@@ -1,11 +1,13 @@
 [user]
   email = philipp.press@googlemail.com
   name  = Philipp Preß
+  signingkey = 039F780244532D1C
 [color]
   ui = auto
 
 [commit]
   verbose = true
+  gpgSign = true
 
 [alias]
   ci = commit
@@ -17,11 +19,14 @@
   ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
   ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
   st = status -s
+
 [core]
   excludesfile = ~/.global_gitignore
+
 [diff]
   patience = true
   compactionHeuristic = true
+
 [push]
   default = simple
 

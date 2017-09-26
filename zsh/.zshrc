@@ -75,6 +75,8 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
+# assh
 export ASSH_PLAYBOOKS_DIRECTORY="${HOME}/coding/blacklane/ansible-playbooks"
 source "${HOME}/coding/blacklane/dotfiles/assh.sh"
 source "${HOME}/coding/blacklane/dotfiles/.blacklane"
+

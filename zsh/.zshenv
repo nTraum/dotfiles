@@ -26,3 +26,6 @@ function charles_disable {
   unset HTTPS_PROXY
   unset NO_PROXY
 }
+
+# GPG agent
+export GPG_TTY=$(tty)
