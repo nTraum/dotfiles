@@ -80,3 +80,4 @@ export ASSH_PLAYBOOKS_DIRECTORY="${HOME}/coding/blacklane/ansible-playbooks"
 source "${HOME}/coding/blacklane/dotfiles/assh.sh"
 source "${HOME}/coding/blacklane/dotfiles/release.sh"
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
