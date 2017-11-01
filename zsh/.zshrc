@@ -78,5 +78,5 @@ export NVM_DIR="$HOME/.nvm"
 # assh
 export ASSH_PLAYBOOKS_DIRECTORY="${HOME}/coding/blacklane/ansible-playbooks"
 source "${HOME}/coding/blacklane/dotfiles/assh.sh"
-source "${HOME}/coding/blacklane/dotfiles/.blacklane"
+source "${HOME}/coding/blacklane/dotfiles/release.sh"
 
