@@ -17,7 +17,6 @@ Plug 'janko-m/vim-test'
 Plug 'majutsushi/tagbar'
 Plug 'mhinz/vim-grepper'
 Plug 'nathanaelkane/vim-indent-guides'
-Plug 'neomake/neomake'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'raimondi/delimitmate'
 Plug 'scrooloose/nerdcommenter'
@@ -90,12 +89,6 @@ let g:deoplete#enable_at_startup=1
 let deoplete#tag#cache_limit_size = 5000000
 
 call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
-
-" Neomake configuration
-autocmd! BufWritePost * Neomake
-
-let g:neomake_open_list = 2
-let g:neomake_ruby_enabled_makers = ['mri']
 
 " Create tags file in current working directory
 set cpoptions+=d
