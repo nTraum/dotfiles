@@ -7,14 +7,15 @@ call plug#begin()
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'airblade/vim-gitgutter'
-Plug 'airblade/vim-rooter'
-Plug 'chriskempson/base16-vim'
-Plug 'elixir-lang/vim-elixir'
-Plug 'janko-m/vim-test'
-Plug 'majutsushi/tagbar'
+Plug 'w0rp/ale' " Async linting engine
+Plug 'SirVer/ultisnips' " Snippets
+Plug 'honza/vim-snippets' " Snippets
+Plug 'airblade/vim-gitgutter' " Gutter with line modification icons
+Plug 'airblade/vim-rooter' " Automatically set pwd to git repo root
+Plug 'chriskempson/base16-vim' " Color scheme
+Plug 'elixir-lang/vim-elixir' " General Elixir language support
+Plug 'janko-m/vim-test' " General test runner
+Plug 'majutsushi/tagbar' " Show tags in a side bar
 Plug 'mhinz/vim-grepper'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
@@ -111,3 +112,8 @@ autocmd FileType gitcommit setlocal textwidth=0
 let g:airline_theme='base16'
 
 let g:airline_powerline_fonts = 1
+
+" Use rubocop to ale fix ruby files
+let g:ale_fixers = {
+\   'ruby': ['rubocop'],
+\}

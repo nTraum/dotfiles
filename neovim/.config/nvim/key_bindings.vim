@@ -54,3 +54,6 @@ nmap <F8> :TagbarToggle<CR>
 nmap <leader>ff :FZF<CR>
 nmap <leader>fs :Grepper<CR>
 nmap <leader>fh :History<CR>
+
+" ALE bindings
+nmap <leader>af :ALEFix<CR>
