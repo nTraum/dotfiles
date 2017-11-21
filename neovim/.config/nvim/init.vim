@@ -117,3 +117,6 @@ let g:airline_powerline_fonts = 1
 let g:ale_fixers = {
 \   'ruby': ['rubocop'],
 \}
+
+" Delay ALE linting for 1 second
+let g:ale_lint_delay = 1000
