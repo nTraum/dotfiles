@@ -44,7 +44,8 @@ set undodir=$HOME/.tmp/vim/undo
 
 set ignorecase
 set smartcase
-
+" Preview incremental updates like s/foo/bar
+set inccommand=nosplit
 " Enable Line numbers
 set number
 set relativenumber
