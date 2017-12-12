@@ -4,9 +4,10 @@ endfunction
 
 " vim-plug
 call plug#begin()
+Plug 'roxma/nvim-completion-manager'
+Plug 'roxma/ncm-rct-complete'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'Chiel92/vim-autoformat'
-Plug 'Shougo/deoplete.nvim', { 'do': function('DoRemote') }
 Plug 'w0rp/ale' " Async linting engine
 Plug 'SirVer/ultisnips' " Snippets
 Plug 'honza/vim-snippets' " Snippets
@@ -83,14 +84,6 @@ set wildmode=longest,list
 
 " Undo always works
 set hidden
-
-" Use deoplete.
-let g:deoplete#enable_at_startup=1
-
-" Increase cache size to 5Mib
-let deoplete#tag#cache_limit_size = 5000000
-
-call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
 
 " Create tags file in current working directory
 set cpoptions+=d
