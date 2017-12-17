@@ -21,7 +21,8 @@ antigen apply
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 # z (https://github.com/rupa/z)
-. `brew --prefix`/etc/profile.d/z.sh
+#. `brew --prefix`/etc/profile.d/z.sh
+. /usr/share/z/z.sh
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
