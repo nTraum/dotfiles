@@ -33,6 +33,7 @@ Plug 'nelstrom/vim-textobj-rubyblock' | Plug 'kana/vim-textobj-user'
 Plug 'machakann/vim-highlightedyank'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'ludovicchabant/vim-gutentags'
 call plug#end()
 
 source ~/.config/nvim/key_bindings.vim
