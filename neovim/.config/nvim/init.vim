@@ -111,7 +111,10 @@ let g:airline_powerline_fonts = 1
 " Use rubocop to ale fix ruby files
 let g:ale_fixers = {
 \   'ruby': ['rubocop'],
+\   'python': ['autopep8'],
 \}
 
 " Delay ALE linting for 1 second
 let g:ale_lint_delay = 1000
+
+let g:ale_python_autopep8_executable = '/Users/ntraum/Library/Python/3.6/bin/autopep8'
