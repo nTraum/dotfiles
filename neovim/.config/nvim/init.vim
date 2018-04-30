@@ -103,6 +103,9 @@ let g:UltiSnipsSnippetsDir = "~/.config/nvim/UltiSnips"
 let g:grepper = {}
 let g:grepper.tools = ['rg']
 
+" Automatically quote search string
+let g:grepper.prompt_quote = 1
+
 " Disable word wrap set by fugitive
 autocmd FileType gitcommit setlocal textwidth=0
 
