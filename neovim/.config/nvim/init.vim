@@ -39,6 +39,7 @@ call plug#end()
 source ~/.config/nvim/key_bindings.vim
 source ~/.config/nvim/tagbar.vim
 
+" Strip leading WhiteSpace automatically
 autocmd BufEnter * EnableStripWhitespaceOnSave
 
 set undofile
@@ -98,17 +99,21 @@ let test#strategy = "neovim"
 
 let g:UltiSnipsSnippetsDir = "~/.config/nvim/UltiSnips"
 
+" Use ripgrepper for file search
 let g:grepper = {}
 let g:grepper.tools = ['rg']
 
 " Disable word wrap set by fugitive
 autocmd FileType gitcommit setlocal textwidth=0
 
+" Color theme
 let g:airline_theme='base16'
 
+" Use Powerline fonts in airline's status
 let g:airline_powerline_fonts = 1
 
 " Use rubocop to ale fix ruby files
+" Use autopep8 to ale fix python files
 let g:ale_fixers = {
 \   'ruby': ['rubocop'],
 \   'python': ['autopep8'],
@@ -117,4 +122,5 @@ let g:ale_fixers = {
 " Delay ALE linting for 1 second
 let g:ale_lint_delay = 1000
 
+" Python 3 autopep8 is not in PATH
 let g:ale_python_autopep8_executable = '/Users/ntraum/Library/Python/3.6/bin/autopep8'
