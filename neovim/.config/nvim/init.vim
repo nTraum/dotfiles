@@ -119,6 +119,7 @@ let g:airline_powerline_fonts = 1
 " Use autopep8 to ale fix python files
 let g:ale_fixers = {
 \   'ruby': ['rubocop'],
+\   'json': ['jq'],
 \   'python': ['autopep8'],
 \}
 
