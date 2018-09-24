@@ -6,7 +6,8 @@ endfunction
 call plug#begin()
 Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/ncm-rct-complete'
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug '~/coding/junegunn/fzf'
+"Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'w0rp/ale' " Async linting engine
 Plug 'SirVer/ultisnips' " Snippets
@@ -63,7 +64,7 @@ set softtabstop=2
 set noshowmode
 
 " Enable base16 colorscheme on dark background
-colorscheme base16-ocean
+"colorscheme base16-default-dark
 set background=dark
 
 " Highlight current line

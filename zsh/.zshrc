@@ -1,5 +1,5 @@
 # Antigen
-source /Users/ntraum/coding/zsh-users/antigen/antigen.zsh
+source ~/coding/zsh-users/antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
@@ -21,9 +21,10 @@ antigen apply
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 # z (https://github.com/rupa/z)
-. `brew --prefix`/etc/profile.d/z.sh
+. ~/coding/rupa/z/z.sh
 
 # rbenv
+export PATH="$HOME/.rbenv/bin:$PATH"
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Brew
@@ -33,7 +34,7 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 # awscli
-source /usr/local/share/zsh/site-functions/_aws
+#source /usr/local/share/zsh/site-functions/_aws
 
 # direnv
 eval "$(direnv hook zsh)"
