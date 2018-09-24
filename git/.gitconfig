@@ -1,13 +1,13 @@
 [user]
   email = philipp.press@googlemail.com
   name  = Philipp Preß
-  signingkey = 039F780244532D1C
+  ;signingkey = 039F780244532D1C
 [color]
   ui = auto
 
 [commit]
   verbose = true
-  gpgSign = true
+  ;gpgSign = true
 
 [alias]
   ci = commit
