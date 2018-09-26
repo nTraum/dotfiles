@@ -4,8 +4,9 @@ endfunction
 
 " vim-plug
 call plug#begin()
-Plug 'roxma/nvim-completion-manager'
-Plug 'roxma/ncm-rct-complete'
+Plug 'ncm2/ncm2'
+" ncm2 requires nvim-yarp
+Plug 'roxma/nvim-yarp'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'w0rp/ale' " Async linting engine
@@ -21,19 +22,20 @@ Plug 'mhinz/vim-grepper'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'raimondi/delimitmate'
-Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter' " Mappings for commenting code
 Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'vim-ruby/vim-ruby'
-Plug 'kopischke/vim-fetch'
-Plug 'nelstrom/vim-textobj-rubyblock' | Plug 'kana/vim-textobj-user'
-Plug 'machakann/vim-highlightedyank'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'tpope/vim-fugitive' " Git wrapper
+Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive
+Plug 'tpope/vim-surround' " Delete, change and add surroundings
+Plug 'tpope/vim-repeat' " Extends repeatable commands using the . command
+Plug 'vim-ruby/vim-ruby' " Ruby configuration files
+Plug 'kopischke/vim-fetch' " Handle line numbers in filenames (like foo.rb:8)
+Plug 'nelstrom/vim-textobj-rubyblock' | Plug 'kana/vim-textobj-user' " Ruby text objects
+Plug 'machakann/vim-highlightedyank' " Highlight yanked text
+Plug 'vim-airline/vim-airline' " Status line
+Plug 'vim-airline/vim-airline-themes' " Status line
+Plug 'ludovicchabant/vim-gutentags' " Tags
+Plug 'vimwiki/vimwiki' " Personal wiki
 call plug#end()
 
 source ~/.config/nvim/key_bindings.vim
@@ -128,3 +130,10 @@ let g:ale_lint_delay = 1000
 
 " Python 3 autopep8 is not in PATH
 let g:ale_python_autopep8_executable = '/Users/ntraum/Library/Python/3.6/bin/autopep8'
+
+
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
