@@ -20,6 +20,9 @@ antigen apply
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 # z (https://github.com/rupa/z)
 . `brew --prefix`/etc/profile.d/z.sh
 
