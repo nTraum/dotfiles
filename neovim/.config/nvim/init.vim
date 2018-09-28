@@ -36,6 +36,7 @@ Plug 'vim-airline/vim-airline' " Status line
 Plug 'vim-airline/vim-airline-themes' " Status line
 Plug 'ludovicchabant/vim-gutentags' " Tags
 Plug 'vimwiki/vimwiki' " Personal wiki
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 source ~/.config/nvim/key_bindings.vim
@@ -137,3 +138,15 @@ let g:vimwiki_list = [{'path': '~/vimwiki/',
 
 " enable ncm2 for all buffers
 autocmd BufEnter * call ncm2#enable_for_buffer()
+
+" Easy motion f search
+nmap s <Plug>(easymotion-overwin-f)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+highlight SpellCap ctermbg=10
