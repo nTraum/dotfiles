@@ -8,6 +8,8 @@ Plug 'roxma/nvim-completion-manager'
 Plug 'roxma/ncm-rct-complete'
 Plug '~/coding/junegunn/fzf'
 "Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'w0rp/ale' " Async linting engine
 Plug 'SirVer/ultisnips' " Snippets
