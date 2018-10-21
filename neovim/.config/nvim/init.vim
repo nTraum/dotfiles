@@ -4,12 +4,10 @@ endfunction
 
 " vim-plug
 call plug#begin()
-Plug 'roxma/nvim-completion-manager'
-Plug 'roxma/ncm-rct-complete'
-Plug '~/coding/junegunn/fzf'
-"Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
 Plug 'Chiel92/vim-autoformat'
 Plug 'w0rp/ale' " Async linting engine
 Plug 'SirVer/ultisnips' " Snippets
@@ -24,23 +22,27 @@ Plug 'mhinz/vim-grepper'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'raimondi/delimitmate'
-Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter' " Mappings for commenting code
 Plug 'tpope/vim-bundler'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rhubarb'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'vim-ruby/vim-ruby'
-Plug 'kopischke/vim-fetch'
-Plug 'nelstrom/vim-textobj-rubyblock' | Plug 'kana/vim-textobj-user'
-Plug 'machakann/vim-highlightedyank'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive' " Git wrapper
+Plug 'tpope/vim-rhubarb' " GitHub extension for fugitive
+Plug 'tpope/vim-surround' " Delete, change and add surroundings
+Plug 'tpope/vim-repeat' " Extends repeatable commands using the . command
+Plug 'vim-ruby/vim-ruby' " Ruby configuration files
+Plug 'kopischke/vim-fetch' " Handle line numbers in filenames (like foo.rb:8)
+Plug 'nelstrom/vim-textobj-rubyblock' | Plug 'kana/vim-textobj-user' " Ruby text objects
+Plug 'machakann/vim-highlightedyank' " Highlight yanked text
+Plug 'vim-airline/vim-airline' " Status line
+Plug 'vim-airline/vim-airline-themes' " Status line
+Plug 'ludovicchabant/vim-gutentags' " Tags
+Plug 'vimwiki/vimwiki' " Personal wiki
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 source ~/.config/nvim/key_bindings.vim
 source ~/.config/nvim/tagbar.vim
 
+" Strip leading WhiteSpace automatically
 autocmd BufEnter * EnableStripWhitespaceOnSave
 
 set undofile
@@ -100,20 +102,51 @@ let test#strategy = "neovim"
 
 let g:UltiSnipsSnippetsDir = "~/.config/nvim/UltiSnips"
 
+" Use ripgrepper for file search
 let g:grepper = {}
 let g:grepper.tools = ['rg']
+
+" Automatically quote search string
+let g:grepper.prompt_quote = 1
 
 " Disable word wrap set by fugitive
 autocmd FileType gitcommit setlocal textwidth=0
 
+" Color theme
 let g:airline_theme='base16'
 
+" Use Powerline fonts in airline's status
 let g:airline_powerline_fonts = 1
 
 " Use rubocop to ale fix ruby files
+" Use autopep8 to ale fix python files
 let g:ale_fixers = {
 \   'ruby': ['rubocop'],
+\   'json': ['jq'],
+\   'python': ['autopep8'],
 \}
 
 " Delay ALE linting for 1 second
 let g:ale_lint_delay = 1000
+
+" Python 3 autopep8 is not in PATH
+let g:ale_python_autopep8_executable = '/Users/ntraum/Library/Python/3.6/bin/autopep8'
+
+
+let g:vimwiki_list = [{'path': '~/vimwiki/',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
+
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+
+" Easy motion f search
+nmap s <Plug>(easymotion-overwin-f)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+highlight SpellCap ctermbg=10
