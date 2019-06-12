@@ -37,6 +37,7 @@ Plug 'vim-airline/vim-airline-themes' " Status line
 Plug 'ludovicchabant/vim-gutentags' " Tags
 Plug 'vimwiki/vimwiki' " Personal wiki
 Plug 'easymotion/vim-easymotion'
+Plug 'slim-template/vim-slim'
 call plug#end()
 
 source ~/.config/nvim/key_bindings.vim
@@ -124,6 +125,7 @@ let g:ale_fixers = {
 \   'ruby': ['rubocop'],
 \   'json': ['jq'],
 \   'python': ['autopep8'],
+\   'slim': ['slim-lint'],
 \}
 
 " Delay ALE linting for 1 second
