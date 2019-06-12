@@ -1,6 +1,15 @@
 # Vim tag files
 tags
 
+# GNU Global tag files
+GPATH
+GRTAGS
+GTAGS
+
+# Org TODO
+TODOs.org
+
+
 # Spacemacs tag files
 tags.lock
 tags.temp
