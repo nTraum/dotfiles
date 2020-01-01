@@ -30,7 +30,8 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(systemd
+   '(sql
+     systemd
      ansible
      (auto-completion :variables
                       auto-completion-enable-snippets-in-popup t)
@@ -142,7 +143,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Fira Code"
-                               :size 28
+                               :size 33
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
