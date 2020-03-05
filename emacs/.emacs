@@ -134,6 +134,7 @@
   )
 
 (use-package evil-magit
+  :after evil magit
   :ensure t
   )
 
