@@ -6,7 +6,6 @@
   ui = auto
 
 [commit]
-  verbose = true
   ;gpgSign = true
 
 [alias]
