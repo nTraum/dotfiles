@@ -25,3 +25,12 @@ tags.temp
 
 # Directory local files (Emacs)
 .dir-locals.el
+
+# ASDF version file
+.tool-versions
+
+# Mac OS
+.DS_Store
+
+# TypeScript Server
+.log
