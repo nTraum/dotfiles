@@ -14,7 +14,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode)))
+    (browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode)))
  '(safe-local-variable-values (quote ((rubocop-autocorrect-on-save . t)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -30,6 +30,13 @@
 ;; This is only needed once, near the top of the file
 (eval-when-compile
   (require 'use-package))
+
+(use-package exec-path-from-shell
+  :ensure t
+  :init (when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+  )
+
 
 ;; Fish shell syntax highlighting
 (use-package fish-mode
@@ -91,18 +98,30 @@
   (dashboard-setup-startup-hook)
   (setq dashboard-center-content t
 	dashboard-startup-banner 'logo)
-)
+  )
 
 ;; Syntax check
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode))
+  :init (global-flycheck-mode)
+)
 
 ;; Git in Emacs
 (use-package magit
   :ensure t
   :init (add-hook 'git-commit-setup-hook 'turn-off-auto-fill
-          t))
+		  t)
+        (setq magit-refresh-status-buffer nil)
+	;; Disable showing diff in commit
+	(remove-hook 'server-switch-hook 'magit-commit-diff)
+  )
+(use-package forge
+  :ensure t
+  :after magit)
+
+(use-package browse-at-remote
+  :ensure t
+  :after magit)
 
 (use-package helm
   :ensure t
@@ -122,10 +141,19 @@
   :ensure t
   )
 
+;; Haml template syntax
+(use-package haml-mode
+  :ensure t
+  )
+
 ;; Slim template syntax
 (use-package slim-mode
   :ensure t
   )
+
+;; Crystal language support
+(use-package crystal-mode
+  :ensure t)
 
 ;; Auto completion framework
 (use-package company
@@ -140,8 +168,8 @@
 (use-package robe
   :ensure t
   :init (add-hook 'ruby-mode-hook 'robe-mode)
-  (push 'company-robe company-backends)
-  )
+ (push 'company-robe company-backends)
+)
 
 (use-package rubocop
   :ensure t
@@ -152,16 +180,44 @@
   :ensure t
   :init
   (projectile-rails-global-mode)
-)
+  )
 
 (use-package go-mode
   :ensure t
-)
+  )
 
 (use-package git-gutter
   :ensure t
   :init (global-git-gutter-mode)
-)
+  )
+
+(use-package all-the-icons
+  :ensure t
+  )
+
+(use-package smartparens
+  :ensure t
+  :init (smartparens-global-mode)
+  )
+
+(use-package lsp-mode
+  :ensure t
+  :hook (prog-mode . lsp))
+
+;; Set up before-save hooks to format buffer and add/delete imports.
+;; Make sure you don't have other gofmt/goimports hooks enabled.
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+(add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+
+(use-package company-lsp
+  :ensure t
+  :init (push 'company-lsp company-backends))
+
+(use-package lsp-ui
+  :ensure
+  )
 
 (use-package general :ensure t
   :config
@@ -173,29 +229,41 @@
    "TAB" '(other-window :which-key "other window")
    "b"  '(:ignore t :which-key "buffers")
    "bb" '(helm-buffers-list t :which-key "helm-buffers-list")
+
    "d"  '(:ignore t :which-key "describe")
    "df" '(describe-function :which "function")
    "dv" '(describe-variable :which "variable")
    "dk" '(describe-key :which "key")
+
    "e"  '(:ignore t :which-key "emacs")
    "ee" '((lambda () (interactive)(find-file "~/.emacs")) :which-key "open .emacs")
    "er" '((lambda () (interactive)(load-file "~/.emacs")) :which-key "reload .emacs")
+
    "f"  '(:ignore t :which-key "files")
    "ff" '(helm-find-files :which-key "find files")
    "fg" '(helm-rg :which-key "grep files")
    "fr" '(helm-recentf :which-key "recent files")
+
    "g"  '(:ignore t :which-key "git")
    "gs" '(magit-status :which-key "git status")
+
+   "l"  '(:ignore t :which-key "lsp")
+   "ld" '(lsp-describe-thing-at-point :which-key "describe thing")
+   "ll" '(lsp-find-definition :which-key "find implementation")
+
    "p"  '(:ignore t :which-key "projectile")
    "pf" '(helm-projectile-find-file :which-key "projects find file")
    "pp" '(helm-projectile-switch-project :which-key "projects")
    "pr" '(helm-projectile-rg :which-key "projects grep")
+
    "r"  '(:ignore t :which-key "ruby")
    "rc" '(inf-ruby-console-auto :which-key "ruby console")
    "rd" '(robe-doc :which-key "robe doc")
    "rj" '(robe-jump :which-key "robe jump")
+
    "s"  '(split-window-vertically :which-key "split vertically")
    "v"  '(split-window-horizontally :which-key "split horizontally")
+
    "w"  '(:ignore t :which-key "window")
    "wh" '(windmove-left :which-key "move left")
    "wj" '(windmove-down :which-key "move down")
@@ -204,7 +272,7 @@
    )
   (general-define-key
    :states '(normal)
-   "ü" '(robe-jump :which-key "robe jump")
+   "ü" '(lsp-goto-implementation :which-key "lsp goto impl")
    "Ü" '(previous-buffer :which-key "previous buffer")
   )
 )
@@ -215,28 +283,26 @@
 
 ;; Disable scroll bar
 (scroll-bar-mode -1)
-
 ;; Show matching parentheses
 (show-paren-mode 1)
 
 ;; Follow symlinks
 (setq vc-follow-symlinks nil)
 
+;; Do not use built-in version control package, we have magit
+(setq vc-handled-backends nil)
+
 ;; Append new line at end of file
 (setq require-final-newline t)
-
 
 ;; Delete trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 ;; Use tmp dir for auto saves and backup files
 (setq backup-directory-alist
-	`((".*" . ,temporary-file-directory)))
+      `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
-	`((".*" ,temporary-file-directory t)))
-
-;; Add closing tags in html-mode
-(setq sgml-quick-keys 'close)
+      `((".*" ,temporary-file-directory t)))
 
 ;; Start emacs maximized
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
@@ -246,5 +312,7 @@
   (setq mac-right-option-modifier nil
 	mac-option-modifier nil
         exec-path (append exec-path '("/usr/local/bin"))
+	)
   )
-)
+
+(set-face-attribute 'default nil :height 160)
