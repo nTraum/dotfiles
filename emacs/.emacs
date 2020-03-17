@@ -14,7 +14,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode)))
+    (yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode)))
  '(safe-local-variable-values (quote ((rubocop-autocorrect-on-save . t)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -27,9 +27,20 @@
 ;; TODO Make relative line numbers work with git gutter
 (global-display-line-numbers-mode)
 
+;; Display column number in mode line
+(column-number-mode)
 ;; This is only needed once, near the top of the file
 (eval-when-compile
   (require 'use-package))
+
+(use-package diminish
+  :ensure
+  :config
+  (diminish 'auto-revert-mode)
+  (diminish 'eldoc-mode)
+  (diminish 'smartparens-mode)
+  (diminish 'undo-tree-mode)
+)
 
 (use-package exec-path-from-shell
   :ensure t
@@ -52,6 +63,7 @@
 ;; editorconfig support
 (use-package editorconfig
   :ensure t
+  :diminish editorconfig-mode
   :config
   (editorconfig-mode 1))
 
@@ -77,6 +89,7 @@
 
 ;; Show key bindings
 (use-package which-key :ensure t
+  :diminish
   :init
   (which-key-mode)
 )
@@ -84,6 +97,7 @@
 ;; Projects based on version control
 (use-package projectile
   :ensure t
+  :diminish
   :config
   (projectile-mode +1)
   (setq projectile-project-search-path '("~/coding/ntraum")))
@@ -125,6 +139,7 @@
 
 (use-package helm
   :ensure t
+  :diminish
   :init (helm-mode 1)
   )
 
@@ -159,6 +174,7 @@
 ;; Auto completion framework
 (use-package company
   :ensure t
+  :diminish company-mode
   :init (add-hook 'after-init-hook 'global-company-mode)
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1)
@@ -189,6 +205,7 @@
 
 (use-package git-gutter
   :ensure t
+  :diminish git-gutter-mode
   :init (global-git-gutter-mode)
   )
 
@@ -220,6 +237,27 @@
   :ensure
   )
 
+(use-package yasnippet
+  :ensure t
+  :after company
+  :init (yas-global-mode))
+
+(use-package yasnippet
+  :after yasnippet)
+
+;; Add yasnippet support for all company backends
+;; https://github.com/syl20bnr/spacemacs/pull/179
+(defvar company-mode/enable-yas t
+  "Enable yasnippet for all backends.")
+
+(defun company-mode/backend-with-yas (backend)
+  (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+      backend
+    (append (if (consp backend) backend (list backend))
+            '(:with company-yasnippet))))
+
+(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+
 (use-package general :ensure t
   :config
   (general-evil-setup t)
@@ -247,6 +285,7 @@
 
    "g"  '(:ignore t :which-key "git")
    "gs" '(magit-status :which-key "git status")
+   "gb" '(magit-branch :which-key "git branch")
 
    "l"  '(:ignore t :which-key "lsp")
    "ld" '(lsp-describe-thing-at-point :which-key "describe thing")
@@ -290,9 +329,6 @@
 ;; Follow symlinks
 (setq vc-follow-symlinks nil)
 
-;; Do not use built-in version control package, we have magit
-(setq vc-handled-backends nil)
-
 ;; Append new line at end of file
 (setq require-final-newline t)
 
@@ -316,4 +352,4 @@
 	)
   )
 
-(set-face-attribute 'default nil :height 160)
+(set-face-attribute 'default nil :height 140)
