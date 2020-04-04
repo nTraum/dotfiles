@@ -1,3 +1,10 @@
+;; Disable menu and tool bar
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+
+;; Disable scroll bar
+(scroll-bar-mode -1)
+
 (require 'package)
 
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
@@ -14,7 +21,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode)))
+    (yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode)))
  '(safe-local-variable-values (quote ((rubocop-autocorrect-on-save . t)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -33,6 +40,26 @@
 (eval-when-compile
   (require 'use-package))
 
+;; Vim key bindings
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode t)
+)
+
+(use-package general :ensure t
+  :config
+  (general-create-definer space-leader
+	    :prefix "SPC"
+	    :non-normal-prefix "M-SPC")
+  (general-create-definer comma-leader
+    :prefix ","
+    :non-normal-prefix "M-,"
+    )
+  )
+
+(use-package ace-jump-mode :ensure)
+
 (use-package diminish
   :ensure
   :config
@@ -50,9 +77,7 @@
 
 
 ;; Fish shell syntax highlighting
-(use-package fish-mode
-  :ensure t
-  )
+(use-package fish-mode :ensure t)
 
 ;; Yaml syntax highlighting
 (use-package yaml-mode
@@ -67,12 +92,6 @@
   :config
   (editorconfig-mode 1))
 
-;; Vim key bindings
-(use-package evil
-  :ensure t
-  :config
-  (evil-mode t)
-)
 
 ;; Vim surround
 (use-package evil-surround
@@ -102,8 +121,7 @@
   (projectile-mode +1)
   (setq projectile-project-search-path '("~/coding/ntraum")))
 
-(use-package gruvbox-theme
-  :ensure t)
+(use-package gruvbox-theme :ensure t)
 
 ;; Startup dashboard
 (use-package dashboard
@@ -153,23 +171,16 @@
   :ensure t
   )
 
-(use-package helm-projectile
-  :ensure t
-  )
+(use-package helm-projectile :ensure t)
 
 ;; Haml template syntax
-(use-package haml-mode
-  :ensure t
-  )
+(use-package haml-mode :ensure t)
 
 ;; Slim template syntax
-(use-package slim-mode
-  :ensure t
-  )
+(use-package slim-mode :ensure t)
 
 ;; Crystal language support
-(use-package crystal-mode
-  :ensure t)
+(use-package crystal-mode :ensure t)
 
 ;; Auto completion framework
 (use-package company
@@ -186,22 +197,28 @@
   :ensure t
   :init (add-hook 'ruby-mode-hook 'robe-mode)
  (push 'company-robe company-backends)
-)
+ )
 
 (use-package rubocop
   :ensure t
-  :init (setq rubocop-autocorrect-on-save t)
+  :config (setq rubocop-autocorrect-on-save t)
 )
 
+(use-package rspec-mode
+  :ensure t
+  :general
+  (comma-leader
+   :states '(normal visual)
+   :keymaps 'ruby-mode-map
+    "tt" 'rspec-verify-single
+    "tT" 'rspec-verify)
+)
 (use-package projectile-rails
   :ensure t
   :init
   (projectile-rails-global-mode)
   )
-
-(use-package go-mode
-  :ensure t
-  )
+(use-package go-mode :ensure t)
 
 (use-package git-gutter
   :ensure t
@@ -209,9 +226,7 @@
   :init (global-git-gutter-mode)
   )
 
-(use-package all-the-icons
-  :ensure t
-  )
+(use-package all-the-icons :ensure t)
 
 (use-package smartparens
   :ensure t
@@ -233,96 +248,89 @@
   :ensure t
   :init (push 'company-lsp company-backends))
 
-(use-package lsp-ui
-  :ensure
-  )
+(use-package lsp-ui :ensure)
 
 (use-package yasnippet
   :ensure t
   :after company
   :init (yas-global-mode))
 
-(use-package yasnippet
+(use-package yasnippet-snippets
+  :ensure t
   :after yasnippet)
 
-;; Add yasnippet support for all company backends
-;; https://github.com/syl20bnr/spacemacs/pull/179
-(defvar company-mode/enable-yas t
-  "Enable yasnippet for all backends.")
+(general-evil-setup t)
+(space-leader
+ :states '(normal visual emacs)
+ :keymaps 'override
+ "SPC" '(helm-M-x :which-key "execute command")
+ "TAB" '(other-window :which-key "other window")
 
-(defun company-mode/backend-with-yas (backend)
-  (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
-      backend
-    (append (if (consp backend) backend (list backend))
-            '(:with company-yasnippet))))
+ "b"  '(:ignore t :which-key "buffers")
+ "bb" '(helm-buffers-list t :which-key "helm-buffers-list")
 
-(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+ "c"  '(:ignore t :which-key "comment")
+ "cc" '(comment-or-uncomment-region-or-line t :which-key "toggle line or region")
 
-(use-package general :ensure t
-  :config
-  (general-evil-setup t)
-  (general-define-key
-   :states '(normal)
-   :prefix "SPC"
-   "SPC" '(helm-M-x :which-key "execute command")
-   "TAB" '(other-window :which-key "other window")
-   "b"  '(:ignore t :which-key "buffers")
-   "bb" '(helm-buffers-list t :which-key "helm-buffers-list")
+ "e"  '(:ignore t :which-key "emacs")
+ "ee" '((lambda () (interactive)(find-file "~/.emacs")) :which-key "open .emacs")
+ "er" '((lambda () (interactive)(load-file "~/.emacs")) :which-key "reload .emacs")
 
-   "d"  '(:ignore t :which-key "describe")
-   "df" '(describe-function :which "function")
-   "dv" '(describe-variable :which "variable")
-   "dk" '(describe-key :which "key")
+ "f"  '(:ignore t :which-key "files")
+ "ff" '(helm-find-files :which-key "find files")
+ "fg" '(helm-rg :which-key "grep files")
+ "fr" '(helm-recentf :which-key "recent files")
 
-   "e"  '(:ignore t :which-key "emacs")
-   "ee" '((lambda () (interactive)(find-file "~/.emacs")) :which-key "open .emacs")
-   "er" '((lambda () (interactive)(load-file "~/.emacs")) :which-key "reload .emacs")
+ "g"  '(:ignore t :which-key "git")
+ "gs" '(magit-status :which-key "git status")
+ "gb" '(magit-branch :which-key "git branch")
 
-   "f"  '(:ignore t :which-key "files")
-   "ff" '(helm-find-files :which-key "find files")
-   "fg" '(helm-rg :which-key "grep files")
-   "fr" '(helm-recentf :which-key "recent files")
+ "h"  '(:ignore t :which-key "help")
+ "hf" '(describe-function :which-key "function")
+ "hk" '(describe-key :which-key "key")
+ "hm" '(describe-mode :which-key "mode")
+ "hv" '(describe-variable :which-key "variable")
 
-   "g"  '(:ignore t :which-key "git")
-   "gs" '(magit-status :which-key "git status")
-   "gb" '(magit-branch :which-key "git branch")
+ "j" '(evil-ace-jump-char-mode :which-key "ace jump")
 
-   "l"  '(:ignore t :which-key "lsp")
-   "ld" '(lsp-describe-thing-at-point :which-key "describe thing")
-   "ll" '(lsp-find-definition :which-key "find implementation")
+ "l"  '(:ignore t :which-key "lsp")
+ "ld" '(lsp-describe-thing-at-point :which-key "describe thing")
+ "ll" '(lsp-find-definition :which-key "find implementation")
 
-   "p"  '(:ignore t :which-key "projectile")
-   "pf" '(helm-projectile-find-file :which-key "projects find file")
-   "pp" '(helm-projectile-switch-project :which-key "projects")
-   "pr" '(helm-projectile-rg :which-key "projects grep")
+ "p"  '(:ignore t :which-key "projectile")
+ "pf" '(helm-projectile-find-file :which-key "projects find file")
+ "pp" '(helm-projectile-switch-project :which-key "projects")
+ "pr" '(helm-projectile-rg :which-key "projects grep")
 
-   "r"  '(:ignore t :which-key "ruby")
-   "rc" '(inf-ruby-console-auto :which-key "ruby console")
-   "rd" '(robe-doc :which-key "robe doc")
-   "rj" '(robe-jump :which-key "robe jump")
+ "r"  '(:ignore t :which-key "ruby")
+ "rc" '(inf-ruby-console-auto :which-key "ruby console")
+ "rd" '(robe-doc :which-key "robe doc")
+ "rj" '(robe-jump :which-key "robe jump")
+ "rb" '(ruby-toggle-block :which-key "toggle block")
 
-   "s"  '(split-window-vertically :which-key "split vertically")
-   "v"  '(split-window-horizontally :which-key "split horizontally")
+ "s"  '(split-window-vertically :which-key "split vertically")
+ "v"  '(split-window-horizontally :which-key "split horizontally")
 
-   "w"  '(:ignore t :which-key "window")
-   "wh" '(windmove-left :which-key "move left")
-   "wj" '(windmove-down :which-key "move down")
-   "wk" '(windmove-up :which-key "move up")
-   "wl" '(windmove-right :which-key "move right")
-   )
-  (general-define-key
-   :states '(normal)
-   "ü" '(lsp-goto-implementation :which-key "lsp goto impl")
-   "Ü" '(previous-buffer :which-key "previous buffer")
-  )
-)
+ "w"  '(:ignore t :which-key "window")
+ "wh" '(windmove-left :which-key "move left")
+ "wj" '(windmove-down :which-key "move down")
+ "wk" '(windmove-up :which-key "move up")
+ "wl" '(windmove-right :which-key "move right")
+ )
+(general-define-key
+ :states '(normal visual emacs)
+ :keymaps 'override
+ "ü" '(lsp-goto-implementation :which-key "lsp goto impl")
+ "Ü" '(previous-buffer :which-key "previous buffer")
+ )
 
-;; Disable menu and tool bar
-(menu-bar-mode -1)
-(tool-bar-mode -1)
+(comma-leader
+  :states '(normal visual)
+  :keymaps 'ruby-mode-map
+  "tt" 'rspec-verify-single
+  "tT" 'rspec-verify)
 
-;; Disable scroll bar
-(scroll-bar-mode -1)
+
 ;; Show matching parentheses
 (show-paren-mode 1)
 
@@ -348,8 +356,21 @@
 (when (string= system-type "darwin")
   (setq mac-right-option-modifier nil
 	mac-option-modifier nil
-        exec-path (append exec-path '("/usr/local/bin"))
+	exec-path (append exec-path '("/usr/local/bin"))
 	)
   )
 
 (set-face-attribute 'default nil :height 140)
+
+;; https://stackoverflow.com/a/9697222/1425701
+(defun comment-or-uncomment-region-or-line ()
+    "Comments or uncomments the region or the current line if there's no active region."
+    (interactive)
+    (let (beg end)
+        (if (region-active-p)
+            (setq beg (region-beginning) end (region-end))
+            (setq beg (line-beginning-position) end (line-end-position)))
+        (comment-or-uncomment-region beg end)))
+
+;; Auto scroll rspec tests
+(setq compilation-scroll-output t)
