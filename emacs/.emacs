@@ -18,10 +18,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("a06658a45f043cd95549d6845454ad1c1d6e24a99271676ae56157619952394a" "123a8dabd1a0eff6e0c48a03dc6fb2c5e03ebc7062ba531543dfbce587e86f2a" default)))
+ '(helm-completion-style (quote emacs))
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode)))
+    (doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode)))
  '(safe-local-variable-values (quote ((rubocop-autocorrect-on-save . t)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -135,7 +139,9 @@
 ;; Syntax check
 (use-package flycheck
   :ensure t
-  :init (global-flycheck-mode)
+  :init
+  (global-flycheck-mode)
+  (setq-default flycheck-disabled-checkers '(ruby-reek))
 )
 
 ;; Git in Emacs
@@ -213,11 +219,7 @@
     "tt" 'rspec-verify-single
     "tT" 'rspec-verify)
 )
-(use-package projectile-rails
-  :ensure t
-  :init
-  (projectile-rails-global-mode)
-  )
+
 (use-package go-mode :ensure t)
 
 (use-package git-gutter
@@ -259,6 +261,14 @@
   :ensure t
   :after yasnippet)
 
+(use-package yard-mode
+  :ensure t
+  :hook ruby-mode)
+
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
 (general-evil-setup t)
 (space-leader
  :states '(normal visual emacs)
@@ -287,6 +297,7 @@
 
  "h"  '(:ignore t :which-key "help")
  "hf" '(describe-function :which-key "function")
+ "ha" '(helm-apropos :which-key "apropos")
  "hk" '(describe-key :which-key "key")
  "hm" '(describe-mode :which-key "mode")
  "hv" '(describe-variable :which-key "variable")
@@ -308,8 +319,8 @@
  "rj" '(robe-jump :which-key "robe jump")
  "rb" '(ruby-toggle-block :which-key "toggle block")
 
- "s"  '(split-window-vertically :which-key "split vertically")
- "v"  '(split-window-horizontally :which-key "split horizontally")
+ "s"  '(:ignore t :which-key "snippets")
+ "ss"  '(yas-insert-snippet :which-key "search")
 
  "w"  '(:ignore t :which-key "window")
  "wh" '(windmove-left :which-key "move left")
@@ -326,9 +337,20 @@
 
 (comma-leader
   :states '(normal visual)
+ "t"  '(:ignore t :which-key "test")
+ "f"  '(:ignore t :which-key "format")
+ )
+
+
+(comma-leader
+  :states '(normal visual)
   :keymaps 'ruby-mode-map
+  "ft" 'rubocop-autocorrect-current-file
+  "fT" 'rubocop-autocorrect-current-file
+  "tT" 'rspec-verify
   "tt" 'rspec-verify-single
-  "tT" 'rspec-verify)
+  "tr" 'rspec-rerun
+  )
 
 
 ;; Show matching parentheses
