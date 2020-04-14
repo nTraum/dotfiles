@@ -6,8 +6,6 @@ abbr --add gds git diff --staged
 
 abbr --add be bundle exec
 
-
-
 alias saml_p='saml2aws login -a production -p production'
 alias saml_t='saml2aws login -a testing -p testing'
 
@@ -39,3 +37,5 @@ end
 function reset_elli_with_test
     mysql -uroot < db/reset_db.sql; bundle exec rake db:migrate test:prepare
 end
+
+starship init fish | source
