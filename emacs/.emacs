@@ -17,7 +17,10 @@
  '(package-selected-packages
    (quote
     (rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode)))
- '(safe-local-variable-values (quote ((rubocop-autocorrect-on-save . t)))))
+ '(safe-local-variable-values
+   (quote
+    ((ansible-vault-password-file . "/home/ntraum/coding/vincura/ansible/vault-password.txt")
+     (rubocop-autocorrect-on-save . t)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
