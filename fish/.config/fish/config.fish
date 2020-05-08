@@ -38,4 +38,17 @@ function reset_elli_with_test
     mysql -uroot < db/reset_db.sql; bundle exec rake db:migrate test:prepare
 end
 
-starship init fish | source
+function is_lappen
+    test "$HOST" = "lappen"
+end
+
+function is_bl_macbook
+    test "$HOST" = "BLSOMETHINGSOMETHING"
+end
+
+set -x Z_DATA /home/ntraum/.local/share/z/data
+set -x Z_DATA_DIR /home/ntraum/,local/share/z
+
+if command -v starship
+    starship init fish | source
+end
