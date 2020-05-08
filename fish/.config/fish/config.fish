@@ -15,39 +15,42 @@ alias create_my_stack="saml_t; env AWS_PROFILE=testing pipenv run ansible-playbo
 
 alias destroy_my_stack="saml_t; env AWS_PROFILE=testing pipenv run ansible-playbook aws_infrastructure.yml -e 'stack_name=phili key_pair=philipp state=absent' --vault-password-file ~/ansible_vault.txt"
 
-set -xg GTAGSLABEL pygments
 set -xg EDITOR emacsclient
 
+function is_lappen
+    test "$hostname" = "lappen"
+end
+
+function is_bl_macbook
+    test "$hostname" = "BLSOMETHINGSOMETHING"
+end
+
+function add_ssh_key_if_missing
+    set ssh_fingerprint $argv[1]
+    set ssh_key = $argv[2]
+
+    ssh-add -l | grep --quiet $ssh_fingerprint
+
+    if test ! $status -eq 0
+	echo "SSH key missing"
+	ssh-add $ssh_key
+    end
+end
+
 if status --is-interactive
-    if ssh-add -l | grep --quiet aTXHZ7JAnuxsV1mkP4+2Iva2/w9xg4UaOJeJti2wpAY
-        echo "SSH key already added to ssh agent."
-    else
-        echo "SSH key not added to ssh-agent yet, adding..."
-        ssh-add $HOME/.ssh/id_ed25519
+    if is_bl_macbook
+	add_ssh_key_if_missing aTXHZ7JAnuxsV1mkP4+2Iva2/w9xg4UaOJeJti2wpAY "$HOME/.ssh/id_ed25519"
+	add_ssh_key_if_missing S/5A8aIh8BB6ergjWIKkQXQofMn9T73IglkrIN4smus "$HOME/.ssh/id_rsa"
     end
 
-    if ssh-add -l | grep --quiet S/5A8aIh8BB6ergjWIKkQXQofMn9T73IglkrIN4smus
-        echo "SSH key already added to ssh agent."
-    else
-        echo "SSH key not added to ssh-agent yet, adding..."
-        ssh-add $HOME/.ssh/id_rsa
+    if is_lappen
+	add_ssh_key_if_missing hQqd2Fu/jyNBVHPNFZC35rdn2EZdDzkxzRe9RM1wa2M "$HOME/.ssh/id_ed25519"
     end
 end
 
 function reset_elli_with_test
     mysql -uroot < db/reset_db.sql; bundle exec rake db:migrate test:prepare
 end
-
-function is_lappen
-    test "$HOST" = "lappen"
-end
-
-function is_bl_macbook
-    test "$HOST" = "BLSOMETHINGSOMETHING"
-end
-
-set -x Z_DATA /home/ntraum/.local/share/z/data
-set -x Z_DATA_DIR /home/ntraum/,local/share/z
 
 if command -v starship
     starship init fish | source
