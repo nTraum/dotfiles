@@ -7,7 +7,6 @@ function is_bl_macbook
 end
 
 if is_lappen
-    echo lappen
     set -U XLIB_SKIP_ARGB_VISUALS 1
 end
 
@@ -30,6 +29,9 @@ end
 if test -f ~/.asdf/asdf.fish
     source ~/.asdf/asdf.fish
 end
+
+
+abbr --add f fzf
 
 abbr --add g git
 abbr --add gd git diff
@@ -57,6 +59,10 @@ if status --is-interactive
     if is_lappen
 	add_ssh_key_if_missing hQqd2Fu/jyNBVHPNFZC35rdn2EZdDzkxzRe9RM1wa2M "$HOME/.ssh/id_ed25519"
     end
+end
+
+if command -v fzf
+    set -xg FZF_DEFAULT_OPTS '--height 80% --border'
 end
 
 function reset_elli_with_test
