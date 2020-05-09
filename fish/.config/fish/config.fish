@@ -1,4 +1,35 @@
-source ~/.asdf/asdf.fish
+function is_lappen
+    test "$hostname" = "lappen"
+end
+
+function is_bl_macbook
+    test "$hostname" = "BLSOMETHINGSOMETHING"
+end
+
+if is_lappen
+    echo lappen
+    set -U XLIB_SKIP_ARGB_VISUALS 1
+end
+
+function add_ssh_key_if_missing
+    set ssh_fingerprint $argv[1]
+    set ssh_key = $argv[2]
+
+    ssh-add -l | grep --quiet $ssh_fingerprint
+
+    if test ! $status -eq 0
+	echo "SSH key missing"
+	ssh-add $ssh_key
+    end
+end
+
+if command -v starship
+    starship init fish | source
+end
+
+if test -f ~/.asdf/asdf.fish
+    source ~/.asdf/asdf.fish
+end
 
 abbr --add g git
 abbr --add gd git diff
@@ -17,26 +48,6 @@ alias destroy_my_stack="saml_t; env AWS_PROFILE=testing pipenv run ansible-playb
 
 set -xg EDITOR emacsclient
 
-function is_lappen
-    test "$hostname" = "lappen"
-end
-
-function is_bl_macbook
-    test "$hostname" = "BLSOMETHINGSOMETHING"
-end
-
-function add_ssh_key_if_missing
-    set ssh_fingerprint $argv[1]
-    set ssh_key = $argv[2]
-
-    ssh-add -l | grep --quiet $ssh_fingerprint
-
-    if test ! $status -eq 0
-	echo "SSH key missing"
-	ssh-add $ssh_key
-    end
-end
-
 if status --is-interactive
     if is_bl_macbook
 	add_ssh_key_if_missing aTXHZ7JAnuxsV1mkP4+2Iva2/w9xg4UaOJeJti2wpAY "$HOME/.ssh/id_ed25519"
@@ -50,8 +61,4 @@ end
 
 function reset_elli_with_test
     mysql -uroot < db/reset_db.sql; bundle exec rake db:migrate test:prepare
-end
-
-if command -v starship
-    starship init fish | source
 end
