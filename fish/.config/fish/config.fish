@@ -30,6 +30,7 @@ if test -f ~/.asdf/asdf.fish
     source ~/.asdf/asdf.fish
 end
 
+abbr --add ap ansible-playbook
 
 abbr --add f fzf
 
@@ -62,7 +63,15 @@ if status --is-interactive
 end
 
 if command -v fzf
-    set -xg FZF_DEFAULT_OPTS '--height 80% --border'
+    set -xg FZF_DEFAULT_OPTS '--height 40% --border'
+end
+
+function fz
+    z --list | awk '{ print $2 }' | fzf --preview='ls -ll {}' | cd
+end
+
+function fh
+    history | fzf
 end
 
 function reset_elli_with_test
