@@ -385,7 +385,26 @@
 	)
   )
 
-(set-face-attribute 'default nil :height 140)
+					;
+(defun is-lappen ()
+  "Return non-nil if the host is lappen."
+  (string= (system-name) "lappen"))
+
+(defun is-bl-macbook ()
+  "Return non-nil if the host is Blacklane macbook."
+  (string= (system-name) "MBSOMETHING"))
+
+(when (is-lappen)
+  (set-face-attribute 'default nil
+		      :family "Source Code Pro"
+		      :height 120
+		      )
+  )
+
+(when (is-bl-macbook)
+  (set-face-attribute 'default nil :height 140)
+  )
+
 
 ;; https://stackoverflow.com/a/9697222/1425701
 (defun comment-or-uncomment-region-or-line ()
