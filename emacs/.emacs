@@ -392,7 +392,7 @@
 
 (defun is-bl-macbook ()
   "Return non-nil if the host is Blacklane macbook."
-  (string= (system-name) "MBSOMETHING"))
+  (string= (system-name) "M20190021"))
 
 (when (is-lappen)
   (set-face-attribute 'default nil
