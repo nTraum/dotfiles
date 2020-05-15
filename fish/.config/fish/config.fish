@@ -64,6 +64,9 @@ end
 
 if command -v fzf > /dev/null
     set -xg FZF_DEFAULT_OPTS '--height 40% --border'
+    if command -v fd > /dev/null
+	set -xg FZF_DEFAULT_COMMAND  'fd --type=file --hidden --no-ignore-vcs'
+    end
 end
 
 function fz
