@@ -22,11 +22,11 @@ function add_ssh_key_if_missing
     end
 end
 
-if command -v starship
+if command -v starship > /dev/null
     starship init fish | source
 end
 
-if test -f ~/.asdf/asdf.fish
+if test -f ~/.asdf/asdf.fish > /dev/null
     source ~/.asdf/asdf.fish
 end
 
@@ -62,7 +62,7 @@ if status --is-interactive
     end
 end
 
-if command -v fzf
+if command -v fzf > /dev/null
     set -xg FZF_DEFAULT_OPTS '--height 40% --border'
 end
 
