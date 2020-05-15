@@ -52,13 +52,13 @@
   :ensure t
   :config
   (evil-mode t)
-)
+  )
 
 (use-package general :ensure t
   :config
   (general-create-definer space-leader
-	    :prefix "SPC"
-	    :non-normal-prefix "M-SPC")
+    :prefix "SPC"
+    :non-normal-prefix "M-SPC")
   (general-create-definer comma-leader
     :prefix ","
     :non-normal-prefix "M-,"
@@ -74,12 +74,12 @@
   (diminish 'eldoc-mode)
   (diminish 'smartparens-mode)
   (diminish 'undo-tree-mode)
-)
+  )
 
 (use-package exec-path-from-shell
   :ensure t
   :init (when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
+	  (exec-path-from-shell-initialize))
   )
 
 
@@ -118,7 +118,7 @@
   :diminish
   :init
   (which-key-mode)
-)
+  )
 
 ;; Projects based on version control
 (use-package projectile
@@ -126,7 +126,8 @@
   :diminish
   :config
   (projectile-mode +1)
-  (setq projectile-project-search-path '("~/coding/ntraum")))
+  (setq projectile-project-search-path '("~/coding"))
+  )
 
 (use-package gruvbox-theme :ensure t)
 
@@ -145,16 +146,16 @@
   :init
   (global-flycheck-mode)
   (setq-default flycheck-disabled-checkers '(ruby-reek))
-)
+  )
 
 ;; Git in Emacs
 (use-package magit
   :ensure t
   :init (add-hook 'git-commit-setup-hook 'turn-off-auto-fill
 		  t)
-        (setq magit-refresh-status-buffer nil)
-	;; Disable showing diff in commit
-	(remove-hook 'server-switch-hook 'magit-commit-diff)
+  (setq magit-refresh-status-buffer nil)
+  ;; Disable showing diff in commit
+  (remove-hook 'server-switch-hook 'magit-commit-diff)
   )
 (use-package forge
   :ensure t
@@ -205,23 +206,23 @@
 (use-package robe
   :ensure t
   :init (add-hook 'ruby-mode-hook 'robe-mode)
- (push 'company-robe company-backends)
- )
+  (push 'company-robe company-backends)
+  )
 
 (use-package rubocop
   :ensure t
   :config (setq rubocop-autocorrect-on-save t)
-)
+  )
 
 (use-package rspec-mode
   :ensure t
   :general
   (comma-leader
-   :states '(normal visual)
-   :keymaps 'ruby-mode-map
+    :states '(normal visual)
+    :keymaps 'ruby-mode-map
     "tt" 'rspec-verify-single
     "tT" 'rspec-verify)
-)
+  )
 
 (use-package go-mode :ensure t)
 
@@ -274,63 +275,63 @@
 
 (general-evil-setup t)
 (space-leader
- :states '(normal visual emacs)
- :keymaps 'override
- "SPC" '(helm-M-x :which-key "execute command")
- "TAB" '(other-window :which-key "other window")
+  :states '(normal visual emacs)
+  :keymaps 'override
+  "SPC" '(helm-M-x :which-key "execute command")
+  "TAB" '(other-window :which-key "other window")
 
- "b"  '(:ignore t :which-key "buffers")
- "bb" '(helm-buffers-list t :which-key "helm-buffers-list")
+  "b"  '(:ignore t :which-key "buffers")
+  "bb" '(helm-buffers-list t :which-key "helm-buffers-list")
 
- "c"  '(:ignore t :which-key "comment")
- "cc" '(comment-or-uncomment-region-or-line t :which-key "toggle line or region")
+  "c"  '(:ignore t :which-key "comment")
+  "cc" '(comment-or-uncomment-region-or-line t :which-key "toggle line or region")
 
- "e"  '(:ignore t :which-key "emacs")
- "ee" '((lambda () (interactive)(find-file "~/.emacs")) :which-key "open .emacs")
- "er" '((lambda () (interactive)(load-file "~/.emacs")) :which-key "reload .emacs")
+  "e"  '(:ignore t :which-key "emacs")
+  "ee" '((lambda () (interactive)(find-file "~/.emacs")) :which-key "open .emacs")
+  "er" '((lambda () (interactive)(load-file "~/.emacs")) :which-key "reload .emacs")
 
- "f"  '(:ignore t :which-key "files")
- "ff" '(helm-find-files :which-key "find files")
- "fg" '(helm-rg :which-key "grep files")
- "fr" '(helm-recentf :which-key "recent files")
+  "f"  '(:ignore t :which-key "files")
+  "ff" '(helm-find-files :which-key "find files")
+  "fg" '(helm-rg :which-key "grep files")
+  "fr" '(helm-recentf :which-key "recent files")
 
- "g"  '(:ignore t :which-key "git")
- "gs" '(magit-status :which-key "git status")
- "gb" '(magit-branch :which-key "git branch")
+  "g"  '(:ignore t :which-key "git")
+  "gs" '(magit-status :which-key "git status")
+  "gb" '(magit-branch :which-key "git branch")
 
- "h"  '(:ignore t :which-key "help")
- "hf" '(describe-function :which-key "function")
- "ha" '(helm-apropos :which-key "apropos")
- "hk" '(describe-key :which-key "key")
- "hm" '(describe-mode :which-key "mode")
- "hv" '(describe-variable :which-key "variable")
+  "h"  '(:ignore t :which-key "help")
+  "hf" '(describe-function :which-key "function")
+  "ha" '(helm-apropos :which-key "apropos")
+  "hk" '(describe-key :which-key "key")
+  "hm" '(describe-mode :which-key "mode")
+  "hv" '(describe-variable :which-key "variable")
 
- "j" '(evil-ace-jump-char-mode :which-key "ace jump")
+  "j" '(evil-ace-jump-char-mode :which-key "ace jump")
 
- "l"  '(:ignore t :which-key "lsp")
- "ld" '(lsp-describe-thing-at-point :which-key "describe thing")
- "ll" '(lsp-find-definition :which-key "find implementation")
+  "l"  '(:ignore t :which-key "lsp")
+  "ld" '(lsp-describe-thing-at-point :which-key "describe thing")
+  "ll" '(lsp-find-definition :which-key "find implementation")
 
- "p"  '(:ignore t :which-key "projectile")
- "pf" '(helm-projectile-find-file :which-key "projects find file")
- "pp" '(helm-projectile-switch-project :which-key "projects")
- "pr" '(helm-projectile-rg :which-key "projects grep")
+  "p"  '(:ignore t :which-key "projectile")
+  "pf" '(helm-projectile-find-file :which-key "projects find file")
+  "pp" '(helm-projectile-switch-project :which-key "projects")
+  "pr" '(helm-projectile-rg :which-key "projects grep")
 
- "r"  '(:ignore t :which-key "ruby")
- "rc" '(inf-ruby-console-auto :which-key "ruby console")
- "rd" '(robe-doc :which-key "robe doc")
- "rj" '(robe-jump :which-key "robe jump")
- "rb" '(ruby-toggle-block :which-key "toggle block")
+  "r"  '(:ignore t :which-key "ruby")
+  "rc" '(inf-ruby-console-auto :which-key "ruby console")
+  "rd" '(robe-doc :which-key "robe doc")
+  "rj" '(robe-jump :which-key "robe jump")
+  "rb" '(ruby-toggle-block :which-key "toggle block")
 
- "s"  '(:ignore t :which-key "snippets")
- "ss"  '(yas-insert-snippet :which-key "search")
+  "s"  '(:ignore t :which-key "snippets")
+  "ss"  '(yas-insert-snippet :which-key "search")
 
- "w"  '(:ignore t :which-key "window")
- "wh" '(windmove-left :which-key "move left")
- "wj" '(windmove-down :which-key "move down")
- "wk" '(windmove-up :which-key "move up")
- "wl" '(windmove-right :which-key "move right")
- )
+  "w"  '(:ignore t :which-key "window")
+  "wh" '(windmove-left :which-key "move left")
+  "wj" '(windmove-down :which-key "move down")
+  "wk" '(windmove-up :which-key "move up")
+  "wl" '(windmove-right :which-key "move right")
+  )
 (general-define-key
  :states '(normal visual emacs)
  :keymaps 'override
@@ -340,9 +341,9 @@
 
 (comma-leader
   :states '(normal visual)
- "t"  '(:ignore t :which-key "test")
- "f"  '(:ignore t :which-key "format")
- )
+  "t"  '(:ignore t :which-key "test")
+  "f"  '(:ignore t :which-key "format")
+  )
 
 
 (comma-leader
@@ -408,13 +409,13 @@
 
 ;; https://stackoverflow.com/a/9697222/1425701
 (defun comment-or-uncomment-region-or-line ()
-    "Comments or uncomments the region or the current line if there's no active region."
-    (interactive)
-    (let (beg end)
-        (if (region-active-p)
-            (setq beg (region-beginning) end (region-end))
-            (setq beg (line-beginning-position) end (line-end-position)))
-        (comment-or-uncomment-region beg end)))
+  "Comments or uncomments the region or the current line if there's no active region."
+  (interactive)
+  (let (beg end)
+    (if (region-active-p)
+	(setq beg (region-beginning) end (region-end))
+      (setq beg (line-beginning-position) end (line-end-position)))
+    (comment-or-uncomment-region beg end)))
 
 ;; Auto scroll rspec tests
 (setq compilation-scroll-output t)
