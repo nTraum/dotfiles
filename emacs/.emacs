@@ -270,6 +270,22 @@
   :ensure t
   :init (doom-modeline-mode 1))
 
+(use-package web-mode
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.njk\\'" . web-mode))
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-enable-auto-pairing nil)
+  (setq web-mode-enable-current-element-highlight t)
+  )
+
+(use-package aggressive-indent
+  :ensure t
+  :hook web-mode
+  )
+
+
 (general-evil-setup t)
 (space-leader
   :states '(normal visual emacs)
