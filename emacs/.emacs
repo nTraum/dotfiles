@@ -374,7 +374,7 @@
 (show-paren-mode 1)
 
 ;; Follow symlinks
-(setq vc-follow-symlinks nil)
+(setq vc-follow-symlinks t)
 
 ;; Append new line at end of file
 (setq require-final-newline t)
