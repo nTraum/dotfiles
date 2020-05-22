@@ -6,10 +6,6 @@ function is_bl_macbook
     test "$hostname" = "M20190021"
 end
 
-# if is_lappen
-#     set -U XLIB_SKIP_ARGB_VISUALS 1
-# end
-
 function add_ssh_key_if_missing
     set ssh_fingerprint $argv[1]
     set ssh_key = $argv[2]
