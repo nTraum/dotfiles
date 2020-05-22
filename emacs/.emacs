@@ -432,3 +432,9 @@
 
 ;; Auto scroll rspec tests
 (setq compilation-scroll-output t)
+
+;; Use spaces for tabs
+(setq-default indent-tabs-mode nil)
+
+;; One tab is 2 spaces
+(setq-default tab-width 2)
