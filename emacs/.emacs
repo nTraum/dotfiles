@@ -25,7 +25,7 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
    (quote
-    (web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode)))
+    (elixir-mode web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode)))
  '(safe-local-variable-values
    (quote
     ((ansible-vault-password-file . "/home/ntraum/coding/vincura/ansible/vault-password.txt")
@@ -82,6 +82,8 @@
 	  (exec-path-from-shell-initialize))
   )
 
+;; Fish shell syntax highlighting
+(use-package elixir-mode :ensure t)
 
 ;; Fish shell syntax highlighting
 (use-package fish-mode :ensure t)
@@ -242,7 +244,9 @@
 
 (use-package lsp-mode
   :ensure t
-  :hook (prog-mode . lsp))
+  :hook (prog-mode . lsp)
+  :init (add-to-list 'exec-path "/Users/ppress/coding/elixir-lsp/elixir-ls/release")
+)
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
@@ -294,7 +298,7 @@
   "TAB" '(other-window :which-key "other window")
 
   "b"  '(:ignore t :which-key "buffers")
-  "bb" '(helm-buffers-list t :which-key "helm-buffers-list")
+  "bb" '(helm-mini t :which-key "helm mini")
 
   "c"  '(:ignore t :which-key "comment")
   "cc" '(comment-or-uncomment-region-or-line t :which-key "toggle line or region")
