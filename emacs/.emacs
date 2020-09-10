@@ -1,3 +1,7 @@
+;; Improve performance according to https://emacs-lsp.github.io/lsp-mode/page/performance/
+(setq gc-cons-threshold 100000000) ;; 100MB
+(setq read-process-output-max (* 1024 1024)) ;; 1MB
+
 ;; Disable menu and tool bar
 (menu-bar-mode -1)
 (tool-bar-mode -1)
