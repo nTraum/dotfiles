@@ -290,6 +290,7 @@
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-enable-auto-pairing nil)
   (setq web-mode-enable-current-element-highlight t)
+  (setq web-mode-enable-current-column-highlight t)
   )
 
 (use-package aggressive-indent
