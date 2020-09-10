@@ -208,7 +208,12 @@
   (setq company-selection-wrap-around t)
   (setq company-minimum-prefix-length 1)
   (company-tng-configure-default)
-  (push '(company-web-html company-css company-dabbrev-code company-dabbrev) company-backends))
+  (push '(company-web-html
+          company-css
+          company-dabbrev-code
+          company-dabbrev
+          company-yasnippet
+          company-files) company-backends))
 
 (use-package robe
   :ensure t
