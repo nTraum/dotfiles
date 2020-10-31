@@ -76,3 +76,11 @@ end
 function reset_elli_with_test
     mysql -uroot < db/reset_db.sql; bundle exec rake db:migrate test:prepare
 end
+
+if command -v bat > /dev/null
+    alias cat="bat"
+
+    function batf
+        tail -f $argv | bat --paging=never -l log
+    end
+end
