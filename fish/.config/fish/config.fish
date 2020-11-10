@@ -13,8 +13,8 @@ function add_ssh_key_if_missing
     ssh-add -l | grep --quiet $ssh_fingerprint
 
     if test ! $status -eq 0
-	echo "SSH key missing"
-	ssh-add $ssh_key
+        echo "SSH key missing"
+        ssh-add $ssh_key
     end
 end
 
@@ -49,19 +49,19 @@ set -xg EDITOR emacsclient
 
 if status --is-interactive
     if is_bl_macbook
-	add_ssh_key_if_missing aTXHZ7JAnuxsV1mkP4+2Iva2/w9xg4UaOJeJti2wpAY "$HOME/.ssh/id_ed25519"
-	add_ssh_key_if_missing S/5A8aIh8BB6ergjWIKkQXQofMn9T73IglkrIN4smus "$HOME/.ssh/id_rsa"
+        add_ssh_key_if_missing aTXHZ7JAnuxsV1mkP4+2Iva2/w9xg4UaOJeJti2wpAY "$HOME/.ssh/id_ed25519"
+        add_ssh_key_if_missing S/5A8aIh8BB6ergjWIKkQXQofMn9T73IglkrIN4smus "$HOME/.ssh/id_rsa"
     end
 
     if is_lappen
-	add_ssh_key_if_missing hQqd2Fu/jyNBVHPNFZC35rdn2EZdDzkxzRe9RM1wa2M "$HOME/.ssh/id_ed25519"
+        add_ssh_key_if_missing IpoVpiDDh2UeWuXYJih2b0x77NnBfKxXCNieIcKZc8s "$HOME/.ssh/id_ed25519"
     end
 end
 
 if command -v fzf > /dev/null
     set -xg FZF_DEFAULT_OPTS '--height 40% --border'
     if command -v fd > /dev/null
-	set -xg FZF_DEFAULT_COMMAND  'fd --type=file --hidden --no-ignore-vcs'
+        set -xg FZF_DEFAULT_COMMAND  'fd --type=file --hidden --no-ignore-vcs'
     end
 end
 
