@@ -22,17 +22,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   (quote
-    ("a06658a45f043cd95549d6845454ad1c1d6e24a99271676ae56157619952394a" "123a8dabd1a0eff6e0c48a03dc6fb2c5e03ebc7062ba531543dfbce587e86f2a" default)))
- '(helm-completion-style (quote emacs))
+   '("b89ae2d35d2e18e4286c8be8aaecb41022c1a306070f64a66fd114310ade88aa" "a06658a45f043cd95549d6845454ad1c1d6e24a99271676ae56157619952394a" "123a8dabd1a0eff6e0c48a03dc6fb2c5e03ebc7062ba531543dfbce587e86f2a" default))
+ '(helm-completion-style 'emacs)
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   (quote
-    (aggressive-indent elixir-mode web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode)))
+   '(gnuplot-mode sudo-edit json-mode aggressive-indent elixir-mode web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode))
  '(safe-local-variable-values
-   (quote
-    ((ansible-vault-password-file . "/home/ntraum/coding/vincura/ansible/vault-password.txt")
-     (rubocop-autocorrect-on-save . t)))))
+   '((ansible-vault-password-file . "/home/ntraum/coding/vincura/ansible/vault-password.txt")
+     (rubocop-autocorrect-on-save . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -206,7 +203,7 @@
   (setq company-minimum-prefix-length 1)
   (setq company-selection-wrap-around t)
   (setq company-minimum-prefix-length 1)
-  (company-tng-configure-default)
+  (company-tng-mode)
   (push '(company-web-html
           company-css
           company-dabbrev-code
@@ -253,6 +250,7 @@
 (use-package lsp-mode
   :ensure t
   :hook (prog-mode . lsp)
+  :init (add-to-list 'exec-path "/home/ntraum/coding/elixir-lsp/elixir-ls-release")
 )
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
@@ -281,6 +279,9 @@
   :ensure t
   :init (doom-modeline-mode 1))
 
+(use-package json-mode
+  :ensure t)
+
 (use-package web-mode
   :ensure t
   :init
@@ -297,6 +298,13 @@
   :hook web-mode
   )
 
+(use-package sudo-edit
+  :ensure t
+  )
+
+(use-package gnuplot-mode
+  :ensure t
+  )
 
 (general-evil-setup t)
 (space-leader
@@ -321,8 +329,9 @@
   "fr" '(helm-recentf :which-key "recent files")
 
   "g"  '(:ignore t :which-key "git")
-  "gs" '(magit-status :which-key "git status")
   "gb" '(magit-branch :which-key "git branch")
+  "gl" '(magit-log :which-key "git log")
+  "gs" '(magit-status :which-key "git status")
 
   "h"  '(:ignore t :which-key "help")
   "hf" '(describe-function :which-key "function")
@@ -431,6 +440,7 @@
   (set-face-attribute 'default nil :height 140)
   )
 
+(load-theme 'gruvbox)
 
 ;; https://stackoverflow.com/a/9697222/1425701
 (defun comment-or-uncomment-region-or-line ()
@@ -450,3 +460,6 @@
 
 ;; One tab is 2 spaces
 (setq-default tab-width 2)
+
+;; faster than default scp
+(setq tramp-default-method "ssh")
