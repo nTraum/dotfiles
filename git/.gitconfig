@@ -1,12 +1,12 @@
 [user]
   email = ntraum@fastmail.com
   name  = Philipp Preß
-  signingkey = BA9D9765D640F6DB
+  signingkey = 438AECCC15D05D62
 [color]
   ui = auto
 
 [commit]
-;  gpgsign = true
+ gpgsign = true
 
 [alias]
   ci = commit
