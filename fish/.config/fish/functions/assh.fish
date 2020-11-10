@@ -1,1 +1,0 @@
-/Users/ppress/coding/blacklane/dotfiles/assh.fish
