@@ -343,6 +343,7 @@
   "ha" '(helm-apropos :which-key "apropos")
   "hk" '(describe-key :which-key "key")
   "hm" '(describe-mode :which-key "mode")
+  "hM" '(which-key-show-major-mode :which-key "key for major mode")
   "hv" '(describe-variable :which-key "variable")
 
   "j" '(evil-ace-jump-char-mode :which-key "ace jump")
@@ -384,7 +385,6 @@
   "f"  '(:ignore t :which-key "format")
   )
 
-
 (comma-leader
   :states '(normal visual)
   :keymaps 'ruby-mode-map
@@ -394,7 +394,6 @@
   "tt" 'rspec-verify-single
   "tr" 'rspec-rerun
   )
-
 
 ;; Show matching parentheses
 (show-paren-mode 1)
