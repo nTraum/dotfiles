@@ -435,13 +435,10 @@
 
 (when (is-lappen)
   (set-face-attribute 'default nil
-		      :family "Source Code Pro"
-		      :height 120
+		      :family "JetBrains Mono"
+		      :height 130
 		      )
-  )
-
-(when (is-bl-macbook)
-  (set-face-attribute 'default nil :height 140)
+  (setq line-spacing 0.2)
   )
 
 (load-theme 'gruvbox)
