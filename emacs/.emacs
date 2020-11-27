@@ -139,7 +139,12 @@
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-center-content t
-	dashboard-startup-banner 'logo)
+        dashboard-startup-banner 'logo
+        dashboard-set-heading-icons t
+        dashboard-set-file-icons t
+        dashboard-items '((recents  . 10)
+                          (projects . 10)
+                          ))
   )
 
 ;; Syntax check
