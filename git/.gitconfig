@@ -1,34 +1,37 @@
 [user]
-  email = ntraum@fastmail.com
-  name  = Philipp Preß
-  signingkey = 438AECCC15D05D62
+email = ntraum@fastmail.com
+name  = Philipp Preß
+signingkey = 438AECCC15D05D62
+
 [color]
-  ui = auto
+ui = auto
 
 [commit]
- gpgsign = true
+gpgsign = true
 
 [alias]
-  ci = commit
-  co = checkout
-  filelog = log -u
-  fl = log -u
-  lg = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative --graph
-  st = status -s
+ci = commit
+co = checkout
+filelog = log -u
+fl = log -u
+lg = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative --graph
+st = status -s
 
 [core]
-  excludesfile = ~/.global_gitignore
+excludesfile = ~/.global_gitignore
 
 [diff]
-  patience = true
-  compactionHeuristic = true
+patience = true
+compactionHeuristic = true
 
 [push]
-  default = simple
+default = simple
 
 [rebase]
-  autosquash = true
+autosquash = true
+
 [pull]
-	rebase = true
+rebase = true
+
 [github]
-	user = nTraum
+user = nTraum
