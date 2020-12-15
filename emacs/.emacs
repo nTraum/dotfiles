@@ -334,9 +334,11 @@
   "fr" '(helm-recentf :which-key "recent files")
 
   "g"  '(:ignore t :which-key "git")
-  "gb" '(magit-branch :which-key "git branch")
-  "gl" '(magit-log :which-key "git log")
-  "gs" '(magit-status :which-key "git status")
+  "gb" '(magit-branch :which-key "branch")
+  "gl" '(magit-log :which-key "log")
+  "gs" '(magit-status :which-key "status")
+  "gd" '(magit-dispatch :which-key "dispatch")
+  "gf" '(magit-file-dispatch :which-key "file-dispatch")
 
   "h"  '(:ignore t :which-key "help")
   "hf" '(describe-function :which-key "function")
