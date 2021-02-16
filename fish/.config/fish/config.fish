@@ -26,8 +26,6 @@ if test -f ~/.asdf/asdf.fish > /dev/null
     source ~/.asdf/asdf.fish
 end
 
-abbr --add ap ansible-playbook
-
 abbr --add f fzf
 
 abbr --add g git
@@ -35,15 +33,6 @@ abbr --add gd git diff
 abbr --add gds git diff --staged
 
 abbr --add be bundle exec
-
-alias saml_p='saml2aws login -a production -p production'
-alias saml_t='saml2aws login -a testing -p testing'
-
-abbr --add apc "saml_t; env AWS_PROFILE=testing STACK_NAME=phili pipenv run ansible-playbook -i aws.py -e 'stack_name=phili' --vault-password-file ~/ansible_vault.txt"
-
-alias create_my_stack="saml_t; env AWS_PROFILE=testing pipenv run ansible-playbook aws_infrastructure.yml -e 'stack_name=phili key_pair=philipp' --vault-password-file ~/ansible_vault.txt"
-
-alias destroy_my_stack="saml_t; env AWS_PROFILE=testing pipenv run ansible-playbook aws_infrastructure.yml -e 'stack_name=phili key_pair=philipp state=absent' --vault-password-file ~/ansible_vault.txt"
 
 set -xg EDITOR emacsclient
 
