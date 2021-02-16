@@ -26,7 +26,7 @@
  '(helm-completion-style 'emacs)
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(gnuplot-mode sudo-edit json-mode aggressive-indent elixir-mode web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode))
+   '(evil-collection gnuplot-mode sudo-edit json-mode aggressive-indent elixir-mode web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode))
  '(safe-local-variable-values
    '((ansible-vault-password-file . "/home/ntraum/coding/vincura/ansible/vault-password.txt")
      (rubocop-autocorrect-on-save . t))))
@@ -50,8 +50,16 @@
 ;; Vim key bindings
 (use-package evil
   :ensure t
+  :init
+  (setq evil-want-keybinding nil)
   :config
   (evil-mode t)
+  )
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config (evil-collection-init)
   )
 
 (use-package general :ensure t
@@ -79,7 +87,7 @@
 (use-package exec-path-from-shell
   :ensure t
   :init (when (memq window-system '(mac ns x))
-	  (exec-path-from-shell-initialize))
+          (exec-path-from-shell-initialize))
   )
 
 ;; Fish shell syntax highlighting
@@ -159,11 +167,12 @@
 (use-package magit
   :ensure t
   :init (add-hook 'git-commit-setup-hook 'turn-off-auto-fill
-		  t)
+                  t)
   (setq magit-refresh-status-buffer nil)
   ;; Disable showing diff in commit
   (remove-hook 'server-switch-hook 'magit-commit-diff)
   )
+
 (use-package forge
   :ensure t
   :after magit)
@@ -181,11 +190,6 @@
 (use-package helm-rg
   :ensure t
   :config (setq helm-rg-default-directory 'git-root)
-  )
-
-(use-package evil-magit
-  :after evil magit
-  :ensure t
   )
 
 (use-package helm-projectile :ensure t)
@@ -256,7 +260,7 @@
   :ensure t
   :hook (prog-mode . lsp)
   :init (add-to-list 'exec-path "/home/ntraum/coding/elixir-lsp/elixir-ls-release")
-)
+  )
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
@@ -421,12 +425,12 @@
 ;; Mac OS specific configuration
 (when (string= system-type "darwin")
   (setq mac-right-option-modifier nil
-	mac-option-modifier nil
-	exec-path (append exec-path '("/usr/local/bin"))
-	)
+        mac-option-modifier nil
+        exec-path (append exec-path '("/usr/local/bin"))
+        )
   )
 
-					;
+                                        ;
 (defun is-lappen ()
   "Return non-nil if the host is lappen."
   (string= (system-name) "lappen"))
@@ -437,9 +441,9 @@
 
 (when (is-lappen)
   (set-face-attribute 'default nil
-		      :family "JetBrains Mono"
-		      :height 130
-		      )
+                      :family "JetBrains Mono"
+                      :height 130
+                      )
   (setq line-spacing 0.2)
   )
 
@@ -451,7 +455,7 @@
   (interactive)
   (let (beg end)
     (if (region-active-p)
-	(setq beg (region-beginning) end (region-end))
+        (setq beg (region-beginning) end (region-end))
       (setq beg (line-beginning-position) end (line-end-position)))
     (comment-or-uncomment-region beg end)))
 
