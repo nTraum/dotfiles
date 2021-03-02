@@ -26,13 +26,12 @@ if test -f ~/.asdf/asdf.fish > /dev/null
     source ~/.asdf/asdf.fish
 end
 
+abbr --add be bundle exec
+abbr --add dc docker-compose
 abbr --add f fzf
-
 abbr --add g git
 abbr --add gd git diff
 abbr --add gds git diff --staged
-
-abbr --add be bundle exec
 
 set -xg EDITOR emacsclient
 
