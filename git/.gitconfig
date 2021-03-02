@@ -7,7 +7,7 @@ signingkey = 438AECCC15D05D62
 ui = auto
 
 [commit]
-gpgsign = true
+# gpgsign = true
 
 [alias]
 ci = commit
