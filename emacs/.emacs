@@ -257,10 +257,14 @@
   )
 
 (use-package lsp-mode
+  :commands lsp
   :ensure t
-  :hook (prog-mode . lsp)
-  :init (add-to-list 'exec-path "/home/ntraum/coding/elixir-lsp/elixir-ls-release")
-  )
+  :diminish lsp-mode
+  :hook
+  (elixir-mode . lsp)
+  :init
+  (setq lsp-file-watch-threshold 10000)
+  (add-to-list 'exec-path "/home/ntraum/bin/elixir-ls"))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
