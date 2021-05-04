@@ -388,7 +388,7 @@
 (general-define-key
  :states '(normal visual emacs)
  :keymaps 'override
- "ü" '(lsp-goto-implementation :which-key "lsp goto impl")
+ "ü" '(evil-goto-definition :which-key "goto definition")
  "Ü" '(previous-buffer :which-key "previous buffer")
  )
 
