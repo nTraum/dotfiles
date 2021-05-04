@@ -329,6 +329,8 @@
 
   "b"  '(:ignore t :which-key "buffers")
   "bb" '(helm-mini t :which-key "helm mini")
+  "bn" '(next-buffer t :which-key "next buffer")
+  "bp" '(previous-buffer t :which-key "previous buffer")
 
   "c"  '(:ignore t :which-key "comment")
   "cc" '(comment-or-uncomment-region-or-line t :which-key "toggle line or region")
