@@ -434,6 +434,12 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+;; Elixir - lsp-mode
+;; Set up before-save hooks to format buffer.
+(defun lsp-elixir-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t))
+(add-hook 'elixir-mode-hook #'lsp-elixir-install-save-hooks)
+
 ;; Start emacs maximized
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
