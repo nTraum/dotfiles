@@ -445,22 +445,10 @@
         )
   )
 
-                                        ;
-(defun is-lappen ()
-  "Return non-nil if the host is lappen."
-  (string= (system-name) "lappen"))
-
-(defun is-bl-macbook ()
-  "Return non-nil if the host is Blacklane macbook."
-  (string= (system-name) "M20190021"))
-
-(when (is-lappen)
-  (set-face-attribute 'default nil
-                      :family "JetBrains Mono"
-                      :height 130
-                      )
-  (setq line-spacing 0.2)
-  )
+(set-face-attribute 'default nil
+                    :family "JetBrains Mono"
+                    :height 110
+                    )
 
 (load-theme 'gruvbox)
 
