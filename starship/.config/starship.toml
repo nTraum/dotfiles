@@ -1,2 +1,9 @@
+[aws]
+disabled = true
+
+[kubernetes]
+disabled = false
+
 [ruby]
 disabled = true
+
