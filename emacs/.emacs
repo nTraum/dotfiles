@@ -27,7 +27,7 @@
  '(helm-minibuffer-history-key "M-p")
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(dockerfile-mode terraform-mode evil-collection gnuplot-mode sudo-edit json-mode aggressive-indent elixir-mode web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode))
+   '(dumb-jump dump-jump dockerfile-mode terraform-mode evil-collection gnuplot-mode sudo-edit json-mode aggressive-indent elixir-mode web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode))
  '(safe-local-variable-values
    '((ansible-vault-password-file . "/home/ntraum/coding/vincura/ansible/vault-password.txt")
      (rubocop-autocorrect-on-save . t))))
@@ -212,7 +212,6 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 1)
   (setq company-selection-wrap-around t)
-  (setq company-minimum-prefix-length 1)
   (company-tng-mode)
   (push '(company-web-html
           company-css
@@ -478,8 +477,11 @@
 ;; Use spaces for tabs
 (setq-default indent-tabs-mode nil)
 
-;; One tab is 2 spaces
+;; One tab is displayed two spaces wide
 (setq-default tab-width 2)
+
+;; Every mode has a different variable for setting tab width it seems
+(setq-default js-indent-level 2)
 
 ;; faster than default scp
 (setq tramp-default-method "ssh")
