@@ -266,7 +266,7 @@
   (setq lsp-file-watch-threshold 10000
         lsp-enable-xref t
         lsp-prefer-flymake nil)
-  (add-to-list 'exec-path "/home/ntraum/bin/elixir-ls"))
+  (add-to-list 'exec-path "/home/ntraum/bin/elixir-ls/4c512a2b4e8fc5db1d4700b4b3922f0dc763506f_1.12.1"))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
