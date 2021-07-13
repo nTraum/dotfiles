@@ -212,13 +212,13 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 0)
   (setq company-selection-wrap-around t)
-  (company-tng-mode)
-  (push '(company-web-html
-          company-css
-          company-dabbrev-code
-          company-dabbrev
-          company-yasnippet
-          company-files) company-backends))
+  (company-tng-mode))
+  ;; (push '(company-web-html
+  ;;         company-css
+  ;;         company-dabbrev-code
+  ;;         company-dabbrev
+  ;;         company-yasnippet
+  ;;         company-files) company-backends))
 
 (use-package robe
   :ensure t
