@@ -455,8 +455,8 @@
   )
 
 (set-face-attribute 'default nil
-                    :family "JetBrains Mono"
-                    :height 110
+                    :family "Source Code Pro Regular"
+                    :height 100
                     )
 
 (load-theme 'gruvbox)
