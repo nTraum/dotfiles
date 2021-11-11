@@ -1,4 +1,6 @@
-neovim/.config/nvim/plugged
+fish/.config/fish/completions/
+fish/.config/fish/conf.d/
 fish/.config/fish/fish_variables
-fish/.config/fish/fishd.lappen
-fish/.config/fish/functions/fzf_key_bindings.fish
+fish/.config/fish/functions/
+
+neovim/.config/nvim/plugged
