@@ -510,3 +510,5 @@
 ;; Make underscore part of a word
 (modify-syntax-entry ?_ "w")
 
+(add-to-list 'auto-mode-alist '("\\.env.*\\'" . shell-script-mode))
+
