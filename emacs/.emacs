@@ -267,12 +267,13 @@
   :ensure t
   :diminish lsp-mode
   :hook
-  (elixir-mode . lsp)
+  ((elixir-mode . lsp)
+   (ruby-mode . lsp))
   :init
   (setq lsp-file-watch-threshold 10000
         lsp-enable-xref t
         lsp-prefer-flymake nil)
-  (add-to-list 'exec-path "/home/ntraum/bin/elixir-ls/"))
+  (add-to-list 'exec-path "/home/ntraum/bin/elixir-ls/0.8.1"))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
