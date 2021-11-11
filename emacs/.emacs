@@ -50,7 +50,9 @@
 
 (use-package undo-tree
   :ensure t
-  :init  (global-undo-tree-mode)
+  :init
+  (global-undo-tree-mode)
+  (setq-default undo-tree-visualizer-timestamps t)
   )
 
 ;; Vim key bindings
@@ -511,4 +513,3 @@
 (modify-syntax-entry ?_ "w")
 
 (add-to-list 'auto-mode-alist '("\\.env.*\\'" . shell-script-mode))
-
