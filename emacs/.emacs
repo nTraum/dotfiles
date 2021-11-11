@@ -494,8 +494,15 @@
 ;; One tab is displayed two spaces wide
 (setq-default tab-width 2)
 
+;; evil <, > tab width
+(setq-default evil-shift-width 2)
+
 ;; Every mode has a different variable for setting tab width it seems
 (setq-default js-indent-level 2)
+
+;; Web mode tab widths
+(setq-default web-mode-css-indent-offset 2)
+(setq-default web-mode-code-indent-offset 2)
 
 ;; faster than default scp
 (setq tramp-default-method "ssh")
