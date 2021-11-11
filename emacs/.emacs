@@ -438,11 +438,18 @@
 ;; Delete trailing whitespace
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; Use tmp dir for auto saves and backup files
-(setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
+;; Use separate backup directory to prevent watchers from reloading on any input
+(setq backup-directory-alist '(("." . "~/MyEmacsBackups")))
+
+;; Use separate backup directory for auto saves
 (setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+      `((".*" "~/MyEmacsBackups/autosaves" t)))
+
+;; Disable use auto save files
+(setq auto-save-default nil)
+
+;; Disable lock files
+(setq create-lockfiles nil)
 
 ;; Elixir - lsp-mode
 ;; Set up before-save hooks to format buffer.
