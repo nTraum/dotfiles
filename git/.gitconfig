@@ -36,6 +36,10 @@ rebase = true
 
 [github]
 user = nTraum
+
+[credential "https://github.com"]
+helper = !/usr/bin/gh auth git-credential
+
 [pager]
     diff = delta
     log = delta
