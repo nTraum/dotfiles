@@ -48,6 +48,11 @@
 (eval-when-compile
   (require 'use-package))
 
+(use-package undo-tree
+  :ensure t
+  :init  (global-undo-tree-mode)
+  )
+
 ;; Vim key bindings
 (use-package evil
   :ensure t
