@@ -486,7 +486,7 @@
 
 (set-face-attribute 'default nil
                     :family "Source Code Pro Regular"
-                    :height 100
+                    :height 110
                     )
 
 (load-theme 'gruvbox)
