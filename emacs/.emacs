@@ -386,6 +386,7 @@
 
   "h"  '(:ignore t :which-key "help")
   "hf" '(describe-function :which-key "function")
+  "hb" '(describe-bindings :which-key "bindings")
   "ha" '(helm-apropos :which-key "apropos")
   "hk" '(describe-key :which-key "key")
   "hm" '(describe-mode :which-key "mode")
