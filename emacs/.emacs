@@ -307,14 +307,23 @@
   :ensure t
   :init (doom-modeline-mode 1))
 
+(use-package tide
+  :ensure t
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+         (before-save . tide-format-before-save)))
+
 (use-package json-mode
   :ensure t)
 
 (use-package web-mode
   :ensure t
   :init
-  (add-to-list 'auto-mode-alist '("\\.njk\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.liquid\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mjml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.njk\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-enable-auto-pairing nil)
