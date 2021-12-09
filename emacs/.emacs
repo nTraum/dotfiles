@@ -174,11 +174,15 @@
 ;; Git in Emacs
 (use-package magit
   :ensure t
-  :init (add-hook 'git-commit-setup-hook 'turn-off-auto-fill
-                  t)
-  (setq magit-refresh-status-buffer nil)
+  :init
+  ;; Disable automatic line breaking
+  (add-hook 'git-commit-setup-hook 'turn-off-auto-fill t)
+  ;; Enable spell correction in commit mode
+  (add-hook 'git-commit-setup-hook 'git-commit-turn-on-flyspell)
   ;; Disable showing diff in commit
   (remove-hook 'server-switch-hook 'magit-commit-diff)
+  ;; Show word diff
+  (setq magit-diff-refine-hunk (quote all))
   )
 
 (use-package forge
