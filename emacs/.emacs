@@ -398,6 +398,11 @@
   "ld" '(lsp-describe-thing-at-point :which-key "describe thing")
   "ll" '(lsp-find-definition :which-key "find implementation")
 
+  "m"  '(:ignore t :which-key "make (flycheck)")
+  "mm"  '(flycheck-list-errors :which-key "list errors")
+  "mn"  '(flycheck-next-error :which-key "next error")
+  "mp"  '(flycheck-next-error :which-key "previous error")
+
   "p"  '(:ignore t :which-key "projectile")
   "pf" '(helm-projectile-find-file :which-key "projects find file")
   "pp" '(helm-projectile-switch-project :which-key "projects")
