@@ -2,10 +2,6 @@ function is_lappen
     test "$hostname" = "lappen"
 end
 
-function is_bl_macbook
-    test "$hostname" = "M20190021"
-end
-
 function add_ssh_key_if_missing
     set ssh_fingerprint $argv[1]
     set ssh_key = $argv[2]
@@ -18,17 +14,19 @@ function add_ssh_key_if_missing
     end
 end
 
+# Initializes sharship prompt
 if command -v starship > /dev/null
     starship init fish | source
 end
 
+# Initializes asdf
 if test -f ~/.asdf/asdf.fish > /dev/null
     source ~/.asdf/asdf.fish
 end
 
+# Abbreviations
 abbr --add be bundle exec
 abbr --add dc docker-compose
-abbr --add f fzf
 abbr --add g git
 abbr --add gd git diff
 abbr --add gds git diff --staged
@@ -51,18 +49,6 @@ if command -v fzf > /dev/null
     if command -v fd > /dev/null
         set -xg FZF_DEFAULT_COMMAND  'fd --type=file --hidden --no-ignore-vcs'
     end
-end
-
-function fz
-    z --list | awk '{ print $2 }' | fzf --preview='ls -ll {}' | cd
-end
-
-function fh
-    history | fzf
-end
-
-function reset_elli_with_test
-    mysql -uroot < db/reset_db.sql; bundle exec rake db:migrate test:prepare
 end
 
 if command -v bat > /dev/null
