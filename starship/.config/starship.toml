@@ -4,5 +4,8 @@ disabled = true
 [kubernetes]
 disabled = false
 
+[package]
+disabled = true
+
 [ruby]
 disabled = true
