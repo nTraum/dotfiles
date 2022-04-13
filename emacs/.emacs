@@ -22,7 +22,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("d14f3df28603e9517eb8fb7518b662d653b25b26e83bd8e129acea042b774298" "b89ae2d35d2e18e4286c8be8aaecb41022c1a306070f64a66fd114310ade88aa" "a06658a45f043cd95549d6845454ad1c1d6e24a99271676ae56157619952394a" "123a8dabd1a0eff6e0c48a03dc6fb2c5e03ebc7062ba531543dfbce587e86f2a" default))
+   '("78c4238956c3000f977300c8a079a3a8a8d4d9fee2e68bad91123b58a4aa8588" "6bdcff29f32f85a2d99f48377d6bfa362768e86189656f63adbf715ac5c1340b" "d14f3df28603e9517eb8fb7518b662d653b25b26e83bd8e129acea042b774298" "b89ae2d35d2e18e4286c8be8aaecb41022c1a306070f64a66fd114310ade88aa" "a06658a45f043cd95549d6845454ad1c1d6e24a99271676ae56157619952394a" "123a8dabd1a0eff6e0c48a03dc6fb2c5e03ebc7062ba531543dfbce587e86f2a" default))
  '(helm-completion-style 'emacs)
  '(helm-minibuffer-history-key "M-p")
  '(inhibit-startup-screen t)
@@ -47,13 +47,6 @@
 ;; This is only needed once, near the top of the file
 (eval-when-compile
   (require 'use-package))
-
-(use-package undo-tree
-  :ensure t
-  :init
-  (global-undo-tree-mode)
-  (setq-default undo-tree-visualizer-timestamps t)
-  )
 
 ;; Vim key bindings
 (use-package evil
@@ -180,9 +173,9 @@
   ;; Enable spell correction in commit mode
   (add-hook 'git-commit-setup-hook 'git-commit-turn-on-flyspell)
   ;; Disable showing diff in commit
-  (remove-hook 'server-switch-hook 'magit-commit-diff)
+  ;; (remove-hook 'server-switch-hook 'magit-commit-diff)
   ;; Show word diff
-  (setq magit-diff-refine-hunk (quote all))
+  (setq magit-diff-refine-hunk 'all)
   )
 
 (use-package forge
@@ -279,7 +272,7 @@
   (setq lsp-file-watch-threshold 10000
         lsp-enable-xref t
         lsp-prefer-flymake nil)
-  (add-to-list 'exec-path "/home/ntraum/bin/elixir-ls/0.8.1"))
+  (add-to-list 'exec-path "/home/ntraum/bin/elixir-ls/0.9.0"))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
@@ -312,7 +305,8 @@
   :after (typescript-mode company flycheck)
   :hook ((typescript-mode . tide-setup)
          (typescript-mode . tide-hl-identifier-mode)
-         (before-save . tide-format-before-save)))
+         ;; (before-save . tide-format-before-save)
+         ))
 
 (use-package json-mode
   :ensure t)
@@ -373,6 +367,7 @@
 
   "f"  '(:ignore t :which-key "files")
   "ff" '(helm-find-files :which-key "find files")
+  "fd" '(dired :which-key "dired")
   "fg" '(helm-rg :which-key "grep files")
   "fr" '(helm-recentf :which-key "recent files")
 
@@ -490,10 +485,11 @@
 
 (set-face-attribute 'default nil
                     :family "Source Code Pro Regular"
-                    :height 110
+                    :height 120
                     )
 
 (load-theme 'gruvbox)
+;; (load-theme 'gruvbox-light-hard)
 
 ;; https://stackoverflow.com/a/9697222/1425701
 (defun comment-or-uncomment-region-or-line ()
@@ -530,4 +526,11 @@
 ;; Make underscore part of a word
 (modify-syntax-entry ?_ "w")
 
+;; Use shell-script mode in .env files
 (add-to-list 'auto-mode-alist '("\\.env.*\\'" . shell-script-mode))
+
+;; Use typescript-mode for tsx files
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+
+;; Use typescript-mode for js files because it seems to work well too
+(add-to-list 'auto-mode-alist '("\\.js\\'" . typescript-mode))
