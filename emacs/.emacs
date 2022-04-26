@@ -523,6 +523,8 @@
 ;; faster than default scp
 (setq tramp-default-method "ssh")
 
+(setq scroll-step 1) ;; keyboard scroll one line at a time
+
 ;; Make underscore part of a word
 (modify-syntax-entry ?_ "w")
 
