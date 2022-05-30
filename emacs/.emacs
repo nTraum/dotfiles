@@ -233,6 +233,7 @@
 
 (use-package rubocop
   :ensure t
+  :init (add-hook 'ruby-mode-hook #'rubocop-mode)
   :config (setq rubocop-autocorrect-on-save t)
   )
 
