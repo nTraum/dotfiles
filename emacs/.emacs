@@ -272,7 +272,9 @@
   :init
   (setq lsp-file-watch-threshold 10000
         lsp-enable-xref t
-        lsp-prefer-flymake nil)
+        lsp-prefer-flymake nil
+        lsp-ui-doc-show-with-cursor t
+        )
   (add-to-list 'exec-path "/home/ntraum/bin/elixir-ls/0.9.0"))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
