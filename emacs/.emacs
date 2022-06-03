@@ -489,8 +489,23 @@
                     :height 120
                     )
 
-(load-theme 'gruvbox)
-;; (load-theme 'gruvbox-light-hard)
+(defconst dark-theme 'gruvbox "My personal dark theme.")
+(defconst light-theme 'gruvbox-light-medium "My personal light theme.")
+
+(load-theme dark-theme)
+
+(defvar current-theme dark-theme "Current theme used.")
+
+(defun toggle-theme ()
+  "Toggle between dark and light theme."
+  (interactive)
+  (if (eq current-theme dark-theme)
+      (progn(load-theme light-theme)
+            (setq current-theme light-theme))
+    (progn(load-theme dark-theme)
+          (setq current-theme dark-theme))
+    )
+  )
 
 ;; https://stackoverflow.com/a/9697222/1425701
 (defun comment-or-uncomment-region-or-line ()
