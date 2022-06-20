@@ -32,6 +32,9 @@ tags.temp
 # Directory local files (Emacs)
 .dir-locals.el
 
+# Projectile files (Emacs)
+.projectile
+
 # Mac OS
 .DS_Store
 
