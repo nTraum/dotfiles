@@ -15,7 +15,9 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
 (setq package-enable-at-startup nil)
+
 (package-initialize)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -23,14 +25,12 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("78c4238956c3000f977300c8a079a3a8a8d4d9fee2e68bad91123b58a4aa8588" "6bdcff29f32f85a2d99f48377d6bfa362768e86189656f63adbf715ac5c1340b" "d14f3df28603e9517eb8fb7518b662d653b25b26e83bd8e129acea042b774298" "b89ae2d35d2e18e4286c8be8aaecb41022c1a306070f64a66fd114310ade88aa" "a06658a45f043cd95549d6845454ad1c1d6e24a99271676ae56157619952394a" "123a8dabd1a0eff6e0c48a03dc6fb2c5e03ebc7062ba531543dfbce587e86f2a" default))
- '(helm-completion-style 'emacs)
- '(helm-minibuffer-history-key "M-p")
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(tide tide-mode origami origami-mode polymode mmm-mode dumb-jump dump-jump dockerfile-mode terraform-mode evil-collection gnuplot-mode sudo-edit json-mode aggressive-indent elixir-mode web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode))
+   '(lsp-python-ms consult marginalia vertico tide tide-mode origami origami-mode polymode mmm-mode dumb-jump dump-jump dockerfile-mode terraform-mode evil-collection gnuplot-mode sudo-edit json-mode aggressive-indent elixir-mode web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode))
  '(safe-local-variable-values
-   '((ansible-vault-password-file . "/home/ntraum/coding/vincura/ansible/vault-password.txt")
-     (rubocop-autocorrect-on-save . t))))
+   '((rubocop-autocorrect-on-save . t)
+     (ansible-vault-password-file . "/home/ntraum/coding/vincura/ansible/vault-password.txt"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -73,6 +73,88 @@
     :non-normal-prefix "M-,"
     )
   )
+
+;; Vertico provides a performant and minimalistic vertical completion UI based on the default completion system.
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode)
+  )
+
+;; Persist history over Emacs restarts. Vertico sorts by history position.
+(use-package savehist
+  :ensure t
+  :init
+  (savehist-mode))
+
+;; This package provides an orderless completion style that divides the pattern into space-separated components, and matches candidates that match all of the components in any order. Each component can match in any one of several ways: literally, as a regexp, as an initialism, in the flex style, or as multiple word prefixes. By default, regexp and literal matches are enabled.
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
+;; Enable richer annotations using the Marginalia package
+(use-package marginalia
+  :ensure t
+  :init
+  (marginalia-mode))
+
+;; Example configuration for Consult
+(use-package consult
+  :ensure t
+  ;; Replace bindings. Lazily loaded due by `use-package'.
+  ;; :bind (;; C-c bindings (mode-specific-map)
+  ;;        ("C-c h" . consult-history)
+  ;;        ("C-c m" . consult-mode-command)
+  ;;        ("C-c k" . consult-kmacro)
+  ;;        ;; C-x bindings (ctl-x-map)
+  ;;        ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
+  ;;        ("C-x b" . consult-buffer)                ;; orig. switch-to-buffer
+  ;;        ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
+  ;;        ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
+  ;;        ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
+  ;;        ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
+  ;;        ;; Custom M-# bindings for fast register access
+  ;;        ("M-#" . consult-register-load)
+  ;;        ("M-'" . consult-register-store)          ;; orig. abbrev-prefix-mark (unrelated)
+  ;;        ("C-M-#" . consult-register)
+  ;;        ;; Other custom bindings
+  ;;        ("M-y" . consult-yank-pop)                ;; orig. yank-pop
+  ;;        ("<help> a" . consult-apropos)            ;; orig. apropos-command
+  ;;        ;; M-g bindings (goto-map)
+  ;;        ("M-g e" . consult-compile-error)
+  ;;        ("M-g f" . consult-flymake)               ;; Alternative: consult-flycheck
+  ;;        ("M-g g" . consult-goto-line)             ;; orig. goto-line
+  ;;        ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
+  ;;        ("M-g o" . consult-outline)               ;; Alternative: consult-org-heading
+  ;;        ("M-g m" . consult-mark)
+  ;;        ("M-g k" . consult-global-mark)
+  ;;        ("M-g i" . consult-imenu)
+  ;;        ("M-g I" . consult-imenu-multi)
+  ;;        ;; M-s bindings (search-map)
+  ;;        ("M-s d" . consult-find)
+  ;;        ("M-s D" . consult-locate)
+  ;;        ("M-s g" . consult-grep)
+  ;;        ("M-s G" . consult-git-grep)
+  ;;        ("M-s r" . consult-ripgrep)
+  ;;        ("M-s l" . consult-line)
+  ;;        ("M-s L" . consult-line-multi)
+  ;;        ("M-s m" . consult-multi-occur)
+  ;;        ("M-s k" . consult-keep-lines)
+  ;;        ("M-s u" . consult-focus-lines)
+  ;;        ;; Isearch integration
+  ;;        ("M-s e" . consult-isearch-history)
+  ;;        :map isearch-mode-map
+  ;;        ("M-e" . consult-isearch-history)         ;; orig. isearch-edit-string
+  ;;        ("M-s e" . consult-isearch-history)       ;; orig. isearch-edit-string
+  ;;        ("M-s l" . consult-line)                  ;; needed by consult-line to detect isearch
+  ;;        ("M-s L" . consult-line-multi)            ;; needed by consult-line to detect isearch
+  ;;        ;; Minibuffer history
+  ;;        :map minibuffer-local-map
+  ;;        ("M-s" . consult-history)                 ;; orig. next-matching-history-element
+  ;;        ("M-r" . consult-history))                ;; orig. previous-matching-history-element)
+)
 
 (use-package ace-jump-mode :ensure)
 
@@ -186,19 +268,6 @@
   :ensure t
   :after magit)
 
-(use-package helm
-  :ensure t
-  :diminish
-  :init (helm-mode 1)
-  )
-
-(use-package helm-rg
-  :ensure t
-  :config (setq helm-rg-default-directory 'git-root)
-  )
-
-(use-package helm-projectile :ensure t)
-
 ;; Haml template syntax
 (use-package haml-mode :ensure t)
 
@@ -286,6 +355,13 @@
 
 (use-package lsp-ui :ensure)
 
+(use-package lsp-python-ms
+  :ensure t
+  :init (setq lsp-python-ms-auto-install-server t)
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-python-ms)
+                         (lsp))))  ; or lsp-deferred
+
 (use-package yasnippet
   :ensure t
   :after company
@@ -353,11 +429,11 @@
 (space-leader
   :states '(normal visual emacs)
   :keymaps 'override
-  "SPC" '(helm-M-x :which-key "execute command")
+  "SPC" '(execute-extended-command :which-key "execute command")
   "TAB" '(other-window :which-key "other window")
 
   "b"  '(:ignore t :which-key "buffers")
-  "bb" '(helm-mini t :which-key "helm mini")
+  "bb" '(consult-buffer t :which-key "buffers")
   "bn" '(next-buffer t :which-key "next buffer")
   "bp" '(previous-buffer t :which-key "previous buffer")
 
@@ -369,10 +445,10 @@
   "er" '((lambda () (interactive)(load-file "~/.emacs")) :which-key "reload .emacs")
 
   "f"  '(:ignore t :which-key "files")
-  "ff" '(helm-find-files :which-key "find files")
+  "ff" '(find-file :which-key "find file")
   "fd" '(dired :which-key "dired")
   "fg" '(helm-rg :which-key "grep files")
-  "fr" '(helm-recentf :which-key "recent files")
+  "fr" '(consult-recent-file :which-key "recent files")
 
   "g"  '(:ignore t :which-key "git")
   "gb" '(magit-branch :which-key "branch")
@@ -384,7 +460,7 @@
   "h"  '(:ignore t :which-key "help")
   "hf" '(describe-function :which-key "function")
   "hb" '(describe-bindings :which-key "bindings")
-  "ha" '(helm-apropos :which-key "apropos")
+  "ha" '(consult-apropos :which-key "apropos")
   "hk" '(describe-key :which-key "key")
   "hm" '(describe-mode :which-key "mode")
   "hM" '(which-key-show-major-mode :which-key "key for major mode")
@@ -402,9 +478,9 @@
   "mp"  '(flycheck-next-error :which-key "previous error")
 
   "p"  '(:ignore t :which-key "projectile")
-  "pf" '(helm-projectile-find-file :which-key "projects find file")
-  "pp" '(helm-projectile-switch-project :which-key "projects")
-  "pr" '(helm-projectile-rg :which-key "projects grep")
+  "pf" '(projectile-find-file :which-key "projects find file")
+  "pp" '(projectile-switch-project :which-key "projects")
+  "pr" '(consult-ripgrep :which-key "projects grep")
 
   "r"  '(:ignore t :which-key "ruby")
   "rc" '(inf-ruby-console-auto :which-key "ruby console")
