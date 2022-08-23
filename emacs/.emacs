@@ -470,7 +470,8 @@
 
   "l"  '(:ignore t :which-key "lsp")
   "ld" '(lsp-describe-thing-at-point :which-key "describe thing")
-  "ll" '(lsp-find-definition :which-key "find implementation")
+  "ll" '(lsp-find-definition :which-key "find definition")
+  "lr" '(lsp-find-references :which-key "find references")
 
   "m"  '(:ignore t :which-key "make (flycheck)")
   "mm"  '(flycheck-list-errors :which-key "list errors")
