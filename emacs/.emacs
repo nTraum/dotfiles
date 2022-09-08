@@ -453,7 +453,8 @@
 
   "f"  '(:ignore t :which-key "files")
   "ff" '(find-file :which-key "find file")
-  "fd" '(dired :which-key "dired")
+  "fd" '(dired-jump :which-key "dired")
+  "fD" '(dired-jump-other-window :which-key "dired other window")
   "fg" '(helm-rg :which-key "grep files")
   "fr" '(consult-recent-file :which-key "recent files")
 
