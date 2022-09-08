@@ -29,11 +29,18 @@ if command -v fzf > /dev/null
     end
 end
 
-# bat (cat replacement)
+# bat as a cat replacement
 if command -v bat > /dev/null
     alias cat="bat"
 
     function batf
         tail -f $argv | bat --paging=never -l log
+    end
+end
+
+# `tm` alias to attach to running tmux session or create a new one
+if command -v tmux > /dev/null
+    function tm
+        tmux attach || tmux new
     end
 end
