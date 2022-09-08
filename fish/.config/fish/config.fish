@@ -44,3 +44,8 @@ if command -v tmux > /dev/null
         tmux attach || tmux new
     end
 end
+
+# Start / attach to tmux if we are not in a tmux session already
+if not set --query TMUX
+    tm
+end
