@@ -45,9 +45,7 @@ if command -v tmux > /dev/null
     end
 end
 
-# Start / attach to tmux
-# - if we are not in a tmux session already
-# - if we are not connected via SSH (to prevent nested tmux sessions)
-if not set --query TMUX and not set --query SSH_CLIENT
+# Start / attach to tmux if we are not in a tmux session already
+if not set --query TMUX
     tm
 end
