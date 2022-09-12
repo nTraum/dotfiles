@@ -45,6 +45,9 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; Start server so we can open files from the terminal in an existing emacs session
+(server-start)
+
 ;; Display line numbers globally
 ;; TODO Make relative line numbers work with git gutter
 (global-display-line-numbers-mode)

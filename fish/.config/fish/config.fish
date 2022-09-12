@@ -15,6 +15,9 @@ abbr --add g git
 abbr --add gd git diff
 abbr --add gds git diff --staged
 
+# Open file in a running emacs session
+alias em="emacsclient --no-wait"
+
 set -xg EDITOR emacsclient
 
 # FZF
