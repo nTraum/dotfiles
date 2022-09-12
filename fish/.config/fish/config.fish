@@ -18,7 +18,7 @@ abbr --add gds git diff --staged
 # Open file in a running emacs session
 alias em="emacsclient --no-wait"
 
-set -xg EDITOR emacsclient
+set -xg EDITOR "emacsclient --nowait"
 
 # FZF
 if command -v fzf > /dev/null
