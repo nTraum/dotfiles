@@ -441,6 +441,7 @@
 
   "b"  '(:ignore t :which-key "buffers")
   "bb" '(consult-buffer t :which-key "buffers")
+  "bB" '(consult-buffer-other-window t :which-key "buffers in other window")
   "bn" '(next-buffer t :which-key "next buffer")
   "bp" '(previous-buffer t :which-key "previous buffer")
 
