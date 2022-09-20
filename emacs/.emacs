@@ -24,7 +24,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("3e374bb5eb46eb59dbd92578cae54b16de138bc2e8a31a2451bf6fdb0f3fd81b" "735561d82728e28f275802fc875c3a2caf14d06f434604a7516c59d49120b163"))
+   '("b1a691bb67bd8bd85b76998caf2386c9a7b2ac98a116534071364ed6489b695d" "3e374bb5eb46eb59dbd92578cae54b16de138bc2e8a31a2451bf6fdb0f3fd81b" "735561d82728e28f275802fc875c3a2caf14d06f434604a7516c59d49120b163"))
  '(inhibit-startup-screen t)
  '(package-selected-packages
    '(lsp-python-ms consult marginalia vertico tide tide-mode origami origami-mode polymode mmm-mode dumb-jump dump-jump dockerfile-mode terraform-mode evil-collection gnuplot-mode sudo-edit json-mode aggressive-indent elixir-mode web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode))
@@ -201,7 +201,6 @@
   :diminish editorconfig-mode
   :config
   (editorconfig-mode 1))
-
 
 ;; Vim surround
 (use-package evil-surround
