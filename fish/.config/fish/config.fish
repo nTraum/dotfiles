@@ -9,15 +9,19 @@ if test -f ~/.asdf/asdf.fish > /dev/null
 end
 
 # Abbreviations
+abbr --add ... cd ../..
+abbr --add .... cd ../../..
+abbr --add ..... cd ../../../..
+abbr --add / cd /
 abbr --add be bundle exec
 abbr --add dc docker-compose
 abbr --add g git
 abbr --add gd git diff
 abbr --add gds git diff --staged
+abbr --add mp mkdir --parents
 
 # Open file in a running emacs session
 alias em="emacsclient --no-wait"
-
 set -xg EDITOR "emacsclient --nowait"
 
 # FZF
