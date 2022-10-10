@@ -482,8 +482,6 @@
   "hM" '(which-key-show-major-mode :which-key "key for major mode")
   "hv" '(describe-variable :which-key "variable")
 
-  "j" '(evil-ace-jump-char-mode :which-key "ace jump")
-
   "l"  '(:ignore t :which-key "lsp")
   "ld" '(lsp-describe-thing-at-point :which-key "describe thing")
   "ll" '(lsp-find-definition :which-key "find definition")
@@ -514,11 +512,20 @@
   "wk" '(windmove-up :which-key "move up")
   "wl" '(windmove-right :which-key "move right")
   )
+
+;; Cannot be overriden
 (general-define-key
  :states '(normal visual emacs)
  :keymaps 'override
- "ü" '(evil-goto-definition :which-key "goto definition")
  "Ü" '(previous-buffer :which-key "previous buffer")
+ "ü" '(evil-goto-definition :which-key "goto definition")
+ )
+
+
+;; Can be overriden (like magit does)
+(general-define-key
+ :states '(normal visual emacs)
+ "s" '(evil-ace-jump-char-mode :which-key "ace jump")
  )
 
 (comma-leader
