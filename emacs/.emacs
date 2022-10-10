@@ -413,6 +413,10 @@
   (setq web-mode-enable-current-column-highlight t)
   )
 
+(use-package prettier
+  :ensure t
+  )
+
 (use-package aggressive-indent
   :ensure t
   :hook web-mode
