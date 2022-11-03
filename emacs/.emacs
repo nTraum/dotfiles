@@ -595,9 +595,9 @@
 (defconst dark-theme 'gruvbox "My personal dark theme.")
 (defconst light-theme 'gruvbox-light-medium "My personal light theme.")
 
-(load-theme dark-theme)
+(load-theme light-theme)
 
-(defvar current-theme dark-theme "Current theme used.")
+(defvar current-theme light-theme "Current theme used.")
 
 (defun toggle-theme ()
   "Toggle between dark and light theme."
