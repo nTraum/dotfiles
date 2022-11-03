@@ -531,6 +531,7 @@
 (general-define-key
  :states '(normal visual emacs)
  "s" '(evil-ace-jump-char-mode :which-key "ace jump")
+ "S" '(consult-imenu :which-key "imenu")
  )
 
 (comma-leader
