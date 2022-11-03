@@ -644,6 +644,9 @@
 
 (setq scroll-step 1) ;; keyboard scroll one line at a time
 
+;; Disable audio bell, use visual bell instead
+(setq visible-bell 1)
+
 ;; Make underscore part of a word
 (modify-syntax-entry ?_ "w")
 
