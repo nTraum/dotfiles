@@ -440,6 +440,10 @@
   :ensure t
   )
 
+(use-package vterm
+  :ensure t
+  )
+
 (general-evil-setup t)
 (space-leader
   :states '(normal visual emacs)
