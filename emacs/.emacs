@@ -658,3 +658,5 @@
 
 ;; Use typescript-mode for js files because it seems to work well too
 (add-to-list 'auto-mode-alist '("\\.js\\'" . typescript-mode))
+;; Use ruby-mode for .xml.builder files
+(add-to-list 'auto-mode-alist '("\\.xml.builder\\'" . ruby-mode))
