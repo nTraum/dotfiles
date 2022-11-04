@@ -28,7 +28,7 @@
  '(helm-minibuffer-history-key "M-p")
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(embark-consult embark inf-elixir vterm consult-lsp lsp-python-ms consult marginalia vertico tide tide-mode origami origami-mode polymode mmm-mode dumb-jump dump-jump dockerfile-mode terraform-mode evil-collection gnuplot-mode sudo-edit json-mode aggressive-indent elixir-mode web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode))
+   '(deadgrep rainbow-delimiters embark-consult embark inf-elixir vterm consult-lsp lsp-python-ms consult marginalia vertico tide tide-mode origami origami-mode polymode mmm-mode dumb-jump dump-jump dockerfile-mode terraform-mode evil-collection gnuplot-mode sudo-edit json-mode aggressive-indent elixir-mode web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode))
  '(safe-local-variable-values
    '((eval prettier-mode t)
      (rspec-docker-cwd . "./")
@@ -98,6 +98,9 @@
   :ensure t
   :init
   (savehist-mode))
+
+(use-package deadgrep
+  :ensure t)
 
 ;; This package provides an orderless completion style that divides the pattern into space-separated components, and matches candidates that match all of the components in any order. Each component can match in any one of several ways: literally, as a regexp, as an initialism, in the flex style, or as multiple word prefixes. By default, regexp and literal matches are enabled.
 (use-package orderless
@@ -301,6 +304,11 @@
 (use-package forge
   :ensure t
   :after magit)
+
+(use-package rainbow-delimiters
+  :ensure t
+  :init (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
+)
 
 (use-package browse-at-remote
   :ensure t
