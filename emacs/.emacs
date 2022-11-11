@@ -100,7 +100,8 @@
   (savehist-mode))
 
 (use-package deadgrep
-  :ensure t)
+  :ensure t
+  :config (evil-set-initial-state 'deadgrep-mode 'emacs))
 
 ;; This package provides an orderless completion style that divides the pattern into space-separated components, and matches candidates that match all of the components in any order. Each component can match in any one of several ways: literally, as a regexp, as an initialism, in the flex style, or as multiple word prefixes. By default, regexp and literal matches are enabled.
 (use-package orderless
@@ -536,7 +537,8 @@
   "p"  '(:ignore t :which-key "projectile")
   "pf" '(projectile-find-file :which-key "projects find file")
   "pp" '(projectile-switch-project :which-key "projects")
-  "pr" '(consult-ripgrep :which-key "projects grep")
+  "pr" '(project-find-regexp :which-key "projects grep")
+  "pR" '(deadgrep :which-key "deadgrep")
 
   "r"  '(:ignore t :which-key "ruby")
   "rc" '(inf-ruby-console-auto :which-key "ruby console")
