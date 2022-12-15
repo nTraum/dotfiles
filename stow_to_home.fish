@@ -1,6 +1,6 @@
 # Stows all directories to $HOME
 
-set STOWS asdf emacs fish git psql ripgrep starship terminator tmux
+set STOWS asdf emacs fish git psql ripgrep ssh starship terminator tmux
 
 echo Stowing the following directories to $HOME:
 echo 📁 $STOWS
