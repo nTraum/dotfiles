@@ -363,6 +363,10 @@
     "tT" 'rspec-verify)
   )
 
+(use-package inf-ruby
+  :ensure t
+  :init (add-hook 'compilation-filter-hook 'inf-ruby-auto-enter))
+
 (use-package go-mode :ensure t)
 
 (use-package git-gutter
@@ -391,7 +395,7 @@
         lsp-prefer-flymake nil
         lsp-ui-doc-show-with-cursor t
         )
-  (add-to-list 'exec-path "/home/ntraum/bin/elixir-ls/0.11.0"))
+  (add-to-list 'exec-path "/home/ntraum/bin/elixir-ls/0.13"))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
@@ -477,9 +481,9 @@
   :ensure t
   )
 
-(use-package vterm
-  :ensure t
-  )
+;; (use-package vterm
+;;   :ensure t
+;;   )
 
 (general-evil-setup t)
 (space-leader
@@ -586,6 +590,7 @@
   "tT" 'rspec-verify
   "tt" 'rspec-verify-single
   "tr" 'rspec-rerun
+  "tp" 'rspec-verify-all
   )
 
 ;; Show matching parentheses
@@ -632,7 +637,7 @@
 
 (set-face-attribute 'default nil
                     :family "Source Code Pro Regular"
-                    :height 120
+                    :height 100
                     )
 
 (defconst dark-theme 'gruvbox "My personal dark theme.")
