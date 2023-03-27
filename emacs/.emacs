@@ -380,6 +380,7 @@
 (use-package smartparens
   :ensure t
   :init (smartparens-global-mode)
+  :config (setq sp-escape-quotes-after-insert nil)
   )
 
 (use-package lsp-mode
