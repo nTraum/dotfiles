@@ -24,7 +24,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("b1a691bb67bd8bd85b76998caf2386c9a7b2ac98a116534071364ed6489b695d" "3e374bb5eb46eb59dbd92578cae54b16de138bc2e8a31a2451bf6fdb0f3fd81b" "735561d82728e28f275802fc875c3a2caf14d06f434604a7516c59d49120b163"))
+   '("98ef36d4487bf5e816f89b1b1240d45755ec382c7029302f36ca6626faf44bbd" "b1a691bb67bd8bd85b76998caf2386c9a7b2ac98a116534071364ed6489b695d" "3e374bb5eb46eb59dbd92578cae54b16de138bc2e8a31a2451bf6fdb0f3fd81b" "735561d82728e28f275802fc875c3a2caf14d06f434604a7516c59d49120b163"))
  '(helm-minibuffer-history-key "M-p")
  '(inhibit-startup-screen t)
  '(package-selected-packages
@@ -641,8 +641,9 @@
         )
   )
 
+;; Font
 (set-face-attribute 'default nil
-                    :family "Source Code Pro Regular"
+                    :family "Source Code Pro Medium"
                     :height 100
                     )
 
