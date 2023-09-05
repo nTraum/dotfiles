@@ -40,3 +40,6 @@ tags.temp
 
 # TypeScript Server
 .log
+
+# asdf version file
+.tool-versions
