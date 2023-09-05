@@ -20,6 +20,7 @@ st = status -s
 
 [core]
 excludesfile = ~/.global_gitignore
+pager = less -F
 
 [diff]
 patience = true
