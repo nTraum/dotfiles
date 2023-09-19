@@ -435,7 +435,9 @@
 
 (use-package doom-modeline
   :ensure t
-  :init (doom-modeline-mode 1))
+  :init (doom-modeline-mode 1)
+  (setq doom-modeline-vcs-max-length 32)
+  (setq doom-modeline-buffer-file-name-style 'truncate-upto-project))
 
 (use-package tide
   :ensure t
