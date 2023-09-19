@@ -219,6 +219,11 @@
 ;; Fish shell syntax highlighting
 (use-package elixir-mode :ensure t)
 
+(use-package heex-ts-mode
+ :ensure t)
+ :init
+ (add-to-list 'auto-mode-alist '("\\.heex\\'" . heex-ts-mode))
+
 ;; Fish shell syntax highlighting
 (use-package fish-mode :ensure t)
 
@@ -456,7 +461,6 @@
   (add-to-list 'auto-mode-alist '("\\.liquid\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.mjml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.njk\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.heex\\'" . web-mode))
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-markup-indent-offset 2)
   (setq web-mode-enable-auto-pairing nil)
