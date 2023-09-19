@@ -216,7 +216,6 @@
           (exec-path-from-shell-initialize))
   )
 
-;; Fish shell syntax highlighting
 (use-package elixir-mode :ensure t)
 
 (use-package heex-ts-mode
