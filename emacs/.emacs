@@ -401,7 +401,8 @@
         ;; Not setting this breaks company completion with yasnippets
         lsp-completion-provider :none
         )
-  (add-to-list 'exec-path "/home/ntraum/bin/elixir-ls/0.13"))
+  (add-to-list 'exec-path "/home/ntraum/bin/elixir-ls-v0.16.0")
+  )
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
