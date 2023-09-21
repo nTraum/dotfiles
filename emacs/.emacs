@@ -28,7 +28,7 @@
  '(helm-minibuffer-history-key "M-p")
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(prettier sqlite3 deadgrep rainbow-delimiters embark-consult embark inf-elixir vterm consult-lsp lsp-python-ms consult marginalia vertico tide tide-mode origami origami-mode polymode mmm-mode dumb-jump dump-jump dockerfile-mode terraform-mode evil-collection gnuplot-mode sudo-edit json-mode aggressive-indent elixir-mode web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode))
+   '(elixir-ts-mode prettier sqlite3 deadgrep rainbow-delimiters embark-consult embark inf-elixir vterm consult-lsp lsp-python-ms consult marginalia vertico tide tide-mode origami origami-mode polymode mmm-mode dumb-jump dump-jump dockerfile-mode terraform-mode evil-collection gnuplot-mode sudo-edit json-mode aggressive-indent web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode))
  '(safe-local-variable-values
    '((eval prettier-mode t)
      (rspec-docker-cwd . "./")
@@ -216,7 +216,7 @@
           (exec-path-from-shell-initialize))
   )
 
-(use-package elixir-mode :ensure t)
+(use-package elixir-ts-mode :ensure t)
 
 (use-package heex-ts-mode
  :ensure t)
@@ -393,7 +393,7 @@
   :ensure t
   :diminish lsp-mode
   :hook
-  ((elixir-mode . lsp)
+  ((elixir-ts-mode . lsp)
    (ruby-mode . lsp))
   :init
   (setq lsp-file-watch-threshold 10000
@@ -634,7 +634,7 @@
 ;; Set up before-save hooks to format buffer.
 (defun lsp-elixir-install-save-hooks ()
   (add-hook 'before-save-hook #'lsp-format-buffer t t))
-(add-hook 'elixir-mode-hook #'lsp-elixir-install-save-hooks)
+(add-hook 'elixir-ts-mode-hook #'lsp-elixir-install-save-hooks)
 
 ;; Start emacs maximized
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
