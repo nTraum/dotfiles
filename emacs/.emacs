@@ -64,7 +64,9 @@
 (use-package evil
   :ensure t
   :init
-  (setq evil-want-keybinding nil)
+  (setq
+     evil-want-keybinding nil
+     evil-search-module 'evil-search)
   :config
   (evil-mode t)
   )
