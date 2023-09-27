@@ -337,8 +337,7 @@
   (setq company-minimum-prefix-length 0) ;
   (setq company-selection-wrap-around t) ; continue from top when reaching bottom
   (setq company-dabbrev-downcase nil) ; do not convert to lowercase
-
-  (company-tng-mode))
+  )
 ;; (push '(company-web-html
 ;;         company-css
 ;;         company-dabbrev-code
