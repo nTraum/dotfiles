@@ -328,6 +328,16 @@
   :init (smartparens-global-mode)
   :config (setq sp-escape-quotes-after-insert nil)
   )
+(use-package indent-bars
+  :custom
+  (indent-bars-prefer-character t)
+  (indent-bars-highlight-current-depth '(:blend 0.64))
+  (indent-bars-treesit-support t)
+  :hook
+  (yaml-ts-mode . indent-bars-mode)
+  )
+
+
 
 (use-package lsp-mode
   :commands lsp
@@ -348,6 +358,7 @@
         )
   (add-to-list 'exec-path "/home/ntraum/bin/elixir-ls-v0.16.0")
   )
+
 
 ;; Set up before-save hooks to format buffer and add/delete imports.
 ;; Make sure you don't have other gofmt/goimports hooks enabled.
