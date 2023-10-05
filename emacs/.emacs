@@ -357,7 +357,7 @@
         ;; Not setting this breaks company completion with yasnippets
         lsp-completion-provider :none
         )
-  (add-to-list 'exec-path "/home/ntraum/bin/elixir-ls-v0.16.0")
+  (add-to-list 'exec-path "/home/ntraum/coding/elixir-ls/v0.16.0")
   )
 
 
@@ -618,7 +618,7 @@
 (defconst dark-theme 'gruvbox "My personal dark theme.")
 (defconst light-theme 'gruvbox-light-medium "My personal light theme.")
 
-(defvar current-theme light-theme "Current theme used.")
+(defvar current-theme dark-theme "Current theme used.")
 (load-theme current-theme)
 
 (defun toggle-theme ()
