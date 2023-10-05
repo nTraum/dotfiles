@@ -218,6 +218,7 @@
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-center-content t
+        dashboard-set-footer nil
         dashboard-startup-banner 'logo
         dashboard-set-heading-icons t
         dashboard-set-file-icons t
@@ -290,7 +291,7 @@
 (use-package robe
   :ensure t
   :init (add-hook 'ruby-mode-hook 'robe-mode)
-  (push 'company-robe company-backends)
+  ;; (push 'company-robe company-backends)
   )
 
 (use-package rubocop
@@ -466,6 +467,12 @@
   "c"  '(:ignore t :which-key "comment")
   "cc" '(comment-or-uncomment-region-or-line t :which-key "toggle line or region")
 
+  "C"  '(:ignore t :which-key "smerge")
+  "Cu" '(smerge-keep-upper t :which-key "keep upper")
+  "Cl" '(smerge-keep-lower t :which-key "keep lower")
+  "Cn" '(smerge-next t :which-key "next")
+  "Cp" '(smerge-prev t :which-key "previous")
+
   "e"  '(:ignore t :which-key "emacs")
   "ee" '((lambda () (interactive)(find-file "~/.emacs")) :which-key "open .emacs")
   "er" '((lambda () (interactive)(load-file "~/.emacs")) :which-key "reload .emacs")
@@ -587,7 +594,9 @@
 ;; Set up before-save hooks to format buffer.
 (defun lsp-elixir-install-save-hooks ()
   (add-hook 'before-save-hook #'lsp-format-buffer t t))
+
 (add-hook 'elixir-ts-mode-hook #'lsp-elixir-install-save-hooks)
+(add-hook 'heex-ts-mode-hook #'lsp-elixir-install-save-hooks)
 
 ;; Start emacs maximized
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
