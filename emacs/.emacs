@@ -338,6 +338,21 @@
   (yaml-ts-mode . indent-bars-mode)
   )
 
+(use-package treesit-auto
+  :ensure t
+  :config
+  (setq treesit-auto-install 'prompt)
+  (global-treesit-auto-mode))
+
+;; (use-package indent-bars
+;;   :custom
+;;   (indent-bars-prefer-character t)
+;;   (indent-bars-highlight-current-depth '(:blend 0.64))
+;;   (indent-bars-treesit-support t)
+;;   :hook
+;;   (yaml-ts-mode . indent-bars-mode)
+;;   )
+
 
 
 (use-package lsp-mode
