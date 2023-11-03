@@ -631,7 +631,7 @@
 ;; Font size
 (set-face-attribute 'default nil
                     :family "Source Code Pro Medium"
-                    :height 110
+                    :height 120
                     )
 
 (defconst dark-theme 'gruvbox "My personal dark theme.")
