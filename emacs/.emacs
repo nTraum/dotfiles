@@ -419,6 +419,10 @@
          ;; (before-save . tide-format-before-save)
          ))
 
+(use-package js2-mode
+  :ensure t
+  )
+
 (use-package json-mode
   :ensure t)
 
