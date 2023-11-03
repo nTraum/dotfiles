@@ -329,14 +329,6 @@
   :init (smartparens-global-mode)
   :config (setq sp-escape-quotes-after-insert nil)
   )
-(use-package indent-bars
-  :custom
-  (indent-bars-prefer-character t)
-  (indent-bars-highlight-current-depth '(:blend 0.64))
-  (indent-bars-treesit-support t)
-  :hook
-  (yaml-ts-mode . indent-bars-mode)
-  )
 
 (use-package treesit-auto
   :ensure t
