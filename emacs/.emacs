@@ -694,6 +694,8 @@
 ;; Disable audio bell, use visual bell instead
 (setq visible-bell 1)
 
+(setq pixel-scroll-precision-mode t)
+
 ;; Make underscore part of a word
 (modify-syntax-entry ?_ "w")
 
