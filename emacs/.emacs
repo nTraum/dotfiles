@@ -363,7 +363,7 @@
         ;; Not setting this breaks company completion with yasnippets
         lsp-completion-provider :none
         )
-  (add-to-list 'exec-path "/home/ntraum/coding/elixir-ls/v0.18.1")
+  (add-to-list 'exec-path "/home/ntraum/coding/elixir-ls/v0.20.0")
   )
 
 
