@@ -157,12 +157,14 @@
           (exec-path-from-shell-initialize))
   )
 
-(use-package elixir-ts-mode :ensure t)
-
 (use-package heex-ts-mode
  :ensure t)
- :init
- (add-to-list 'auto-mode-alist '("\\.heex\\'" . heex-ts-mode))
+
+(use-package elixir-ts-mode :ensure t
+  :init (add-to-list 'auto-mode-alist '("\\.heex\\'" . elixir-ts-mode))
+  :after (heex-ts-mode)
+  )
+
 
 ;; Fish shell syntax highlighting
 (use-package fish-mode :ensure t)
