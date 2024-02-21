@@ -287,6 +287,11 @@
 ;;         company-yasnippet
 ;;         company-files) company-backends))
 
+(use-package company-quickhelp
+  :ensure t
+  :init (company-quickhelp-mode)
+  )
+
 (use-package robe
   :ensure t
   :init (add-hook 'ruby-mode-hook 'robe-mode)
