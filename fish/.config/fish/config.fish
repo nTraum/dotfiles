@@ -39,8 +39,9 @@ if command -v fzf > /dev/null
         set -xg FZF_DEFAULT_COMMAND  'fd --type=file --hidden --no-ignore-vcs'
     end
 
-    function gcf
-        git checkout (git branch --all | sed "s/.* //" | fzf)
+
+    function gcb
+        git branch --sort=-committerdate | grep -v "^\*" | fzf --height=20% --reverse --info=inline | xargs git checkout
     end
 end
 
