@@ -39,10 +39,8 @@ if command -v fzf > /dev/null
         set -xg FZF_DEFAULT_COMMAND  'fd --type=file --hidden --no-ignore-vcs'
     end
 
-
-    function gcb
-        git branch --sort=-committerdate | grep -v "^\*" | fzf --height=20% --reverse --info=inline | xargs git checkout
-    end
+    # Bind Ctrl+G to insert git branch via fzf
+    bind \cg 'commandline -i $(git branch --sort=-committerdate | grep -v "^\\*" | tr -d "[:blank:]" | fzf --height=20% --reverse --info=inline); commandline -f repaint'
 end
 
 # bat as a cat replacement
