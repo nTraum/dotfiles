@@ -27,6 +27,11 @@ abbr --add mts MIX_ENV=test mix test --stale
 alias em="emacsclient --no-wait"
 set -xg EDITOR "emacsclient --nowait"
 
+if command -v eza > /dev/null
+    alias l="eza -l --icons"
+    alias la="eza -la --icons"
+end
+
 # FZF
 if command -v fzf > /dev/null
     set -xg FZF_DEFAULT_OPTS '--height 40% --border'
