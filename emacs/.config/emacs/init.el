@@ -24,7 +24,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("7b8f5bbdc7c316ee62f271acf6bcd0e0b8a272fdffe908f8c920b0ba34871d98" "98ef36d4487bf5e816f89b1b1240d45755ec382c7029302f36ca6626faf44bbd" "b1a691bb67bd8bd85b76998caf2386c9a7b2ac98a116534071364ed6489b695d" "3e374bb5eb46eb59dbd92578cae54b16de138bc2e8a31a2451bf6fdb0f3fd81b" "735561d82728e28f275802fc875c3a2caf14d06f434604a7516c59d49120b163"))
+   '("7b8f5bbdc7c316ee62f271acf6bcd0e0b8a272fdffe908f8c920b0ba34871d98"))
  '(inhibit-startup-screen t)
  '(package-selected-packages
    '(company-quickhelp 0x0 0blayout elixir-ts-mode prettier sqlite3 deadgrep rainbow-delimiters embark-consult embark inf-elixir vterm consult-lsp lsp-python-ms consult marginalia vertico tide tide-mode origami origami-mode polymode mmm-mode dumb-jump dump-jump dockerfile-mode terraform-mode evil-collection gnuplot-mode sudo-edit json-mode aggressive-indent web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode))
@@ -54,8 +54,8 @@
   :ensure t
   :init
   (setq
-     evil-want-keybinding nil
-     evil-search-module 'evil-search)
+   evil-want-keybinding nil
+   evil-search-module 'evil-search)
   :config
   (evil-mode t)
   )
@@ -91,6 +91,7 @@
   (savehist-mode))
 
 (use-package deadgrep
+  :after (evil)
   :ensure t
   :config (evil-set-initial-state 'deadgrep-mode 'emacs))
 
@@ -113,33 +114,6 @@
   :ensure t
   )
 
-(use-package embark
-  :ensure t
-
-  :bind
-  (("C-+" . embark-act)         ;; pick some comfortable binding
-   ("C-;" . embark-dwim)        ;; good alternative: M-.
-   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
-
-  :init
-
-  ;; Optionally replace the key help with a completing-read interface
-  (setq prefix-help-command #'embark-prefix-help-command)
-
-  :config
-
-  ;; Hide the mode line of the Embark live/completions buffers
-  (add-to-list 'display-buffer-alist
-               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                 nil
-                 (window-parameters (mode-line-format . none)))))
-
-;; Consult users will also want the embark-consult package.
-(use-package embark-consult
-  :ensure t ; only need to install it, embark loads it after consult if found
-  :hook
-  (embark-collect-mode . consult-preview-at-point-mode))
-
 (use-package ace-jump-mode :ensure)
 
 (use-package diminish
@@ -158,13 +132,12 @@
   )
 
 (use-package heex-ts-mode
- :ensure t)
+  :ensure t)
 
 (use-package elixir-ts-mode :ensure t
   :init (add-to-list 'auto-mode-alist '("\\.heex\\'" . elixir-ts-mode))
   :after (heex-ts-mode)
   )
-
 
 ;; Fish shell syntax highlighting
 (use-package fish-mode :ensure t)
@@ -219,7 +192,6 @@
   :config
   (dashboard-setup-startup-hook)
   (setq dashboard-center-content t
-        dashboard-set-footer nil
         dashboard-startup-banner 'logo
         dashboard-set-heading-icons t
         dashboard-set-file-icons t
@@ -250,14 +222,10 @@
   (setq magit-diff-refine-hunk 'all)
   )
 
-(use-package forge
-  :ensure t
-  :after magit)
-
 (use-package rainbow-delimiters
   :ensure t
   :init (add-hook 'prog-mode-hook 'rainbow-delimiters-mode)
-)
+  )
 
 (use-package browse-at-remote
   :ensure t
@@ -282,12 +250,6 @@
   (setq company-selection-wrap-around t) ; continue from top when reaching bottom
   (setq company-dabbrev-downcase nil) ; do not convert to lowercase
   )
-;; (push '(company-web-html
-;;         company-css
-;;         company-dabbrev-code
-;;         company-dabbrev
-;;         company-yasnippet
-;;         company-files) company-backends))
 
 (use-package company-quickhelp
   :ensure t
@@ -361,15 +323,15 @@
   ((elixir-ts-mode . lsp)
    (ruby-mode . lsp))
   :init
-  (setq lsp-file-watch-threshold 10000
-        lsp-enable-xref t
-        lsp-prefer-flymake nil
-        lsp-ui-doc-show-with-cursor t
+  (setq-default lsp-file-watch-threshold 10000
+                lsp-enable-xref t
+                lsp-prefer-flymake nil
+                lsp-ui-doc-show-with-cursor t
 
-        ;; https://github.com/emacs-lsp/lsp-mode/issues/3173
-        ;; Not setting this breaks company completion with yasnippets
-        lsp-completion-provider :none
-        )
+                ;; https://github.com/emacs-lsp/lsp-mode/issues/3173
+                ;; Not setting this breaks company completion with yasnippets
+                lsp-completion-provider :none
+                )
   (add-to-list 'exec-path "/home/ntraum/coding/elixir-ls/v0.20.0")
   )
 
@@ -620,10 +582,9 @@
 
 ;; Mac OS specific configuration
 (when (string= system-type "darwin")
-  (setq mac-right-option-modifier nil
-        mac-option-modifier nil
-        exec-path (append exec-path '("/usr/local/bin"))
-        )
+  (setq-default mac-option-modifier nil
+                mac-right-option-modifier nil)
+  (setq exec-path (append exec-path '("/usr/local/bin")))
   )
 
 ;; Font size
