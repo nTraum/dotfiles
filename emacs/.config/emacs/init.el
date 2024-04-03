@@ -688,6 +688,7 @@
 (setq tramp-default-method "ssh")
 
 (setq scroll-step 1) ;; keyboard scroll one line at a time
+(setq scroll-margin 3) ;; At least 3 lines bottom / above
 
 ;; Disable audio bell, use visual bell instead
 (setq visible-bell 1)
