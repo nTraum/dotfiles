@@ -491,8 +491,8 @@
   "Cp" '(smerge-prev t :which-key "previous")
 
   "e"  '(:ignore t :which-key "emacs")
-  "ee" '((lambda () (interactive)(find-file "~/.emacs")) :which-key "open .emacs")
-  "er" '((lambda () (interactive)(load-file "~/.emacs")) :which-key "reload .emacs")
+  "ee" '((lambda () (interactive)(find-file "~/.config/emacs/init.el")) :which-key "open .emacs")
+  "er" '((lambda () (interactive)(load-file "~/.config/emacs/init.el")) :which-key "reload .emacs")
 
   "f"  '(:ignore t :which-key "files")
   "ff" '(find-file :which-key "find file")
