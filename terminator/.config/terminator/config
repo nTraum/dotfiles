@@ -13,7 +13,7 @@
 [profiles]
   [[default]]
     background_color = "#282828"
-    font = Source Code Pro 11
+    font = UbuntuMono Nerd Font Mono 13
     foreground_color = "#ebdbb2"
     show_titlebar = False
     scrollbar_position = hidden
@@ -23,7 +23,7 @@
     copy_on_selection = True
   [[light]]
     background_color = "#fbf1c7"
-    font = Source Code Pro 11
+    font = Source Code Pro 12
     foreground_color = "#3c3836"
     show_titlebar = False
     scrollback_infinite = True
