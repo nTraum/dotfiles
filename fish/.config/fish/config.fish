@@ -1,3 +1,5 @@
+fish_add_path /opt/nvim-linux64/bin
+
 # Initializes sharship prompt
 if command -v starship > /dev/null
     starship init fish | source
@@ -22,6 +24,7 @@ abbr --add mc mix compile
 abbr --add mp mkdir --parents
 abbr --add mt MIX_ENV=test mix test
 abbr --add mts MIX_ENV=test mix test --stale
+abbr --add nv nvim
 
 # Open file in a running emacs session
 alias em="emacsclient --no-wait"
