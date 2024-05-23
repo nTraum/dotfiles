@@ -24,10 +24,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("7b8f5bbdc7c316ee62f271acf6bcd0e0b8a272fdffe908f8c920b0ba34871d98"))
+   '("98ef36d4487bf5e816f89b1b1240d45755ec382c7029302f36ca6626faf44bbd" "7b8f5bbdc7c316ee62f271acf6bcd0e0b8a272fdffe908f8c920b0ba34871d98"))
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(company-quickhelp 0x0 0blayout elixir-ts-mode prettier sqlite3 deadgrep rainbow-delimiters embark-consult embark inf-elixir vterm consult-lsp lsp-python-ms consult marginalia vertico tide tide-mode origami origami-mode polymode mmm-mode dumb-jump dump-jump dockerfile-mode terraform-mode evil-collection gnuplot-mode sudo-edit json-mode aggressive-indent web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge smartparens all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode))
+   '(smartparens treesit-auto elixir-ts-mode company-quickhelp 0x0 0blayout prettier sqlite3 deadgrep embark-consult embark inf-elixir vterm consult-lsp lsp-python-ms consult marginalia vertico tide tide-mode origami origami-mode polymode mmm-mode dumb-jump dump-jump dockerfile-mode terraform-mode evil-collection gnuplot-mode sudo-edit json-mode aggressive-indent web-mode doom-modeline yard-mode yasnippet-snippets rspec-mode ace-jump-mode yasnippet yasipped diminish browse-at-remote haml-mode crystal-mode lsp-ui exec-path-from-shell company-lsp lsp-mode forge all-the-icons helm-rg fish-mode editorconfig yaml-mode helm-ag go-mode git-gutter company rubocop projectile-rails evil-args company-mode robe gruvbox-theme dashboard slim-mode helm-projectile helm evil-magit magit general flycheck linum-relative projectile evil-surround ivy which-key use-package evil evil-visual-mark-mode))
  '(safe-local-variable-values
    '((eval prettier-mode t)
      (rspec-docker-cwd . "./")
@@ -134,7 +134,8 @@
 (use-package heex-ts-mode
   :ensure t)
 
-(use-package elixir-ts-mode :ensure t
+(use-package elixir-ts-mode
+  :ensure t
   :init (add-to-list 'auto-mode-alist '("\\.heex\\'" . elixir-ts-mode))
   :after (heex-ts-mode)
   )
@@ -313,8 +314,6 @@
 ;;   (yaml-ts-mode . indent-bars-mode)
 ;;   )
 
-
-
 (use-package lsp-mode
   :commands lsp
   :ensure t
@@ -327,12 +326,13 @@
                 lsp-enable-xref t
                 lsp-prefer-flymake nil
                 lsp-ui-doc-show-with-cursor t
+                lsp-ui-doc-position 'bottom
 
                 ;; https://github.com/emacs-lsp/lsp-mode/issues/3173
                 ;; Not setting this breaks company completion with yasnippets
                 lsp-completion-provider :none
                 )
-  (add-to-list 'exec-path "/home/ntraum/coding/elixir-ls/v0.20.0")
+  (add-to-list 'exec-path "/home/ntraum/coding/elixir-ls/v0.21.3")
   )
 
 
@@ -436,6 +436,13 @@
   "SPC" '(execute-extended-command :which-key "execute command")
   "TAB" '(other-window :which-key "other window")
 
+  "a"  '(:ignore t :which-key "smerge")
+  "aa" '(smerge-next t :which-key "next")
+  "au" '(smerge-keep-upper t :which-key "keep upper")
+  "al" '(smerge-keep-lower t :which-key "keep lower")
+  "an" '(smerge-next t :which-key "next")
+  "ap" '(smerge-prev t :which-key "previous")
+
   "b"  '(:ignore t :which-key "buffers")
   "bb" '(consult-buffer t :which-key "buffers")
   "bi" '(consult-imenu t :which-key "imenu")
@@ -446,11 +453,6 @@
   "c"  '(:ignore t :which-key "comment")
   "cc" '(comment-or-uncomment-region-or-line t :which-key "toggle line or region")
 
-  "C"  '(:ignore t :which-key "smerge")
-  "Cu" '(smerge-keep-upper t :which-key "keep upper")
-  "Cl" '(smerge-keep-lower t :which-key "keep lower")
-  "Cn" '(smerge-next t :which-key "next")
-  "Cp" '(smerge-prev t :which-key "previous")
 
   "e"  '(:ignore t :which-key "emacs")
   "ee" '((lambda () (interactive)(find-file "~/.config/emacs/init.el")) :which-key "open .emacs")
@@ -517,8 +519,8 @@
  :keymaps 'override
  "Ü" '(previous-buffer :which-key "previous buffer")
  "ü" '(evil-goto-definition :which-key "goto definition")
+ "K" '(lsp-ui-doc-focus-frame :which-key "focus LSP doc frame")
  )
-
 
 ;; Can be overriden (like magit does)
 (general-define-key
