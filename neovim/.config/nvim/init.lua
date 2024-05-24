@@ -205,10 +205,10 @@ lspconfig.lua_ls.setup({
 
 -- Telescope keymaps
 local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
-vim.keymap.set("n", "<leader>fr", builtin.oldfiles, {})
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-vim.keymap.set("n", "<leader>bb", builtin.buffers, {})
+vim.keymap.set("n", "<leader>ff", builtin.find_files, { noremap = true })
+vim.keymap.set("n", "<leader>fr", builtin.oldfiles, { noremap = true })
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, { noremap = true })
+vim.keymap.set("n", "<leader>bb", builtin.buffers, { noremap = true })
 
 local cmp = require("cmp")
 
@@ -246,11 +246,11 @@ cmp.setup({
 	},
 })
 
-vim.keymap.set("n", "Ü", ":bp<CR>")
-vim.keymap.set("n", "<leader>wh", "<C-w>h")
-vim.keymap.set("n", "<leader>wl", "<C-w>l")
-vim.keymap.set("n", "<leader>wj", "<C-w>j")
-vim.keymap.set("n", "<leader>wk", "<C-w>k")
-vim.keymap.set("n", "<leader><Tab>", "<C-w>p")
+vim.keymap.set("n", "Ü", ":bp<CR>", { noremap = true })
+vim.keymap.set("n", "<leader>wh", "<C-w>h", { noremap = true })
+vim.keymap.set("n", "<leader>wl", "<C-w>l", { noremap = true })
+vim.keymap.set("n", "<leader>wj", "<C-w>j", { noremap = true })
+vim.keymap.set("n", "<leader>wk", "<C-w>k", { noremap = true })
+vim.keymap.set("n", "<leader><Tab>", "<C-w>p", { noremap = true })
 
-vim.keymap.set("n", "gs", ":Neogit<CR>")
+vim.keymap.set("n", "gs", ":Neogit<CR>", { noremap = true })
