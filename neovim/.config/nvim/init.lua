@@ -17,9 +17,30 @@ vim.opt.number = true
 
 vim.opt.smartcase = true
 
+-- Live show substituations in buffer
+vim.opt.incsearch = true
+
+-- command-line completion
+vim.opt.wildmenu = true
+-- Wildcard characters
+vim.opt.wildmode = "longest:full,full"
+-- Display the completion matches using the popup menu
+vim.opt.wildoptions = "pum"
+
+vim.opt.pumblend = 15
+
+-- Persistent undo even when editor closes
+vim.opt.undofile = true
+vim.opt.undodir = vim.fn.stdpath("data") .. "/undodir"
+
 -- TAB is 2 spaces
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
+-- Expand tabs to spaces
+vim.opt.expandtab = true
+
+-- Scroll margin
+vim.opt.scrolloff = 10
 
 -- Leader key is SPACE
 vim.g.mapleader = " "
