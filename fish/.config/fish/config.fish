@@ -28,7 +28,7 @@ abbr --add nv nvim
 
 # Open file in a running emacs session
 alias em="emacsclient --no-wait"
-set -xg EDITOR "emacsclient --nowait"
+set -xg EDITOR "nvim"
 
 if command -v eza > /dev/null
     alias l="eza -l --icons"
