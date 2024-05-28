@@ -204,6 +204,9 @@ require("lazy").setup({
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
+	{
+		"christoomey/vim-tmux-navigator",
+	},
 })
 
 -- Set colorscheme
@@ -259,6 +262,7 @@ vim.keymap.set("n", "<leader>ff", builtin.find_files)
 vim.keymap.set("n", "<leader>fr", builtin.oldfiles)
 vim.keymap.set("n", "<leader>fg", builtin.live_grep)
 vim.keymap.set("n", "<leader>bb", builtin.buffers)
+vim.keymap.set("n", "<leader>fh", builtin.help_tags)
 
 local cmp = require("cmp")
 
@@ -300,11 +304,11 @@ cmp.setup({
 vim.keymap.set("n", "Ü", ":bp<CR>")
 
 -- Window navigation
-vim.keymap.set("n", "<leader>wh", "<C-w>h")
-vim.keymap.set("n", "<leader>wl", "<C-w>l")
-vim.keymap.set("n", "<leader>wj", "<C-w>j")
-vim.keymap.set("n", "<leader>wk", "<C-w>k")
-vim.keymap.set("n", "<leader><Tab>", "<C-w>p")
+vim.keymap.set("n", "C-h", ":TmuxNavigateLeft<CR>")
+vim.keymap.set("n", "C-l", ":TmuxNavigateRight<CR>")
+vim.keymap.set("n", "C-j", ":TmuxNavigateDown<CR>")
+vim.keymap.set("n", "C-k", ":TmuxNavigateUp<CR>")
+vim.keymap.set("n", "C-<Tab>", ":TmuxNavigatePrevious<CR>")
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
