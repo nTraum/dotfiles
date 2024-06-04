@@ -72,7 +72,7 @@ vim.opt.cursorline = true
 -- Set gruvbox theme
 vim.o.background = "dark"
 
-vim.opt.completeopt = "menu,menuone,noselect"
+vim.opt.completeopt = "menu,menuone,noinsert"
 
 -- Limit number of completion window
 vim.opt.pumheight = 10
@@ -204,9 +204,9 @@ require("lazy").setup({
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
-	{
-		"christoomey/vim-tmux-navigator",
-	},
+	{ "christoomey/vim-tmux-navigator" },
+	{ "onsails/lspkind.nvim" },
+	{ "tpope/vim-fugitive" },
 })
 
 -- Set colorscheme
@@ -258,13 +258,16 @@ lspconfig.lua_ls.setup({
 
 -- Telescope keymaps
 local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", builtin.find_files)
+vim.keymap.set("n", "<leader>ff", function()
+	builtin.find_files({ hidden = true })
+end)
 vim.keymap.set("n", "<leader>fr", builtin.oldfiles)
 vim.keymap.set("n", "<leader>fg", builtin.live_grep)
 vim.keymap.set("n", "<leader>bb", builtin.buffers)
 vim.keymap.set("n", "<leader>fh", builtin.help_tags)
 
 local cmp = require("cmp")
+local lspkind = require("lspkind")
 
 cmp.setup({
 	snippet = {
@@ -284,7 +287,7 @@ cmp.setup({
 		keyword_length = 2,
 	},
 	sources = {
-		{ name = "nvim_lsp" },
+		{ name = "nvim_lsp", keyword_length = 2 },
 		{
 			name = "buffer",
 			option = {
@@ -297,6 +300,16 @@ cmp.setup({
 		{ name = "path" },
 		{ name = "cmdline" },
 		{ name = "luasnip" },
+	},
+	formatting = {
+		format = lspkind.cmp_format({
+			mode = "symbol", -- show only symbol annotations
+			maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+			-- can also be a function to dynamically calculate max width such as
+			-- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
+			ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+			show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+		}),
 	},
 })
 
