@@ -133,7 +133,20 @@ require("lazy").setup({
 			vim.o.timeoutlen = 1000
 		end,
 	},
-	{ "nvim-telescope/telescope.nvim", tag = "0.1.6", dependencies = { "nvim-lua/plenary.nvim" } },
+	{
+		"nvim-telescope/telescope.nvim",
+		tag = "0.1.6",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {
+			defaults = {
+				layout_config = {
+					horizontal = {
+						preview_cutoff = 20,
+					},
+				},
+			},
+		},
+	},
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -150,7 +163,28 @@ require("lazy").setup({
 		end,
 	},
 	-- Status line
-	{ "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" }, opts = { "gruvbox" } },
+	{
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+		opts = {
+			theme = "gruvbox",
+			sections = {
+				lualine_c = {
+					"filename",
+					function()
+						return require("lsp-progress").progress()
+					end,
+				},
+			},
+		},
+	},
+	-- LSP status
+	{
+		"linrongbin16/lsp-progress.nvim",
+		config = function()
+			require("lsp-progress").setup()
+		end,
+	},
 	-- Git signs next to line numbers
 	{ "lewis6991/gitsigns.nvim", config = true },
 	-- Show LSP signature on hover
@@ -212,6 +246,12 @@ require("lazy").setup({
 -- Set colorscheme
 vim.cmd([[colorscheme gruvbox]])
 
+-- Strip trailing whitespace on save
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+	pattern = { "*" },
+	command = [[%s/\s\+$//e]],
+})
+
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
@@ -221,6 +261,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
 		vim.highlight.on_yank()
 	end,
+})
+--
+-- listen lsp-progress event and refresh lualine
+vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
+vim.api.nvim_create_autocmd("User", {
+	group = "lualine_augroup",
+	pattern = "LspProgressStatusUpdated",
+	callback = require("lualine").refresh,
 })
 
 -- Add nvim-lspconfig plugin
