@@ -24,6 +24,8 @@ vim.opt.showmode = false
 -- Show line numbers
 vim.opt.number = true
 
+-- Search case-insensitively, except when term contains upper case chars
+vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Live show substituations in buffer
@@ -170,7 +172,7 @@ require("lazy").setup({
 			theme = "gruvbox",
 			sections = {
 				lualine_c = {
-					"filename",
+					{ "filename", path = 1 },
 					function()
 						return require("lsp-progress").progress()
 					end,
@@ -241,6 +243,7 @@ require("lazy").setup({
 	{ "christoomey/vim-tmux-navigator" },
 	{ "onsails/lspkind.nvim" },
 	{ "tpope/vim-fugitive" },
+	{ "akinsho/git-conflict.nvim", version = "*", config = true },
 })
 
 -- Set colorscheme
@@ -288,7 +291,7 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 lspconfig.elixirls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
-	cmd = { "/home/ntraum/coding/elixir-ls/v0.21.3/language_server.sh" },
+	cmd = { "/home/ntraum/coding/elixir-ls/v0.22.1/language_server.sh" },
 })
 
 -- Lua LS
@@ -304,6 +307,12 @@ lspconfig.lua_ls.setup({
 	},
 })
 
+-- pyright LS (Python)
+lspconfig.pyright.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+
 -- Telescope keymaps
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", function()
@@ -313,6 +322,7 @@ vim.keymap.set("n", "<leader>fr", builtin.oldfiles)
 vim.keymap.set("n", "<leader>fg", builtin.live_grep)
 vim.keymap.set("n", "<leader>bb", builtin.buffers)
 vim.keymap.set("n", "<leader>fh", builtin.help_tags)
+vim.keymap.set("n", "<leader>fl", builtin.lsp_workspace_symbols)
 
 local cmp = require("cmp")
 local lspkind = require("lspkind")
@@ -371,6 +381,18 @@ vim.keymap.set("n", "C-j", ":TmuxNavigateDown<CR>")
 vim.keymap.set("n", "C-k", ":TmuxNavigateUp<CR>")
 vim.keymap.set("n", "C-<Tab>", ":TmuxNavigatePrevious<CR>")
 
+vim.keymap.set("n", "gs", ":Git<CR>")
+
+-- Quickfix list                                                                      t
+-- Toggle on q
+-- vim.keymap.set("n", "q", function()
+-- 	local qf_winid = vim.fn.getqflist({ winid = 0 }).winid
+-- 	local action = qf_winid > 0 and "cclose" or "copen"
+-- 	vim.cmd("botright " .. action)
+-- end, { noremap = true, silent = true })
+vim.keymap.set("n", "[q", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnotstic message" })
+vim.keymap.set("n", "]q", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostict message" })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -403,4 +425,3 @@ vim.keymap.set(
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
