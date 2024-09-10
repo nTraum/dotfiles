@@ -37,13 +37,24 @@ end
 
 # FZF
 if command -v fzf > /dev/null
+    # Default Fish keybindings
     set -xg FZF_DEFAULT_OPTS '--height 40% --border'
+
     if command -v fd > /dev/null
         set -xg FZF_DEFAULT_COMMAND  'fd --type=file --hidden --no-ignore-vcs'
     end
 
+    fzf --fish | source
+
     # Bind Ctrl+G to insert git branch via fzf
     bind \cg 'commandline -i $(git branch --sort=-committerdate | grep -v "^\\*" | tr -d "[:blank:]" | fzf --height=20% --reverse --info=inline); commandline -f repaint'
+
+    # Bind Ctrl+Alt+S to insert git status file via fzf
+    bind \e\cS 'commandline -i $(git -c color.status=always status --short | fzf --ansi --no-sort | fzf --ansi --no-sort | awk \'{print $NF}\'); commandline -f repaint'
+
+
+    # TODO bind this to ctrl + alt + s
+    # git -c color.status=always status --short | fzf --ansi --no-sort | awk '{print $NF}'
 end
 
 # bat as a cat replacement
@@ -60,4 +71,8 @@ if command -v tmux > /dev/null
     function tm -d "Attach to running tmux session or create a new one"
         tmux attach || tmux new
     end
+end
+
+if command -v podman > /dev/null
+  alias docker=podman
 end
