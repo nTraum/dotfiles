@@ -1,6 +1,19 @@
 # Gruvbox theme
 import = [ "~/.config/alacritty/themes/themes/gruvbox_dark.toml" ]
+# import = [ "~/.config/alacritty/themes/themes/gruvbox_light.toml" ]
+
+[shell]
+program = "/usr/bin/fish"
+args = ["--interactive"]
 
 [font]
 normal = { family = "Ubuntu Mono" }
-size = 12
+size = 13
+
+[window]
+# decorations = "None"
+
+[keyboard]
+bindings = [
+  { key = "N", mods = "Control|Shift", action = "CreateNewWindow" }
+]
