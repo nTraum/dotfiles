@@ -115,6 +115,7 @@ require("lazy").setup({
 	-- Gruvbox Theme
 	-- Bold is just too much, disabled
 	{ "ellisonleao/gruvbox.nvim", priority = 1000, opts = { bold = false } },
+	-- Easily install and manage LSP servers
 	{
 		"williamboman/mason.nvim",
 		config = true,
@@ -126,8 +127,8 @@ require("lazy").setup({
 	{
 		"neovim/nvim-lspconfig",
 	},
+	-- Shows which keys to press olol
 	{
-		-- TODO
 		"folke/which-key.nvim",
 		event = "VeryLazy",
 		init = function()
@@ -135,6 +136,7 @@ require("lazy").setup({
 			vim.o.timeoutlen = 1000
 		end,
 	},
+	-- Fuzzy finder over lists
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.6",
@@ -161,6 +163,25 @@ require("lazy").setup({
 				sync_install = false,
 				highlight = { enable = true },
 				indent = { enable = true },
+			})
+		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				textobjects = {
+					select = {
+						enable = true,
+						lookahead = true,
+						keymaps = {
+							["af"] = "@function.outer",
+							["if"] = "@function.inner",
+							["ia"] = "@parameter.inner",
+							["aa"] = "@parameter.outer",
+						},
+					},
+				},
 			})
 		end,
 	},
@@ -240,9 +261,13 @@ require("lazy").setup({
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
+	-- Navigate between tmux and neovim windows
 	{ "christoomey/vim-tmux-navigator" },
+	-- Pictograms in completions
 	{ "onsails/lspkind.nvim" },
+	-- Git client
 	{ "tpope/vim-fugitive" },
+	-- Resolve git merge conflicts
 	{ "akinsho/git-conflict.nvim", version = "*", config = true },
 })
 
@@ -320,7 +345,9 @@ vim.keymap.set("n", "<leader>ff", function()
 end)
 vim.keymap.set("n", "<leader>fr", builtin.oldfiles)
 vim.keymap.set("n", "<leader>fg", builtin.live_grep)
-vim.keymap.set("n", "<leader>bb", builtin.buffers)
+vim.keymap.set("n", "<leader>bb", function()
+	builtin.buffers({ sort_mru = true })
+end)
 vim.keymap.set("n", "<leader>fh", builtin.help_tags)
 vim.keymap.set("n", "<leader>fl", builtin.lsp_workspace_symbols)
 
