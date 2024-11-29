@@ -1,8 +1,9 @@
+[general]
 # Gruvbox theme
 import = [ "~/.config/alacritty/themes/themes/gruvbox_dark.toml" ]
 # import = [ "~/.config/alacritty/themes/themes/gruvbox_light.toml" ]
 
-[shell]
+[terminal.shell]
 program = "/usr/bin/fish"
 args = ["--interactive"]
 
@@ -17,3 +18,4 @@ size = 13
 bindings = [
   { key = "N", mods = "Control|Shift", action = "CreateNewWindow" }
 ]
+
