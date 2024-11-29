@@ -20,6 +20,7 @@ abbr --add dc docker-compose
 abbr --add g git
 abbr --add gd git diff
 abbr --add gds git diff --staged
+abbr --add lg lazygit
 abbr --add mc mix compile
 abbr --add mp mkdir --parents
 abbr --add mt MIX_ENV=test mix test
