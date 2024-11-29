@@ -77,3 +77,5 @@ end
 if command -v podman > /dev/null
   alias docker=podman
 end
+
+set -xg ERL_AFLAGS '-kernel shell_history enabled'
