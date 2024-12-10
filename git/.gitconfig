@@ -56,3 +56,5 @@ repo = /home/ntraum/coding/nTraum/studiolineatur
 enabled = true
 
 
+[init]
+	defaultBranch = main
