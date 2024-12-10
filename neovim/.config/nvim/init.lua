@@ -93,7 +93,12 @@ require("lazy").setup({
 					command = "/home/ntraum/bin/stylua",
 				},
 			},
-			formatters_by_ft = { lua = { "stylua" }, javascript = { "prettier" } },
+			formatters_by_ft = {
+				lua = { "stylua" },
+				javascript = { "prettier" },
+				json = { "jq" },
+				fish = { "fish_indent" },
+			},
 		},
 	},
 
@@ -267,8 +272,33 @@ require("lazy").setup({
 	{ "onsails/lspkind.nvim" },
 	-- Git client
 	{ "tpope/vim-fugitive" },
+	-- Enables :GBrowse for to open GH urls in fugitive
+	{ "tpope/vim-rhubarb" },
 	-- Resolve git merge conflicts
 	{ "akinsho/git-conflict.nvim", version = "*", config = true },
+	{ "ThePrimeagen/harpoon", dependencies = { "nvim-lua/plenary.nvim" }, branch = "harpoon2", config = true },
+	{ "ggandor/leap.nvim" },
+	-- Highlight TODO / FIXME comments
+	{ "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config = true },
+	{
+		"f-person/git-blame.nvim",
+		-- Because of the keys part, you will be lazy loading this plugin.
+		-- The plugin wil only load once one of the keys is used.
+		-- If you want to load the plugin at startup, add something like event = "VeryLazy",
+		-- or lazy = false. One of both options will work.
+		opts = {
+			-- your configuration comes here
+			-- for example
+			enabled = true, -- if you want to enable the plugin
+			virtual_text_column = 80,
+			highlight_group = "CursorLine",
+			--
+			--
+			-- message_template = " <summary> • <date> • <author> • <<sha>>", -- template for the blame message, check the Message template section for more options
+			-- date_format = "%m-%d-%Y %H:%M:%S", -- template for the date, check Date format section for more options
+			-- virtual_text_column = 1, -- virtual text start column, check Start virtual text at column section for more options
+		},
+	},
 })
 
 -- Set colorscheme
@@ -316,7 +346,7 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 lspconfig.elixirls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
-	cmd = { "/home/ntraum/coding/elixir-ls/v0.22.1/language_server.sh" },
+	cmd = { "/home/ntraum/coding/elixir-ls/v0.24.1/language_server.sh" },
 })
 
 -- Lua LS
@@ -334,6 +364,23 @@ lspconfig.lua_ls.setup({
 
 -- pyright LS (Python)
 lspconfig.pyright.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+
+-- Svelte
+lspconfig.svelte.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+--
+-- yamllint
+lspconfig.yamlls.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+
+lspconfig.ts_ls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
@@ -408,7 +455,7 @@ vim.keymap.set("n", "C-j", ":TmuxNavigateDown<CR>")
 vim.keymap.set("n", "C-k", ":TmuxNavigateUp<CR>")
 vim.keymap.set("n", "C-<Tab>", ":TmuxNavigatePrevious<CR>")
 
-vim.keymap.set("n", "gs", ":Git<CR>")
+vim.keymap.set("n", "<leader>gs", ":Git<CR>")
 
 -- Quickfix list                                                                      t
 -- Toggle on q
@@ -452,3 +499,30 @@ vim.keymap.set(
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+
+-- Harpoon
+
+local harpoon = require("harpoon")
+
+vim.keymap.set("n", "<leader>A", function()
+	harpoon:list():add()
+end)
+
+vim.keymap.set("n", "<leader>a", function()
+	harpoon.ui:toggle_quick_menu(harpoon:list())
+end)
+
+vim.keymap.set("n", "<C-1>", function()
+	harpoon:list():select(1)
+end)
+vim.keymap.set("n", "<C-2>", function()
+	harpoon:list():select(2)
+end)
+vim.keymap.set("n", "<C-3>", function()
+	harpoon:list():select(3)
+end)
+vim.keymap.set("n", "<C-4>", function()
+	harpoon:list():select(4)
+end)
+
+require("leap").create_default_mappings()
