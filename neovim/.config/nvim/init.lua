@@ -346,7 +346,7 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 lspconfig.elixirls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
-	cmd = { "/home/ntraum/coding/elixir-ls/v0.24.1/language_server.sh" },
+	cmd = { "/home/ntraum/coding/elixir-ls/v0.25.0/language_server.sh" },
 })
 
 -- Lua LS
