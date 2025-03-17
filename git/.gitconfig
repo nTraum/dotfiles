@@ -8,6 +8,7 @@ ui = auto
 
 [commit]
 # gpgsign = true
+verbose = true
 
 [alias]
 ci = commit
@@ -28,8 +29,7 @@ unhide = update-index --no-assume-unchanged
 excludesfile = ~/.global_gitignore
 
 [diff]
-patience = true
-compactionHeuristic = true
+algorithm = histogram
 
 [push]
 default = simple
@@ -47,6 +47,8 @@ user = nTraum
 [credential "https://github.com"]
 helper = !/usr/bin/gh auth git-credential
 
+[merge]
+conflictstyle = zdiff3
 
 [maintenance]
 repo = /home/ntraum/coding/hexafarms/hexchange
@@ -54,7 +56,7 @@ repo = /home/ntraum/coding/nTraum/studiolineatur
 
 [rerere]
 enabled = true
-
+autoupdate = true
 
 [init]
-	defaultBranch = main
+defaultBranch = main
