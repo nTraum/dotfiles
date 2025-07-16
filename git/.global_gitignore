@@ -43,3 +43,8 @@ tags.temp
 
 # asdf version file
 .tool-versions
+
+
+# Claude code
+.claude
+CLAUDE.md
