@@ -1,0 +1,19 @@
+# Ghostty Configuration
+
+# Theme (using Gruvbox dark)
+theme = GruvboxDark
+
+# Font
+font-family = "Ubuntu Mono"
+# font-family = "Adwaita Mono"
+font-size = 13
+
+# Shell
+shell-integration = fish
+
+# Window
+window-decoration = false
+
+# Keybindings
+keybind = ctrl+shift+n=new_window
+
