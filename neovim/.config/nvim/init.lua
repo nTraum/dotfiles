@@ -82,6 +82,9 @@ vim.opt.pumheight = 10
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3
+
 require("lazy").setup({
 	{
 		-- Auto format on save
@@ -171,25 +174,6 @@ require("lazy").setup({
 			})
 		end,
 	},
-	{
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				textobjects = {
-					select = {
-						enable = true,
-						lookahead = true,
-						keymaps = {
-							["af"] = "@function.outer",
-							["if"] = "@function.inner",
-							["ia"] = "@parameter.inner",
-							["aa"] = "@parameter.outer",
-						},
-					},
-				},
-			})
-		end,
-	},
 	-- Status line
 	{
 		"nvim-lualine/lualine.nvim",
@@ -217,17 +201,6 @@ require("lazy").setup({
 	{ "lewis6991/gitsigns.nvim", config = true },
 	-- Show LSP signature on hover
 	{ "ray-x/lsp_signature.nvim", opts = { hint_enable = false } },
-	-- Git client, magit like
-	{
-		"NeogitOrg/neogit",
-		dependencies = {
-			"nvim-lua/plenary.nvim", -- required
-			"sindrets/diffview.nvim", -- optional - Diff integration
-
-			-- Only one of these is needed, not both.
-			"nvim-telescope/telescope.nvim", -- optional
-		},
-	},
 	{
 		-- surround motion
 		"kylechui/nvim-surround",
@@ -299,6 +272,55 @@ require("lazy").setup({
 			-- virtual_text_column = 1, -- virtual text start column, check Start virtual text at column section for more options
 		},
 	},
+	{
+		"stevearc/oil.nvim",
+		---@module 'oil'
+		---@type oil.SetupOpts
+		opts = {},
+		-- Optional dependencies
+		dependencies = { { "echasnovski/mini.icons", opts = {} } },
+		-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+		lazy = false,
+	},
+	{
+		"yetone/avante.nvim",
+		event = "VeryLazy",
+		version = false, -- Never set this value to "*"! Never!
+		opts = {
+			-- add any opts here
+			-- for example
+			provider = "claude",
+			-- openai = {
+			-- 	endpoint = "https://api.openai.com/v1",
+			-- 	model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
+			-- 	timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
+			-- 	temperature = 0,
+			-- 	max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
+			-- 	--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
+			-- },
+		},
+		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
+		-- build = "make",
+		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"stevearc/dressing.nvim",
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			--- The below dependencies are optional,
+			"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+			"ibhagwan/fzf-lua", -- for file_selector provider fzf
+			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+			{
+				-- Make sure to set this up properly if you have lazy=true
+				"MeanderingProgrammer/render-markdown.nvim",
+				opts = { file_types = { "markdown", "Avante" } },
+				ft = { "markdown", "Avante" },
+			},
+		},
+	},
 })
 
 -- Set colorscheme
@@ -329,6 +351,8 @@ vim.api.nvim_create_autocmd("User", {
 	callback = require("lualine").refresh,
 })
 
+vim.lsp.set_log_level("off")
+
 -- Add nvim-lspconfig plugin
 local lspconfig = require("lspconfig")
 local on_attach = function(_, bufnr)
@@ -346,7 +370,7 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 lspconfig.elixirls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
-	cmd = { "/home/ntraum/coding/elixir-ls/v0.25.0/language_server.sh" },
+	cmd = { "/home/ntraum/coding/elixir-ls/v0.28.0/language_server.sh" },
 })
 
 -- Lua LS
@@ -508,7 +532,7 @@ vim.keymap.set("n", "<leader>A", function()
 	harpoon:list():add()
 end)
 
-vim.keymap.set("n", "<leader>a", function()
+vim.keymap.set("n", "<leader>AA", function()
 	harpoon.ui:toggle_quick_menu(harpoon:list())
 end)
 
