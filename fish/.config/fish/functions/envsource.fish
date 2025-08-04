@@ -9,11 +9,11 @@
 # Global variables are specific to the current fish session. They can be erased by explicitly requesting set -e.
 
 function envsource
-  # Ignore commented
-  for line in (cat $argv | grep -v '^#' | grep -v '^\s*$')
-    set item (string split -m 1 '=' $line)
-    #set -gx $item[3] $item[2]
-     set -Ux $item[1] $item[2]
-    echo "Exported universal env var $item[1]"
-  end
+    # Ignore commented
+    for line in (cat $argv | grep -v '^#' | grep -v '^\s*$')
+        set item (string split -m 1 '=' $line)
+        set -Ux $item[1] $item[2]
+        #set -gx $item[3] $item[2]
+        echo "Exported universal env var $item[1]"
+    end
 end
