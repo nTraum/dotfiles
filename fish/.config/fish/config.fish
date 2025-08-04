@@ -5,10 +5,10 @@ if command -v starship >/dev/null
     starship init fish | source
 end
 
-# Initializes asdf
-if test -f ~/.asdf/asdf.fish >/dev/null
-    source ~/.asdf/asdf.fish
-end
+## Initializes asdf
+#if test -f ~/.asdf/asdf.fish >/dev/null
+#    source ~/.asdf/asdf.fish
+#end
 
 # Abbreviations
 abbr --add ... cd ../..
@@ -32,7 +32,6 @@ alias em="emacsclient --no-wait"
 set -xg EDITOR nvim
 
 if command -v eza >/dev/null
-
     alias l="eza -l --icons"
     alias la="eza -la --icons"
 end
@@ -80,3 +79,9 @@ if command -v podman >/dev/null
 end
 
 set -xg ERL_AFLAGS '-kernel shell_history enabled'
+/home/ntraum/.local/bin/mise activate fish | source
+
+
+if command -v zoxide >/dev/null
+    zoxide init fish | source
+end
