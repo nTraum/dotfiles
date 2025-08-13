@@ -283,44 +283,6 @@ require("lazy").setup({
 		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
 		lazy = false,
 	},
-	{
-		"yetone/avante.nvim",
-		event = "VeryLazy",
-		version = false, -- Never set this value to "*"! Never!
-		opts = {
-			-- add any opts here
-			-- for example
-			provider = "claude",
-			-- openai = {
-			-- 	endpoint = "https://api.openai.com/v1",
-			-- 	model = "gpt-4o", -- your desired model (or use gpt-4o, etc.)
-			-- 	timeout = 30000, -- Timeout in milliseconds, increase this for reasoning models
-			-- 	temperature = 0,
-			-- 	max_completion_tokens = 8192, -- Increase this to include reasoning tokens (for reasoning models)
-			-- 	--reasoning_effort = "medium", -- low|medium|high, only used for reasoning models
-			-- },
-		},
-		-- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
-		-- build = "make",
-		-- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"stevearc/dressing.nvim",
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-			--- The below dependencies are optional,
-			"nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-			"hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-			"ibhagwan/fzf-lua", -- for file_selector provider fzf
-			"nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-			{
-				-- Make sure to set this up properly if you have lazy=true
-				"MeanderingProgrammer/render-markdown.nvim",
-				opts = { file_types = { "markdown", "Avante" } },
-				ft = { "markdown", "Avante" },
-			},
-		},
-	},
 })
 
 -- Set colorscheme
@@ -370,7 +332,7 @@ capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 lspconfig.elixirls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
-	cmd = { "/home/ntraum/coding/elixir-ls/v0.28.0/language_server.sh" },
+	cmd = { "/home/ntraum/coding/elixir-ls/v0.29.0/language_server.sh" },
 })
 
 -- Lua LS
@@ -467,6 +429,23 @@ cmp.setup({
 			show_labelDetails = true, -- show labelDetails in menu. Disabled by default
 		}),
 	},
+})
+
+-- LuaSnip snippets
+local ls = require("luasnip")
+local s = ls.snippet
+local t = ls.text_node
+local i = ls.insert_node
+
+ls.add_snippets("elixir", {
+	s("pry", {
+		t({ "require IEx; IEx.pry()" }),
+	}),
+	s("dbg", {
+		t("dbg("),
+		i(1, "expression"),
+		t(")"),
+	}),
 })
 
 -- Jump to previous buffer
