@@ -313,7 +313,7 @@ vim.api.nvim_create_autocmd("User", {
 	callback = require("lualine").refresh,
 })
 
-vim.lsp.set_log_level("off")
+vim.lsp.set_log_level("warn")
 
 -- Add nvim-lspconfig plugin
 local lspconfig = require("lspconfig")
@@ -325,15 +325,33 @@ local on_attach = function(_, bufnr)
 end
 
 -- nvim-cmp supports additional completion capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+-- Expert
+
+require("lspconfig").lexical.setup({
+	cmd = { "/home/ntraum/coding/expert/expert_linux_amd64" },
+	root_dir = function(fname)
+		return require("lspconfig").util.root_pattern("mix.exs", ".git")(fname) or vim.loop.cwd()
+	end,
+	filetypes = { "elixir", "eelixir", "heex" },
+	-- capabilities = capabilities,
+	on_attach = on_attach,
+	-- optional settings
+	-- settings = {},
+	flags = {
+		-- https://github.com/elixir-lang/expert/issues/110
+		allow_incremental_sync = false,
+	},
+})
 
 -- Elixir LS
-lspconfig.elixirls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-	cmd = { "/home/ntraum/coding/elixir-ls/v0.29.0/language_server.sh" },
-})
+-- lspconfig.elixirls.setup({
+-- 	capabilities = capabilities,
+-- 	on_attach = on_attach,
+-- 	cmd = { "/home/ntraum/coding/elixir-ls/v0.29.2/language_server.sh" },
+-- })
 
 -- Lua LS
 lspconfig.lua_ls.setup({
