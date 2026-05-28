@@ -10,6 +10,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 		lazypath,
 	})
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 -- Enable mouse mode, can be useful for resizing splits for example!
@@ -84,8 +85,54 @@ vim.opt.splitbelow = true
 
 -- views can only be fully collapsed with the global statusline
 vim.opt.laststatus = 3
+--
+-- New UI opt-in
+require("vim._core.ui2").enable({})
 
 require("lazy").setup({
+	{
+		"saghen/blink.cmp",
+		-- use a release tag to download pre-built binaries
+		version = "1.*",
+		---@module 'blink.cmp'
+		---@type blink.cmp.Config
+		opts = {
+			-- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+			-- 'super-tab' for mappings similar to vscode (tab to accept)
+			-- 'enter' for enter to accept
+			-- 'none' for no mappings
+			--
+			-- All presets have the following mappings:
+			-- C-space: Open menu or open docs if already open
+			-- C-n/C-p or Up/Down: Select next/previous item
+			-- C-e: Hide menu
+			-- C-k: Toggle signature help (if signature.enabled = true)
+			--
+			-- See :h blink-cmp-config-keymap for defining your own keymap
+			-- keymap = { preset = "default" },
+
+			-- appearance = {
+			-- 	-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
+			-- 	-- Adjusts spacing to ensure icons are aligned
+			-- 	nerd_font_variant = "mono",
+			-- },
+
+			-- (Default) Only show the documentation popup when manually triggered
+			completion = { documentation = { auto_show = true }, ghost_text = { enabled = true } },
+
+			-- Default list of enabled providers defined so that you can extend it
+			-- elsewhere in your config, without redefining it, due to `opts_extend`
+			-- sources = {
+			-- 	default = { "lsp", "path", "snippets", "buffer" },
+			-- },
+
+			signature = { enabled = true },
+
+			fuzzy = { implementation = "prefer_rust_with_warning" },
+		},
+		opts_extend = { "sources.default" },
+	},
+
 	{
 		-- Auto format on save
 		"stevearc/conform.nvim",
@@ -105,21 +152,7 @@ require("lazy").setup({
 		},
 	},
 
-	-- Snippets, somehow required for nvim-cmp?
 	{ "L3MON4D3/LuaSnip", version = "v2.*" },
-	{ "saadparwaiz1/cmp_luasnip" },
-	-- Completion via LSP
-	{ "hrsh7th/cmp-nvim-lsp" },
-	-- Buffer conten completion
-	{ "hrsh7th/cmp-buffer" },
-	-- Path completion
-	{ "hrsh7th/cmp-path" },
-	-- Commandline completion
-	{ "hrsh7th/cmp-cmdline" },
-	-- Completions
-	{
-		"hrsh7th/nvim-cmp",
-	},
 	-- Gruvbox Theme
 	-- Bold is just too much, disabled
 	{ "ellisonleao/gruvbox.nvim", priority = 1000, opts = { bold = false } },
@@ -161,6 +194,7 @@ require("lazy").setup({
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "master",
 		build = ":TSUpdate",
 
 		config = function()
@@ -226,19 +260,6 @@ require("lazy").setup({
 			})
 		end,
 	},
-	{
-		-- Auto pairs
-		"windwp/nvim-autopairs",
-		dependencies = { "hrsh7th/nvim-cmp" },
-		event = "InsertEnter",
-		config = function()
-			require("nvim-autopairs").setup({})
-			-- If you want to automatically add `(` after selecting a function or method
-			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-			local cmp = require("cmp")
-			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-		end,
-	},
 	-- Navigate between tmux and neovim windows
 	{ "christoomey/vim-tmux-navigator" },
 	-- Pictograms in completions
@@ -250,7 +271,6 @@ require("lazy").setup({
 	-- Resolve git merge conflicts
 	{ "akinsho/git-conflict.nvim", version = "*", config = true },
 	{ "ThePrimeagen/harpoon", dependencies = { "nvim-lua/plenary.nvim" }, branch = "harpoon2", config = true },
-	{ "ggandor/leap.nvim" },
 	-- Highlight TODO / FIXME comments
 	{ "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config = true },
 	{
@@ -282,6 +302,43 @@ require("lazy").setup({
 		-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
 		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
 		lazy = false,
+	},
+	{
+		"folke/trouble.nvim",
+		opts = {},
+		cmd = "Trouble",
+		keys = {
+			{
+				"<leader>xx",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+			{
+				"<leader>xX",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
+			},
+			{
+				"<leader>cs",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "Symbols (Trouble)",
+			},
+			{
+				"<leader>cl",
+				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+				desc = "LSP Definitions / references / ... (Trouble)",
+			},
+			{
+				"<leader>xL",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "Location List (Trouble)",
+			},
+			{
+				"<leader>xQ",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "Quickfix List (Trouble)",
+			},
+		},
 	},
 })
 
@@ -317,40 +374,31 @@ vim.lsp.set_log_level("warn")
 
 -- Add nvim-lspconfig plugin
 local lspconfig = require("lspconfig")
-local on_attach = function(_, bufnr)
-	local attach_opts = { silent = true, buffer = bufnr }
-	vim.keymap.set("n", "ü", vim.lsp.buf.definition, attach_opts)
-	vim.keymap.set("n", "K", vim.lsp.buf.hover, attach_opts)
-	vim.keymap.set("n", "<C-s>", vim.lsp.buf.signature_help, attach_opts)
-end
 
--- nvim-cmp supports additional completion capabilities
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		local client = vim.lsp.get_client_by_id(args.data.client_id)
+		if not client then
+			return
+		end
 
--- Expert LS (Elixir)
-
-require("lspconfig").lexical.setup({
-	cmd = { "/home/ntraum/coding/expert/expert_linux_amd64" },
-	root_dir = function(fname)
-		return require("lspconfig").util.root_pattern("mix.exs", ".git")(fname) or vim.loop.cwd()
+		local attach_opts = { silent = true, buffer = args.buf }
+		vim.keymap.set("n", "ü", vim.lsp.buf.definition, attach_opts)
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, attach_opts)
+		vim.keymap.set("n", "<C-s>", vim.lsp.buf.signature_help, attach_opts)
 	end,
-	filetypes = { "elixir", "eelixir", "heex" },
-	-- capabilities = capabilities,
-	on_attach = on_attach,
-	-- optional settings
-	-- settings = {},
-	flags = {
-		-- https://github.com/elixir-lang/expert/issues/110
-		allow_incremental_sync = false,
-	},
 })
 
--- Elixir LS
--- lspconfig.elixirls.setup({
--- 	capabilities = capabilities,
--- 	on_attach = on_attach,
--- 	cmd = { "/home/ntraum/coding/elixir-ls/v0.29.2/language_server.sh" },
--- })
+vim.lsp.config("expert", {
+	cmd = { "/home/ntraum/coding/expert/expert_linux_amd64", "--stdio" },
+	-- flags = {
+	-- 	-- https://github.com/elixir-lang/expert/issues/110
+	-- 	allow_incremental_sync = false,
+	-- },
+})
+
+vim.lsp.enable("expert")
+vim.lsp.enable("bashls")
 
 vim.lsp.config("lua_ls", {
 	on_init = function(client)
@@ -391,42 +439,10 @@ vim.lsp.config("lua_ls", {
 })
 
 vim.lsp.enable("lua_ls")
-
--- Lua LS
--- lspconfig.lua_ls.setup({
--- 	capabilities = capabilities,
--- 	on_attach = on_attach,
--- 	settings = {
--- 		Lua = {
--- 			diagnostics = {
--- 				globals = { "vim" },
--- 			},
--- 		},
--- 	},
--- })
-
--- pyright LS (Python)
-lspconfig.pyright.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-
--- Svelte
-lspconfig.svelte.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
---
--- yamllint
-lspconfig.yamlls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-
-lspconfig.ts_ls.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
+vim.lsp.enable("pyright")
+vim.lsp.enable("svelte")
+vim.lsp.enable("yamlls")
+vim.lsp.enable("ts_ls")
 
 -- Telescope keymaps
 local builtin = require("telescope.builtin")
@@ -441,52 +457,7 @@ end)
 vim.keymap.set("n", "<leader>fh", builtin.help_tags)
 vim.keymap.set("n", "<leader>fl", builtin.lsp_workspace_symbols)
 
-local cmp = require("cmp")
 local lspkind = require("lspkind")
-
-cmp.setup({
-	snippet = {
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
-		end,
-	},
-	mapping = {
-		["<C-d>"] = cmp.mapping.scroll_docs(-4),
-		["<C-f>"] = cmp.mapping.scroll_docs(4),
-		["<C-e>"] = cmp.mapping.close(),
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
-		["<C-n>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
-		["<C-p>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
-	},
-	completion = {
-		keyword_length = 2,
-	},
-	sources = {
-		{ name = "nvim_lsp", keyword_length = 2 },
-		{
-			name = "buffer",
-			option = {
-				-- Complete from other buffers too
-				get_bufnrs = function()
-					return vim.api.nvim_list_bufs()
-				end,
-			},
-		},
-		{ name = "path" },
-		{ name = "cmdline" },
-		{ name = "luasnip" },
-	},
-	formatting = {
-		format = lspkind.cmp_format({
-			mode = "symbol", -- show only symbol annotations
-			maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
-			-- can also be a function to dynamically calculate max width such as
-			-- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
-			ellipsis_char = "...", -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
-			show_labelDetails = true, -- show labelDetails in menu. Disabled by default
-		}),
-	},
-})
 
 -- LuaSnip snippets
 local ls = require("luasnip")
@@ -584,5 +555,3 @@ end)
 vim.keymap.set("n", "<C-4>", function()
 	harpoon:list():select(4)
 end)
-
-require("leap").create_default_mappings()
