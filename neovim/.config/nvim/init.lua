@@ -454,6 +454,9 @@ vim.lsp.enable("svelte")
 vim.lsp.enable("yamlls")
 vim.lsp.enable("ts_ls")
 
+-- Enable inlay hints
+vim.lsp.inlay_hint.enable()
+
 -- Telescope keymaps
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<leader>ff", function()
