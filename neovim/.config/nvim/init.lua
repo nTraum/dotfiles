@@ -185,7 +185,7 @@ require("lazy").setup({
 			defaults = {
 				layout_config = {
 					horizontal = {
-						preview_cutoff = 20,
+						preview_cutoff = 120,
 					},
 				},
 			},
