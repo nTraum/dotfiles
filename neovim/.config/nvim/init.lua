@@ -490,11 +490,11 @@ ls.add_snippets("elixir", {
 vim.keymap.set("n", "Ü", ":bp<CR>")
 
 -- Window navigation
-vim.keymap.set("n", "C-h", ":TmuxNavigateLeft<CR>")
-vim.keymap.set("n", "C-l", ":TmuxNavigateRight<CR>")
-vim.keymap.set("n", "C-j", ":TmuxNavigateDown<CR>")
-vim.keymap.set("n", "C-k", ":TmuxNavigateUp<CR>")
-vim.keymap.set("n", "C-<Tab>", ":TmuxNavigatePrevious<CR>")
+vim.keymap.set("n", "<C-h>", ":TmuxNavigateLeft<CR>", { silent = true })
+vim.keymap.set("n", "<C-l>", ":TmuxNavigateRight<CR>", { silent = true })
+vim.keymap.set("n", "<C-j>", ":TmuxNavigateDown<CR>", { silent = true })
+vim.keymap.set("n", "<C-k>", ":TmuxNavigateUp<CR>", { silent = true })
+vim.keymap.set("n", "<C-Tab>", ":TmuxNavigatePrevious<CR>", { silent = true })
 
 vim.keymap.set("n", "<leader>gs", ":Git<CR>")
 
