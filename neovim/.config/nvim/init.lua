@@ -234,6 +234,18 @@ require("lazy").setup({
 	},
 	-- Git signs next to line numbers
 	{ "lewis6991/gitsigns.nvim", config = true },
+	-- Auto-highlight references to symbol under cursor
+	{ "RRethy/vim-illuminate" },
+	-- Collection of QoL utilities
+	{
+		"folke/snacks.nvim",
+		opts = {
+			input = { enabled = true },
+			notifier = { enabled = true },
+			indent = { enabled = true, only_scope = true },
+			scroll = { enabled = true },
+		},
+	},
 	{
 		-- surround motion
 		"kylechui/nvim-surround",
