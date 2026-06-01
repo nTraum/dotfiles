@@ -227,19 +227,10 @@ require("lazy").setup({
 			sections = {
 				lualine_c = {
 					{ "filename", path = 1 },
-					function()
-						return require("lsp-progress").progress()
-					end,
+					{ vim.lsp.status },
 				},
 			},
 		},
-	},
-	-- LSP status
-	{
-		"linrongbin16/lsp-progress.nvim",
-		config = function()
-			require("lsp-progress").setup()
-		end,
 	},
 	-- Git signs next to line numbers
 	{ "lewis6991/gitsigns.nvim", config = true },
@@ -371,13 +362,12 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
---
--- listen lsp-progress event and refresh lualine
-vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
-vim.api.nvim_create_autocmd("User", {
-	group = "lualine_augroup",
-	pattern = "LspProgressStatusUpdated",
-	callback = require("lualine").refresh,
+
+-- Redraw statusline on LSP progress updates
+vim.api.nvim_create_autocmd("LspProgress", {
+	callback = function()
+		vim.cmd.redrawstatus()
+	end,
 })
 
 vim.lsp.set_log_level("warn")
