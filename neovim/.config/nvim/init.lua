@@ -234,8 +234,6 @@ require("lazy").setup({
 	},
 	-- Git signs next to line numbers
 	{ "lewis6991/gitsigns.nvim", config = true },
-	-- Show LSP signature on hover
-	{ "ray-x/lsp_signature.nvim", opts = { hint_enable = false } },
 	{
 		-- surround motion
 		"kylechui/nvim-surround",
