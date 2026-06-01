@@ -535,6 +535,9 @@ vim.keymap.set(
 	{ noremap = true }
 )
 
+-- Oil.nvim
+vim.keymap.set("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
 -- Diagnostics
 
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
