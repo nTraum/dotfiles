@@ -180,7 +180,6 @@ require("lazy").setup({
 	-- Fuzzy finder over lists
 	{
 		"nvim-telescope/telescope.nvim",
-		tag = "0.1.6",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
 			defaults = {
@@ -194,17 +193,28 @@ require("lazy").setup({
 	},
 	{
 		"nvim-treesitter/nvim-treesitter",
-		branch = "master",
+		branch = "main",
+		lazy = false,
 		build = ":TSUpdate",
 
 		config = function()
-			local configs = require("nvim-treesitter.configs")
+			require("nvim-treesitter").install({
+				"lua",
+				"vim",
+				"vimdoc",
+				"query",
+				"elixir",
+				"heex",
+				"javascript",
+				"html",
+			})
 
-			configs.setup({
-				ensure_installed = { "lua", "vim", "vimdoc", "query", "elixir", "heex", "javascript", "html" },
-				sync_install = false,
-				highlight = { enable = true },
-				indent = { enable = true },
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function()
+					pcall(vim.treesitter.start)
+
+					vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end,
 			})
 		end,
 	},
