@@ -1,7 +1,6 @@
 # Ghostty Configuration
 
-# Theme (using Gruvbox dark)
-theme = GruvboxDark
+theme = Gruvbox Dark
 
 # Font
 font-family = "Ubuntu Mono"
