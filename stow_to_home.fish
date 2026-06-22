@@ -15,6 +15,6 @@ end
 
 for dir in $STOWS
     echo -n Stowing $dir
-    stow $dir --target=$HOME
+    stow -R $dir --target=$HOME
     echo " ✅"
 end
