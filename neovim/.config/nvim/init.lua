@@ -85,7 +85,10 @@ vim.opt.splitbelow = true
 
 -- views can only be fully collapsed with the global statusline
 vim.opt.laststatus = 3
---
+
+vim.opt.foldmethod = "indent"
+vim.opt.foldlevelstart = 99
+
 -- New UI opt-in
 require("vim._core.ui2").enable({})
 
@@ -206,6 +209,7 @@ require("lazy").setup({
 				"elixir",
 				"heex",
 				"javascript",
+				"svelte",
 				"html",
 			})
 
