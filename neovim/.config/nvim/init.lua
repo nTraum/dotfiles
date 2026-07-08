@@ -140,7 +140,7 @@ require("lazy").setup({
 		-- Auto format on save
 		"stevearc/conform.nvim",
 		opts = {
-			format_on_save = { timeout_ms = 2000, lsp_fallback = true },
+			format_on_save = { timeout_ms = 2000, async = true, lsp_format = "fallback" },
 			formatters = {
 				stylua = {
 					command = "/home/ntraum/bin/stylua",
@@ -151,6 +151,8 @@ require("lazy").setup({
 				javascript = { "prettier" },
 				json = { "jq" },
 				fish = { "fish_indent" },
+				elixir = { "mix" },
+				heex = { "mix" },
 			},
 		},
 	},
@@ -166,7 +168,7 @@ require("lazy").setup({
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
-		opts = { ensure_installed = { "lua_ls" } },
+		opts = { ensure_installed = { "lua_ls", "pyright", "svelte", "ts_ls", "yamlls", "bashls" } },
 	},
 	{
 		"neovim/nvim-lspconfig",
@@ -237,7 +239,44 @@ require("lazy").setup({
 		},
 	},
 	-- Git signs next to line numbers
-	{ "lewis6991/gitsigns.nvim", config = true },
+	{
+		"lewis6991/gitsigns.nvim",
+		opts = {
+			on_attach = function(bufnr)
+				local gs = require("gitsigns")
+				local function map(mode, l, r, desc)
+					vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
+				end
+
+				-- Navigate hunks
+				map("n", "]h", function()
+					gs.nav_hunk("next")
+				end, "Next git hunk")
+				map("n", "[h", function()
+					gs.nav_hunk("prev")
+				end, "Prev git hunk")
+
+				-- View
+				map("n", "<leader>hp", gs.preview_hunk, "Preview hunk")
+				map("n", "<leader>hd", gs.diffthis, "Diff against index")
+
+				-- Stage / reset (visual mode = partial hunk)
+				map("n", "<leader>hs", gs.stage_hunk, "Stage hunk")
+				map("n", "<leader>hr", gs.reset_hunk, "Reset hunk")
+				map("v", "<leader>hs", function()
+					gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end, "Stage selection")
+				map("v", "<leader>hr", function()
+					gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+				end, "Reset selection")
+				map("n", "<leader>hu", gs.undo_stage_hunk, "Undo stage hunk")
+
+				-- Stage/reset whole buffer
+				map("n", "<leader>hS", gs.stage_buffer, "Stage buffer")
+				map("n", "<leader>hR", gs.reset_buffer, "Reset buffer")
+			end,
+		},
+	},
 	-- Auto-highlight references to symbol under cursor
 	{ "RRethy/vim-illuminate" },
 	-- Collection of QoL utilities
@@ -280,11 +319,11 @@ require("lazy").setup({
 	-- Pictograms in completions
 	{ "onsails/lspkind.nvim" },
 	-- Git client
-	{ "tpope/vim-fugitive" },
-	-- Enables :GBrowse for to open GH urls in fugitive
-	{ "tpope/vim-rhubarb" },
-	-- Resolve git merge conflicts
-	{ "akinsho/git-conflict.nvim", version = "*", config = true },
+	{
+		"NeogitOrg/neogit",
+		dependencies = { "sindrets/diffview.nvim" },
+		config = true,
+	},
 	{ "ThePrimeagen/harpoon", dependencies = { "nvim-lua/plenary.nvim" }, branch = "harpoon2", config = true },
 	-- Highlight TODO / FIXME comments
 	{ "folke/todo-comments.nvim", dependencies = { "nvim-lua/plenary.nvim" }, config = true },
@@ -503,7 +542,10 @@ vim.keymap.set("n", "<C-j>", ":TmuxNavigateDown<CR>", { silent = true })
 vim.keymap.set("n", "<C-k>", ":TmuxNavigateUp<CR>", { silent = true })
 vim.keymap.set("n", "<C-Tab>", ":TmuxNavigatePrevious<CR>", { silent = true })
 
-vim.keymap.set("n", "<leader>gs", ":Git<CR>")
+vim.keymap.set("n", "<leader>gs", ":Neogit<CR>")
+vim.keymap.set("n", "<leader>gb", function()
+	Snacks.gitbrowse()
+end, { desc = "Open in browser (git)" })
 
 -- Quickfix list                                                                      t
 -- Toggle on q
