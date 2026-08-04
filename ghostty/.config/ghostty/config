@@ -10,6 +10,10 @@ font-size = 13
 # Shell
 shell-integration = fish
 
+# Auto-attach to (or create) the shared tmux session "main" on every new
+# window/tab/split instead of starting a plain shell.
+command = tmux new-session -A -s main
+
 # Window
 window-decoration = false
 window-padding-x = 10

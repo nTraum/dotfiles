@@ -70,7 +70,7 @@ end
 # `tm` alias to attach to running tmux session or create a new one
 if command -v tmux >/dev/null
     function tm -d "Attach to running tmux session or create a new one"
-        tmux attach || tmux new
+        tmux new-session -A -s main
     end
 end
 
